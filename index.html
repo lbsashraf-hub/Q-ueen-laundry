@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Queen Laundry - Premium Price List</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 100%);
+            color: #2d3748;
+            line-height: 1.6;
+            padding-bottom: 50px;
+        }
+        /* HEADER DIBUAT LEBIH RINGKAS & PAS */
+        header {
+            background: linear-gradient(135deg, #db2777, #be185d);
+            color: white;
+            text-align: center;
+            padding: 2rem 1rem 2.2rem 1rem;
+            border-bottom-left-radius: 25px;
+            border-bottom-right-radius: 25px;
+            box-shadow: 0 10px 25px rgba(219, 39, 119, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        header h1 {
+            font-size: 1.7rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+            letter-spacing: 0.5px;
+        }
+        header p {
+            font-size: 0.85rem;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+        .container {
+            max-width: 600px;
+            margin: -20px auto 0 auto;
+            padding: 0 15px;
+        }
+        .section-box {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+        .section-box h2 {
+            color: #be185d;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            border-bottom: 2px solid #fce7f3;
+            padding-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .info-text {
+            font-size: 0.88rem;
+            color: #4a5568;
+            margin-bottom: 8px;
+        }
+        
+        /* Kalkulator Styles */
+        .calc-group {
+            margin-bottom: 12px;
+        }
+        .calc-group label {
+            font-size: 0.82rem;
+            font-weight: 500;
+            color: #4a5568;
+            display: block;
+            margin-bottom: 4px;
+        }
+        .calc-select, .calc-input, .search-input {
+            width: 100%;
+            padding: 10px 14px;
+            border-radius: 12px;
+            border: 1.5px solid #e2e8f0;
+            font-size: 0.88rem;
+            font-family: 'Poppins', sans-serif;
+            background: #f8fafc;
+            outline: none;
+            transition: all 0.2s;
+        }
+        .calc-select:focus, .calc-input:focus, .search-input:focus {
+            border-color: #db2777;
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(219, 39, 119, 0.1);
+        }
+        .calc-result {
+            background: linear-gradient(135deg, #fdf2f8, #fce7f3);
+            border: 1px solid #fbcfe8;
+            padding: 14px;
+            border-radius: 14px;
+            text-align: center;
+            margin-top: 15px;
+        }
+        .calc-result span {
+            font-size: 0.82rem;
+            color: #9d174d;
+            font-weight: 500;
+        }
+        .calc-total {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #be185d;
+            margin-top: 2px;
+        }
+        .btn-order-wa {
+            display: block;
+            background: #25d366;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-top: 10px;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+            transition: background 0.2s;
+        }
+        .btn-order-wa:hover {
+            background: #20ba5a;
+        }
+
+        /* Member Card Special */
+        .member-banner {
+            background: linear-gradient(135deg, #fffbeb, #fef3c7);
+            border: 2px dashed #f59e0b;
+        }
+        .member-banner h3 {
+            color: #d97706;
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+        .member-price {
+            color: #db2777 !important;
+            font-weight: 700;
+        }
+
+        /* Price List Styles */
+        .category-title {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #fff;
+            background: linear-gradient(135deg, #db2777, #be185d);
+            margin-top: 16px;
+            margin-bottom: 10px;
+            padding: 5px 12px;
+            border-radius: 6px;
+            letter-spacing: 0.5px;
+            display: inline-block;
+        }
+        .price-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            font-size: 0.85rem;
+            border-bottom: 1px dashed #edf2f7;
+            padding-bottom: 8px;
+        }
+        .price-item span:first-child {
+            color: #2d3748;
+            font-weight: 500;
+        }
+        .price-item span:last-child {
+            font-weight: 600;
+            color: #db2777;
+            background: #fdf2f8;
+            padding: 3px 10px;
+            border-radius: 6px;
+            font-size: 0.82rem;
+        }
+        .badge-normal span:last-child {
+            background: #f1f5f9;
+            color: #475569;
+        }
+
+        /* Buttons */
+        .btn-maps {
+            display: block;
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: white;
+            text-align: center;
+            padding: 12px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.88rem;
+            margin-top: 12px;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+        .btn-wa-main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #25d366, #16a34a);
+            color: white;
+            text-align: center;
+            padding: 14px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.92rem;
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.35);
+            margin-top: 20px;
+        }
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #718096;
+            font-size: 0.78rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>👑 Queen Laundry</h1>
+        <p>Bersih, Wangi, Rapi, & Berkualitas Premium</p>
+    </header>
+
+    <div class="container">
+
+        <!-- PROFIL -->
+        <div class="section-box">
+            <h2>✨ Tentang Kami</h2>
+            <p class="info-text">Queen Laundry hadir memberikan solusi terbaik untuk cucian Anda. Menggunakan deterjen ramah lingkungan dan parfum eksklusif pilihan agar pakaian wangi tahan lama.</p>
+        </div>
+
+        <!-- KALKULATOR HARGA -->
+        <div class="section-box">
+            <h2>🧮 Kalkulator Estimasi Harga</h2>
+            <p class="info-text" style="margin-bottom: 10px;">Pilih layanan & berat cucian (Dibulatkan ke 500 terdekat):</p>
+            
+            <div class="calc-group">
+                <label>Pilih Layanan Kiloan:</label>
+                <select id="pilihLayanan" class="calc-select" onchange="hitungTotal()">
+                    <option value="6500">Standar - Cuci Setrika (Rp 6.500/kg)</option>
+                    <option value="5500">Standar - Cuci Setrika [Member] (Rp 5.500/kg)</option>
+                    <option value="4500">Standar - Cuci Kering (Rp 4.500/kg)</option>
+                    <option value="4500">Standar - Setrika (Rp 4.500/kg)</option>
+                    <option value="4500">Standar - Dryer Only (Rp 4.500/kg)</option>
+                    <option value="13000">Express - Cuci Setrika (Rp 13.000/kg)</option>
+                    <option value="11000">Express - Cuci Setrika [Member] (Rp 11.000/kg)</option>
+                    <option value="10000">Express - Cuci Kering (Rp 10.000/kg)</option>
+                    <option value="8000">Express - Setrika Only (Rp 8.000/kg)</option>
+                    <option value="3500">Express - Dryer Only (Rp 3.500/kg)</option>
+                    <option value="20000">Kilat - Cuci Setrika (Rp 20.000/kg)</option>
+                    <option value="15000">Kilat - Cuci Kering (Rp 15.000/kg)</option>
+                    <option value="7000">Kilat - Dryer Only (Rp 7.000/kg)</option>
+                </select>
+            </div>
+
+            <div class="calc-group">
+                <label>Berat Cucian (Kg):</label>
+                <input type="number" id="beratKg" class="calc-input" value="1" min="0.1" step="0.1" oninput="hitungTotal()">
+            </div>
+
+            <div class="calc-result">
+                <span>Estimasi Total Biaya:</span>
+                <div id="hasilTotal" class="calc-total">Rp 6.500</div>
+                <a id="waOrderLink" href="https://wa.me/6285770246502?text=Halo%20Queen%20Laundry,%20saya%20mau%20order%20layanan%20dengan%20estimasi%20harga%20Rp%206.500" target="_blank" class="btn-order-wa">
+                    🚀 Order Layanan Ini via WhatsApp
+                </a>
+            </div>
+        </div>
+
+        <!-- JOIN MEMBER -->
+        <div class="section-box member-banner">
+            <h3>🌟 Keuntungan Join Member</h3>
+            <p class="info-text">Biaya Daftar: <b>Rp 110.000 / 20 Kg</b></p>
+            <p class="info-text" style="margin-top: 6px;">
+                🔥 <b>Standar (Cuci Setrika):</b> <span style="text-decoration: line-through; color: #718096;">Rp 6.500</span> jadi <span class="member-price">Rp 5.500 / Kg</span><br>
+                🚀 <b>Express (Cuci Setrika):</b> <span style="text-decoration: line-through; color: #718096;">Rp 13.000</span> jadi <span class="member-price">Rp 11.000 / Kg</span>
+            </p>
+        </div>
+
+        <!-- DAFTAR HARGA -->
+        <div class="section-box">
+            <h2>📋 Daftar Harga (Price List)</h2>
+            
+            <div style="margin-bottom: 12px;">
+                <input type="text" id="searchInput" class="search-input" placeholder="🔍 Cari nama barang (cth: karpet, bedcover)..." onkeyup="cariBarang()">
+            </div>
+            
+            <div id="priceListContainer">
+                <div class="category-title">STANDAR (3 - 4 Hari)</div>
+                <div class="price-item"><span>Cuci Setrika (Member: Rp 5.500)</span><span>Rp 6.500 / Kg</span></div>
+                <div class="price-item badge-normal"><span>Cuci Kering</span><span>Rp 4.500 / Kg</span></div>
+                <div class="price-item badge-normal"><span>Setrika</span><span>Rp 4.500 / Kg</span></div>
+                <div class="price-item badge-normal"><span>Dryer Only</span><span>Rp 4.500 / Kg</span></div>
+
+                <div class="category-title">EXPRESS (1 Hari)</div>
+                <div class="price-item"><span>Cuci Setrika (Member: Rp 11.000)</span><span>Rp 13.000 / Kg</span></div>
+                <div class="price-item badge-normal"><span>Cuci Kering</span><span>Rp 10.000 / Kg</span></div>
+                <div class="price-item badge-normal"><span>Setrika Only</span><span>Rp 8.000 / Kg</span></div>
+                <div class="price-item badge-normal"><span>Dryer Only</span><span>Rp 3.500 / Kg</span></div>
+
+                <div class="category-title">KILAT (8 Jam)</div>
+                <div class="price-item badge-normal"><span>Cuci Setrika</span><span>Rp 20.000 / Kg</span></div>
+                <div class="price-item badge-normal"><span>Cuci Kering</span><span>Rp 15.000 / Kg</span></div>
+                <div class="price-item badge-normal"><span>Dryer Only</span><span>Rp 7.000 / Kg</span></div>
+
+                <div class="category-title">HARGA SATUAN & BARANG LAINNYA</div>
+                <div class="price-item badge-normal"><span>Bedcover Single</span><span>Rp 20.000</span></div>
+                <div class="price-item badge-normal"><span>Bedcover Double</span><span>Rp 25.000</span></div>
+                <div class="price-item badge-normal"><span>Bedcover Jumbo</span><span>Rp 30.000</span></div>
+                <div class="price-item badge-normal"><span>Boneka Kecil</span><span>Rp 15.000</span></div>
+                <div class="price-item badge-normal"><span>Boneka Sedang</span><span>Rp 20.000</span></div>
+                <div class="price-item badge-normal"><span>Boneka Besar</span><span>Rp 25.000</span></div>
+                <div class="price-item badge-normal"><span>Celana Chino</span><span>Rp 12.000</span></div>
+                <div class="price-item badge-normal"><span>Handuk</span><span>Rp 5.000</span></div>
+                <div class="price-item badge-normal"><span>Jaket Biasa</span><span>Rp 20.000</span></div>
+                <div class="price-item badge-normal"><span>Jaket Tebal</span><span>Rp 25.000</span></div>
+                <div class="price-item badge-normal"><span>Jaket Kulit</span><span>Rp 35.000</span></div>
+                <div class="price-item badge-normal"><span>Sajadah Tipis</span><span>Rp 5.000</span></div>
+                <div class="price-item badge-normal"><span>Sajadah Tebal</span><span>Rp 8.000</span></div>
+                <div class="price-item badge-normal"><span>Sajadah Super Tebal</span><span>Rp 11.000</span></div>
+                <div class="price-item badge-normal"><span>Seprai</span><span>Rp 5.000</span></div>
+                <div class="price-item badge-normal"><span>Seprai 1 set</span><span>Rp 7.500</span></div>
+                <div class="price-item badge-normal"><span>Selimut Tipis Kecil</span><span>Rp 5.000</span></div>
+                <div class="price-item badge-normal"><span>Selimut Tipis Besar</span><span>Rp 10.000</span></div>
+                <div class="price-item badge-normal"><span>Pakaian Putih</span><span>Rp 1.500</span></div>
+                <div class="price-item badge-normal"><span>Peci Putih</span><span>Rp 3.500</span></div>
+                <div class="price-item badge-normal"><span>Mukena 1 set</span><span>Rp 2.500</span></div>
+                <div class="price-item badge-normal"><span>Sepatu</span><span>Rp 25.000</span></div>
+                <div class="price-item badge-normal"><span>Sandal Crocs</span><span>Rp 25.000</span></div>
+                <div class="price-item badge-normal"><span>Karpet kecil</span><span>Rp 25.000</span></div>
+                <div class="price-item badge-normal"><span>Kantong Tidur</span><span>Rp 27.000</span></div>
+                <div class="price-item badge-normal"><span>Karpet Sedang</span><span>Rp 30.000</span></div>
+                <div class="price-item badge-normal"><span>Karpet Besar</span><span>Rp 35.000</span></div>
+                <div class="price-item badge-normal"><span>Jas</span><span>Rp 35.000</span></div>
+            </div>
+        </div>
+
+        <!-- LOKASI & MAPS -->
+        <div class="section-box">
+            <h2>📍 Lokasi & Jam Operasional</h2>
+            <p class="info-text"><b>Alamat:</b> Kp. Jl. Cihaur, Sukarapih, Kec. Sukarame, Tasikmalaya</p>
+            <p class="info-text" style="margin-top: 4px;">⏰ <b>Buka:</b> Senin - Minggu (08.00 - 17.00 WIB)</p>
+            
+            <a href="https://maps.app.goo.gl/K3b4yoQHxTkgiiFn8" target="_blank" class="btn-maps">
+                🗺️ Buka Rute di Google Maps
+            </a>
+        </div>
+
+        <!-- TOMBOL WHATSAPP UTAMA -->
+        <a href="https://wa.me/6285770246502?text=Halo%20Queen%20Laundry,%20saya%20mau%20tanya-tanya%20laundry" target="_blank" class="btn-wa-main">
+            💬 Hubungi Customer Service via WhatsApp
+        </a>
+
+    </div>
+
+    <footer>
+        &copy; 2026 Queen Laundry. All rights reserved.
+    </footer>
+
+    <script>
+        function hitungTotal() {
+            let select = document.getElementById('pilihLayanan');
+            let textLayanan = select.options[select.selectedIndex].text;
+            let hargaPerKg = parseFloat(select.value) || 0;
+            let berat = parseFloat(document.getElementById('beratKg').value) || 0;
+            if (berat < 0) berat = 0;
+            
+            let totalKotor = hargaPerKg * berat;
+            let total = Math.round(totalKotor / 500) * 500;
+            let formatRupiah = total.toLocaleString('id-ID', { maximumFractionDigits: 0 });
+            
+            document.getElementById('hasilTotal').innerText = "Rp " + formatRupiah;
+            
+            let pesanWa = `Halo Queen Laundry, saya mau order ${textLayanan} dengan berat ${berat} Kg. Total estimasi harga Rp ${formatRupiah}. Mohon konfirmasinya ya!`;
+            let encodedPesan = encodeURIComponent(pesanWa);
+            document.getElementById('waOrderLink').href = `https://wa.me/6285770246502?text=${encodedPesan}`;
+        }
+
+        function cariBarang() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let items = document.querySelectorAll('.price-item');
+            
+            items.forEach(function(item) {
+                let namaBarang = item.querySelector('span').textContent.toLowerCase();
+                if (namaBarang.includes(input)) {
+                    item.style.display = "flex";
+                } else {
+                    item.style.display = "none";
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>
