@@ -398,28 +398,42 @@
             box-shadow: 0 8px 20px rgba(245, 158, 11, 0.4);
         }
 
-        .category-title {
-            font-size: 0.75rem;
+        /* Desain Modern Price List Cards */
+        .price-card-group {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 14px;
+        }
+
+        .price-card-title {
+            font-size: 0.85rem;
             font-weight: 800;
             color: var(--primary-dark);
             background: var(--primary-light);
-            margin-top: 16px;
-            margin-bottom: 10px;
             padding: 6px 12px;
             border-radius: 8px;
             display: inline-block;
-            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+            letter-spacing: 0.3px;
         }
 
         .price-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             font-size: 0.85rem;
             border-bottom: 1px dashed #f1f5f9;
             padding-bottom: 8px;
             font-weight: 500;
+        }
+
+        .price-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
         }
 
         .price-item span:last-child {
@@ -576,7 +590,7 @@
             </div>
         </div>
 
-        <!-- KALKULATOR & ONGKIR -->
+        <!-- KALKULATOR & ONGKIR MODERN -->
         <div id="kalkulator" class="section-box">
             <h2>🧮 Kalkulator & Estimasi Biaya</h2>
             
@@ -586,11 +600,16 @@
                     <label>Pilih Jenis Layanan:</label>
                     <select id="pilihLayananKiloan" class="calc-select" onchange="hitungTotal()">
                         <option value="6500">Standar - Cuci Setrika (Rp 6.500/kg)</option>
-                        <option value="5500">Standar - Cuci Setrika [Member] (Rp 5.500/kg)</option>
                         <option value="4500">Standar - Cuci Kering (Rp 4.500/kg)</option>
+                        <option value="4500">Standar - Setrika (Rp 4.500/kg)</option>
+                        <option value="4500">Standar - Dryer Only (Rp 4.500/kg)</option>
                         <option value="13000">Express - Cuci Setrika (Rp 13.000/kg)</option>
-                        <option value="11000">Express - Cuci Setrika [Member] (Rp 11.000/kg)</option>
+                        <option value="10000">Express - Cuci Kering (Rp 10.000/kg)</option>
+                        <option value="8000">Express - Setrika Only (Rp 8.000/kg)</option>
+                        <option value="3500">Express - Dryer Only (Rp 3.500/kg)</option>
                         <option value="20000">Kilat - Cuci Setrika (Rp 20.000/kg)</option>
+                        <option value="15000">Kilat - Cuci Kering (Rp 15.000/kg)</option>
+                        <option value="7000">Kilat - Dryer Only (Rp 7.000/kg)</option>
                     </select>
                 </div>
                 <div class="calc-group">
@@ -608,8 +627,31 @@
                         <option value="20000">Bedcover Single (Rp 20.000)</option>
                         <option value="25000">Bedcover Double (Rp 25.000)</option>
                         <option value="30000">Bedcover Jumbo (Rp 30.000)</option>
+                        <option value="15000">Boneka Kecil (Rp 15.000)</option>
+                        <option value="20000">Boneka Sedang (Rp 20.000)</option>
+                        <option value="25000">Boneka Besar (Rp 25.000)</option>
+                        <option value="12000">Celana Chino (Rp 12.000)</option>
+                        <option value="5000">Handuk (Rp 5.000)</option>
+                        <option value="20000">Jaket Biasa (Rp 20.000)</option>
+                        <option value="25000">Jaket Tebal (Rp 25.000)</option>
+                        <option value="35000">Jaket Kulit (Rp 35.000)</option>
+                        <option value="5000">Sajadah Tipis (Rp 5.000)</option>
+                        <option value="8000">Sajadah Tebal (Rp 8.000)</option>
+                        <option value="11000">Sajadah Super Tebal (Rp 11.000)</option>
+                        <option value="5000">Seprai (Rp 5.000)</option>
+                        <option value="7500">Seprai 1 set (Rp 7.500)</option>
+                        <option value="5000">Selimut Tipis Kecil (Rp 5.000)</option>
+                        <option value="10000">Selimut Tipis Besar (Rp 10.000)</option>
+                        <option value="1500">Pakaian Putih (Rp 1.500)</option>
+                        <option value="3500">Peci Putih (Rp 3.500)</option>
+                        <option value="2500">Mukena 1 set (Rp 2.500)</option>
                         <option value="25000">Sepatu (Rp 25.000)</option>
+                        <option value="25000">Sandal Crocs (Rp 25.000)</option>
+                        <option value="25000">Karpet kecil (Rp 25.000)</option>
+                        <option value="27000">Kantong Tidur (Rp 27.000)</option>
+                        <option value="30000">Karpet Sedang (Rp 30.000)</option>
                         <option value="35000">Karpet Besar (Rp 35.000)</option>
+                        <option value="35000">Jas (Rp 35.000)</option>
                     </select>
                 </div>
                 <div class="calc-group">
@@ -618,18 +660,26 @@
                 </div>
             </div>
 
-            <!-- ONGKIR (Disesuaikan Rp 3.000 - Rp 7.000) -->
-            <div class="calc-section-card">
-                <div class="calc-section-title">🛵 Layanan Antar Jemput (Ongkir)</div>
+            <!-- FITUR ONGKIR SESUAI KETENTUAN JARAK -->
+            <div class="calc-section-card" style="border: 1px solid rgba(244, 63, 94, 0.3); background: linear-gradient(135deg, #ffffff, #fff1f2);">
+                <div class="calc-section-title" style="color: var(--primary-dark);">🛵 Layanan Antar Jemput (Berdasarkan Jarak)</div>
+                <div style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 10px; line-height: 1.5;">
+                    💡 <b>Ketentuan Ongkir:</b> Dihitung di atas 3,5 km. Jarak di bawah itu / antar-jemput sendiri (Rp 0). Jarak 4 - 4,5 km (<b>Rp 7.000</b>), dan di atas itu (<b>Rp 13.000</b>). Silakan cek Google Maps untuk melihat jarak Anda dari toko kami!
+                </div>
+                
                 <div class="calc-group">
-                    <label>Pilih Opsi Antar Jemput:</label>
+                    <label>Pilih Kategori Jarak Anda:</label>
                     <select id="pilihOngkir" class="calc-select" onchange="hitungTotal()">
-                        <option value="0">Antar Jemput Sendiri ke Toko (Rp 0)</option>
-                        <option value="3000">Area Dekat / Radius &lt; 2 km (Rp 3.000)</option>
-                        <option value="5000">Area Menengah / 2 - 4 km (Rp 5.000)</option>
-                        <option value="7000">Area Luar / 4 - 6 km (Rp 7.000)</option>
+                        <option value="0">Antar Jemput Sendiri / Di Bawah 3,5 Km (Rp 0)</option>
+                        <option value="7000">Jarak 4 - 4,5 Km (Rp 7.000)</option>
+                        <option value="13000">Jarak Di Atas 4,5 Km (Rp 13.000)</option>
                     </select>
                 </div>
+
+                <!-- Tombol Cek Maps Cepat -->
+                <a href="https://maps.app.goo.gl/K3b4yoQHxTkgiiFn8" target="_blank" style="display: inline-flex; align-items: center; gap: 6px; font-size: 0.75rem; font-weight: 700; color: #1d4ed8; background: #e0f2fe; padding: 6px 12px; border-radius: 8px; text-decoration: none; margin-top: 4px;">
+                    <span>📍 Cek Jarak via Google Maps</span>
+                </a>
             </div>
 
             <div class="calc-result">
@@ -648,36 +698,74 @@
             <a href="member.html" class="btn-to-member">✨ Lihat Paket & Keuntungan Member</a>
         </div>
 
-        <!-- PRICE LIST LENGKAP -->
+        <!-- PRICE LIST LENGKAP MODERN -->
         <div id="pricelist" class="section-box">
             <h2>📋 Daftar Harga Lengkap</h2>
-            <div style="margin-bottom: 14px;">
+            <div style="margin-bottom: 16px;">
                 <input type="text" id="searchInput" class="search-input" placeholder="🔍 Cari jenis layanan..." onkeyup="cariBarang()">
             </div>
             <div id="priceListContainer">
-                <div class="category-title">STANDAR KILOAN</div>
-                <div class="price-item"><span>Cuci Setrika Regular</span><span>Rp 6.500 / Kg</span></div>
-                <div class="price-item"><span>Cuci Setrika [Member]</span><span>Rp 5.500 / Kg</span></div>
-                <div class="price-item"><span>Cuci Kering Saja</span><span>Rp 4.500 / Kg</span></div>
+                
+                <!-- STANDAR 3 - 4 HARI -->
+                <div class="price-card-group">
+                    <div class="price-card-title">STANDAR [ 3 - 4 Hari ]</div>
+                    <div class="price-item"><span>CUCI Setrika</span><span>Rp 6.500 / Kg</span></div>
+                    <div class="price-item"><span>Cuci kering</span><span>Rp 4.500 / Kg</span></div>
+                    <div class="price-item"><span>Setrika</span><span>Rp 4.500 / Kg</span></div>
+                    <div class="price-item"><span>Dryer Only</span><span>Rp 4.500 / Kg</span></div>
+                    <div class="price-item"><span>Join Member</span><span>Rp 110.000 / 20 Kg</span></div>
+                </div>
 
-                <div class="category-title">EXPRESS & KILAT</div>
-                <div class="price-item"><span>Express Cuci Setrika (1 Hari)</span><span>Rp 13.000 / Kg</span></div>
-                <div class="price-item"><span>Express Cuci Setrika [Member]</span><span>Rp 11.000 / Kg</span></div>
-                <div class="price-item"><span>Kilat Express (Jam / Hari Sama)</span><span>Rp 20.000 / Kg</span></div>
+                <!-- EXPRESS 1 HARI -->
+                <div class="price-card-group">
+                    <div class="price-card-title">EXPRESS [ 1 Hari ]</div>
+                    <div class="price-item"><span>Cuci Setrika</span><span>Rp 13.000 / Kg</span></div>
+                    <div class="price-item"><span>Cuci Kering</span><span>Rp 10.000 / Kg</span></div>
+                    <div class="price-item"><span>Setrika Only</span><span>Rp 8.000 / Kg</span></div>
+                    <div class="price-item"><span>Dryer Only</span><span>Rp 3.500 / Kg</span></div>
+                </div>
 
-                <div class="category-title">BARANG SATUAN & BEDCOVER</div>
-                <div class="price-item"><span>Bedcover Single</span><span>Rp 20.000</span></div>
-                <div class="price-item"><span>Bedcover Double</span><span>Rp 25.000</span></div>
-                <div class="price-item"><span>Bedcover Jumbo</span><span>Rp 30.000</span></div>
-                <div class="price-item"><span>Selimut / Sprei</span><span>Rp 15.000</span></div>
-                <div class="price-item"><span>Sepatu (Shoes Care)</span><span>Rp 25.000</span></div>
-                <div class="price-item"><span>Karpet Besar</span><span>Rp 35.000</span></div>
-                <div class="price-item"><span>Jaket Tebal / Jas</span><span>Rp 15.000</span></div>
+                <!-- KILAT 8 JAM -->
+                <div class="price-card-group">
+                    <div class="price-card-title">KILAT [ 8 Jam ]</div>
+                    <div class="price-item"><span>Cuci Setrika</span><span>Rp 20.000 / Kg</span></div>
+                    <div class="price-item"><span>Cuci Kering</span><span>Rp 15.000 / Kg</span></div>
+                    <div class="price-item"><span>Dryer Only</span><span>Rp 7.000 / Kg</span></div>
+                </div>
 
-                <div class="category-title">LAYANAN ANTAR JEMPUT (ONGKIR)</div>
-                <div class="price-item"><span>Area Dekat (&lt; 2 km)</span><span>Rp 3.000</span></div>
-                <div class="price-item"><span>Area Menengah (2 - 4 km)</span><span>Rp 5.000</span></div>
-                <div class="price-item"><span>Area Luar (4 - 6 km)</span><span>Rp 7.000</span></div>
+                <!-- HARGA SATUAN -->
+                <div class="price-card-group">
+                    <div class="price-card-title">HARGA SATUAN & BARANG KHUSUS</div>
+                    <div class="price-item"><span>Bedcover Single</span><span>Rp 20.000</span></div>
+                    <div class="price-item"><span>Bedcover Double</span><span>Rp 25.000</span></div>
+                    <div class="price-item"><span>Bedcover Jumbo</span><span>Rp 30.000</span></div>
+                    <div class="price-item"><span>Boneka Kecil</span><span>Rp 15.000</span></div>
+                    <div class="price-item"><span>Boneka Sedang</span><span>Rp 20.000</span></div>
+                    <div class="price-item"><span>Boneka Besar</span><span>Rp 25.000</span></div>
+                    <div class="price-item"><span>Celana Chino</span><span>Rp 12.000</span></div>
+                    <div class="price-item"><span>Handuk</span><span>Rp 5.000</span></div>
+                    <div class="price-item"><span>Jaket Biasa</span><span>Rp 20.000</span></div>
+                    <div class="price-item"><span>Jaket Tebal</span><span>Rp 25.000</span></div>
+                    <div class="price-item"><span>Jaket Kulit</span><span>Rp 35.000</span></div>
+                    <div class="price-item"><span>Sajadah Tipis</span><span>Rp 5.000</span></div>
+                    <div class="price-item"><span>Sajadah Tebal</span><span>Rp 8.000</span></div>
+                    <div class="price-item"><span>Sajadah Super Tebal</span><span>Rp 11.000</span></div>
+                    <div class="price-item"><span>Seprai</span><span>Rp 5.000</span></div>
+                    <div class="price-item"><span>Seprai 1 set</span><span>Rp 7.500</span></div>
+                    <div class="price-item"><span>Selimut Tipis Kecil</span><span>Rp 5.000</span></div>
+                    <div class="price-item"><span>Selimut Tipis Besar</span><span>Rp 10.000</span></div>
+                    <div class="price-item"><span>Pakaian Putih</span><span>Rp 1.500</span></div>
+                    <div class="price-item"><span>Peci Putih</span><span>Rp 3.500</span></div>
+                    <div class="price-item"><span>Mukena 1 set</span><span>Rp 2.500</span></div>
+                    <div class="price-item"><span>Sepatu</span><span>Rp 25.000</span></div>
+                    <div class="price-item"><span>Sandal Crocs</span><span>Rp 25.000</span></div>
+                    <div class="price-item"><span>Karpet kecil</span><span>Rp 25.000</span></div>
+                    <div class="price-item"><span>Kantong Tidur</span><span>Rp 27.000</span></div>
+                    <div class="price-item"><span>Karpet Sedang</span><span>Rp 30.000</span></div>
+                    <div class="price-item"><span>Karpet Besar</span><span>Rp 35.000</span></div>
+                    <div class="price-item"><span>Jas</span><span>Rp 35.000</span></div>
+                </div>
+
             </div>
         </div>
 
@@ -737,7 +825,7 @@
         window.onload = function() {
             let dataUlasan = JSON.parse(localStorage.getItem('queen_reviews')) || [];
             dataUlasan.forEach(data => {
-                let listContainer = document.getElementById('listTestimoni');
+                let listContainer = document.getElementById('listTestimisi');
                 let card = document.createElement('div');
                 card.className = 'testimonial-card';
                 card.innerHTML = `<p>"${data.pesan}"</p><div class="testimonial-author"><span>${data.nama}</span><div class="stars">⭐⭐⭐⭐⭐</div></div>`;
