@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ketentuan Garansi - Queen Laundry</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #f43f5e;
+            --primary-dark: #e11d48;
+            --primary-light: #fff1f2;
+            --accent: #fb7185;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --bg-gradient: linear-gradient(135deg, #fff5f7 0%, #fff1f2 100%);
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --shadow: 0 10px 30px -5px rgba(244, 63, 94, 0.08);
+            --radius: 24px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--bg-gradient);
+            color: var(--text-main);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding-bottom: 50px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(244, 63, 94, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 0.9rem 1rem;
+        }
+
+        .header-container {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-info h1 {
+            font-size: 1.15rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #e11d48, #fb7185);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .brand-info p {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .btn-back {
+            background: var(--primary-light);
+            border: 1px solid rgba(244, 63, 94, 0.2);
+            color: var(--primary-dark);
+            padding: 8px 14px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 700;
+            transition: all 0.2s ease;
+        }
+
+        .btn-back:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto 0 auto;
+            padding: 0 16px;
+        }
+
+        .hero-garansi {
+            background: linear-gradient(135deg, #e11d48, #f43f5e);
+            color: white;
+            border-radius: var(--radius);
+            padding: 28px 24px;
+            text-align: center;
+            margin-bottom: 18px;
+            box-shadow: 0 12px 30px rgba(225, 29, 72, 0.25);
+        }
+
+        .hero-garansi h2 {
+            font-size: 1.3rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .hero-garansi p {
+            font-size: 0.85rem;
+            opacity: 0.95;
+            font-weight: 500;
+        }
+
+        .section-box {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius);
+            padding: 24px;
+            margin-bottom: 18px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .garansi-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-left: 4px solid var(--primary);
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 14px;
+            transition: transform 0.2s ease;
+        }
+
+        .garansi-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .garansi-title {
+            font-size: 0.92rem;
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .garansi-desc {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .garansi-desc b {
+            color: var(--primary-dark);
+        }
+
+        .btn-wa-garansi {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            color: white;
+            text-align: center;
+            padding: 14px;
+            border-radius: 16px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.92rem;
+            margin-top: 20px;
+            box-shadow: 0 8px 20px rgba(34, 197, 94, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .btn-wa-garansi:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px rgba(34, 197, 94, 0.4);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <div class="brand-info">
+                <h1>👑 Queen Laundry</h1>
+                <p>Modern & Professional Care</p>
+            </div>
+            <a href="index.html" class="btn-back">← Kembali ke Beranda</a>
+        </div>
+    </header>
+
+    <div class="container">
+        
+        <!-- HERO BANNER -->
+        <div class="hero-garansi">
+            <h2>🛡️ Ketentuan Garansi & Klaim</h2>
+            <p>Kebijakan resmi penanganan komplain, barang hilang, dan tanggung jawab layanan di Queen Laundry.</p>
+        </div>
+
+        <!-- DAFTAR KETENTUAN GARANSI -->
+        <div class="section-box">
+            <h2 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 16px; color: var(--text-main);">📋 Syarat & Ketentuan Layanan</h2>
+
+            <div class="garansi-card">
+                <div class="garansi-title">⏱️ 1. Batas Waktu Komplain</div>
+                <div class="garansi-desc">
+                    Pengaduan komplain wajib dilakukan maksimal <b>1 x 24 jam</b> sejak cucian diterima.
+                </div>
+            </div>
+
+            <div class="garansi-card">
+                <div class="garansi-title">⚠️ 2. Risiko Bahan Kain (Luntur / Susut)</div>
+                <div class="garansi-desc">
+                    Kerusakan seperti luntur, susut, dan berkerut akibat proses pencucian <b>bukan tanggung jawab kami</b>. Maka dari itu, disarankan untuk menggunakan layanan satuan.
+                </div>
+            </div>
+
+            <div class="garansi-card">
+                <div class="garansi-title">⚖️ 3. Validasi Jumlah Pakaian</div>
+                <div class="garansi-desc">
+                    Jumlah pakaian yang tidak dihitung oleh pelanggan bukan tanggung jawab kami, dan <b>hitungan dari pihak kami yang dianggap benar</b>.
+                </div>
+            </div>
+
+            <div class="garansi-card">
+                <div class="garansi-title">🔍 4. Laporan Pakaian Hilang</div>
+                <div class="garansi-desc">
+                    Laporan adanya pakaian hilang diterima maksimal <b>1 x 24 jam</b>. Melebihi waktu tersebut, garansi dinyatakan hilang.
+                </div>
+            </div>
+
+            <div class="garansi-card">
+                <div class="garansi-title">🧾 5. Ketentuan Penggantian & Bukti Nota</div>
+                <div class="garansi-desc">
+                    • Wajib menyertakan bukti nota pembelian dari pakaian tersebut (baik online maupun offline).<br>
+                    • Apabila tidak ada nota, solusi akan dicari bersama untuk menaksir harga pakaian yang wajar.<br>
+                    • Pakaian diganti <b>50% dari harga beli</b> apabila pakaian tersebut masih relatif baru.<br>
+                    • Pakaian diganti <b>20% dari harga beli</b> apabila pakaian sudah dipakai dalam jangka waktu lama.
+                </div>
+            </div>
+
+            <a href="https://wa.me/6285770246502?text=Halo%20Queen%20Laundry,%20saya%20ingin%20konsultasi%20mengenai%20ketentuan%20garansi." target="_blank" class="btn-wa-garansi">
+                💬 Hubungi Admin untuk Info / Pengaduan
+            </a>
+        </div>
+
+    </div>
+
+    <footer>&copy; 2026 Queen Laundry<br>Website created AshrafNr.</footer>
+
+</body>
+</html>
