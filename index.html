@@ -887,39 +887,46 @@
         // Fungsi untuk buka/tutup menu hamburger
         function toggleMenu() {
             let menu = document.getElementById('dropdownMenu');
-            menu.classList.toggle('active');
+            if (menu) {
+                menu.classList.toggle('active');
+            }
         }
 
         // Hitung total harga dari gabungan kolom Kiloan dan Kolom Satuan + Ongkir
         function hitungTotal() {
             // 1. Hitung Kiloan
             let selectKiloan = document.getElementById('pilihLayananKiloan');
-            let textKiloan = selectKiloan.options[selectKiloan.selectedIndex].text;
-            let hargaPerKg = parseFloat(selectKiloan.value) || 0;
-            let berat = parseFloat(document.getElementById('beratKg').value) || 0;
+            let textKiloan = selectKiloan ? selectKiloan.options[selectKiloan.selectedIndex].text : "";
+            let hargaPerKg = selectKiloan ? parseFloat(selectKiloan.value) || 0 : 0;
+            let beratInput = document.getElementById('beratKg');
+            let berat = beratInput ? parseFloat(beratInput.value) || 0 : 0;
             if (berat < 0) berat = 0;
             let subtotalKiloan = hargaPerKg * berat;
 
             // 2. Hitung Satuan
             let selectSatuan = document.getElementById('pilihLayananSatuan');
-            let textSatuan = selectSatuan.options[selectSatuan.selectedIndex].text;
-            let hargaSatuan = parseFloat(selectSatuan.value) || 0;
-            let jumlah = parseInt(document.getElementById('jumlahPcs').value) || 0;
+            let textSatuan = selectSatuan ? selectSatuan.options[selectSatuan.selectedIndex].text : "";
+            let hargaSatuan = selectSatuan ? parseFloat(selectSatuan.value) || 0 : 0;
+            let jumlahInput = document.getElementById('jumlahPcs');
+            let jumlah = jumlahInput ? parseInt(jumlahInput.value) || 0 : 0;
             if (jumlah < 0) jumlah = 0;
             let subtotalSatuan = hargaSatuan * jumlah;
 
             // 3. Hitung Ongkir
             let selectOngkir = document.getElementById('pilihOngkir');
-            let textOngkir = selectOngkir.options[selectOngkir.selectedIndex].text;
-            let biayaOngkir = parseFloat(selectOngkir.value) || 0;
+            let textOngkir = selectOngkir ? selectOngkir.options[selectOngkir.selectedIndex].text : "";
+            let biayaOngkir = selectOngkir ? parseFloat(selectOngkir.value) || 0 : 0;
 
             let totalKotor = subtotalKiloan + subtotalSatuan + biayaOngkir;
             let total = Math.round(totalKotor / 500) * 500; // pembulatan terdekat
             let formatRupiah = total.toLocaleString('id-ID', { maximumFractionDigits: 0 });
             
-            document.getElementById('hasilTotal').innerText = "Rp " + formatRupiah;
+            let hasilTotal = document.getElementById('hasilTotal');
+            if (hasilTotal) {
+                hasilTotal.innerText = "Rp " + formatRupiah;
+            }
             
-            // Susun teks pesan WhatsApp secara rapi dengan baris baru (\n)
+            // Susun teks pesan WhatsApp secara rapi tersusun ke bawah
             let rincianPesanan = [];
             if (berat > 0) {
                 rincianPesanan.push(`- ${textKiloan} (${berat} Kg)`);
@@ -931,17 +938,22 @@
             let detailOrderText = rincianPesanan.length > 0 ? rincianPesanan.join("\n") : "- (Tidak ada layanan dipilih)";
             
             let pesanWa = "Halo Queen Laundry, saya mau order:\n" + 
-                          detailOrderText + "\n\n" + 
-                          "🚚 Opsi Antar-Jemput: " + textOngkir + "\n" + 
-                          "💰 Total Estimasi: Rp " + formatRupiah + "\n\n" + 
-                          "Mohon konfirmasinya ya, terima kasih!";
+                          detailOrderText + "\n" + 
+                          "(Opsi Antar-Jemput: " + textOngkir + ").\n" + 
+                          "Total estimasi harga Rp " + formatRupiah + ".\n" + 
+                          "Mohon konfirmasinya ya!";
 
             let encodedPesan = encodeURIComponent(pesanWa);
-            document.getElementById('waOrderLink').href = `https://wa.me/6285770246502?text=${encodedPesan}`;
+            let waOrderLink = document.getElementById('waOrderLink');
+            if (waOrderLink) {
+                waOrderLink.href = `https://wa.me/6285770246502?text=${encodedPesan}`;
+            }
         }
 
         function cariBarang() {
-            let input = document.getElementById('searchInput').value.toLowerCase();
+            let inputElem = document.getElementById('searchInput');
+            if (!inputElem) return;
+            let input = inputElem.value.toLowerCase();
             let items = document.querySelectorAll('.price-item');
             
             items.forEach(function(item) {
@@ -981,9 +993,15 @@
         };
 
         function tambahTestimoni() {
-            let nama = document.getElementById('inputNama').value.trim();
-            let bintang = document.getElementById('inputBintang').value;
-            let pesan = document.getElementById('inputPesan').value.trim();
+            let inputNama = document.getElementById('inputNama');
+            let inputBintang = document.getElementById('inputBintang');
+            let inputPesan = document.getElementById('inputPesan');
+
+            if (!inputNama || !inputBintang || !inputPesan) return;
+
+            let nama = inputNama.value.trim();
+            let bintang = inputBintang.value;
+            let pesan = inputPesan.value.trim();
 
             if (!nama || !pesan) {
                 alert("Mohon isi Nama dan Pesan ulasan terlebih dahulu!");
@@ -1002,13 +1020,15 @@
 
             tampilkanUlasanHtml(ulasanBaru, true);
 
-            document.getElementById('inputNama').value = '';
-            document.getElementById('inputPesan').value = '';
+            inputNama.value = '';
+            inputPesan.value = '';
             alert("Terima kasih! Ulasan Anda berhasil dikirim dan langsung tampil di website.");
         }
 
         function tampilkanUlasanHtml(data, isNew = false) {
             let listContainer = document.getElementById('listTestimoni');
+            if (!listContainer) return;
+            
             let card = document.createElement('div');
             card.className = 'testimonial-card';
             card.innerHTML = `
