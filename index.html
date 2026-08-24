@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Queen Laundry - Premium Care Service</title>
     
-    <!-- KODE VERIFIKASI GOOGLE SEARCH CONSOLE -->
-    <meta name="google-site-verification" content="tWzQZjPyYBz60LxPIA4UMOLPx9QB8ELxh3l5nOrGb5E" />
+    <!-- KODE BARU GOOGLE SEARCH CONSOLE -->
+    <meta name="google-site-verification" content="f790bzIVELmF4DsjiqrPgPwDKncgSIzpTVrOrtoYRWs" />
 
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -156,7 +156,6 @@
             padding: 0 16px;
         }
 
-        /* --- BANNER PROMO DENGAN ORNAMEN TIMUR TENGAH AMAN (TIDAK MENGHALANGI TEKS) --- */
         .maulid-banner {
             background: linear-gradient(135deg, #022c22 0%, #064e3b 50%, #047857 100%);
             color: white;
@@ -207,21 +206,6 @@
             z-index: 2;
         }
 
-        .maulid-banner::before {
-            content: '';
-            position: absolute;
-            top: -50%; left: -50%; width: 200%; height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.06), transparent);
-            transform: rotate(30deg);
-            animation: shine 6s infinite linear;
-            pointer-events: none;
-        }
-
-        @keyframes shine {
-            0% { transform: translateY(-100%) rotate(30deg); }
-            100% { transform: translateY(100%) rotate(30deg); }
-        }
-
         .maulid-badge {
             display: inline-block;
             background: linear-gradient(135deg, #f59e0b, #d97706);
@@ -241,7 +225,6 @@
             font-weight: 800;
             margin-bottom: 6px;
             letter-spacing: -0.3px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
             color: #fef08a;
         }
 
@@ -268,7 +251,6 @@
 
         .maulid-btn:hover {
             transform: translateY(-3px) scale(1.03);
-            box-shadow: 0 10px 25px rgba(245, 158, 11, 0.6);
             background: linear-gradient(135deg, #fde047, #d97706);
             color: #fff;
         }
@@ -291,7 +273,6 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            letter-spacing: -0.3px;
         }
 
         .quality-banner {
@@ -465,7 +446,6 @@
             font-weight: 800;
             color: var(--primary-dark);
             margin: 4px 0 12px 0;
-            letter-spacing: -0.5px;
         }
 
         .btn-order-wa, .btn-submit-feedback {
@@ -483,11 +463,6 @@
             width: 100%;
             box-shadow: 0 8px 20px rgba(244, 63, 94, 0.3);
             transition: all 0.2s ease;
-        }
-
-        .btn-order-wa:hover, .btn-submit-feedback:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 25px rgba(244, 63, 94, 0.4);
         }
 
         .member-banner {
@@ -512,11 +487,6 @@
             font-size: 0.85rem;
             margin-top: 12px;
             box-shadow: 0 6px 15px rgba(245, 158, 11, 0.3);
-            transition: all 0.2s ease;
-        }
-        .btn-to-member:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(245, 158, 11, 0.4);
         }
 
         .price-card-group {
@@ -536,7 +506,6 @@
             border-radius: 8px;
             display: inline-block;
             margin-bottom: 12px;
-            letter-spacing: 0.3px;
         }
 
         .price-item {
@@ -548,12 +517,6 @@
             border-bottom: 1px dashed #f1f5f9;
             padding-bottom: 8px;
             font-weight: 500;
-        }
-
-        .price-item:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-            padding-bottom: 0;
         }
 
         .price-item span:last-child {
@@ -571,9 +534,7 @@
             padding: 14px;
             border-radius: 12px;
             margin-bottom: 12px;
-            border-top: 1px solid #f1f5f9;
-            border-right: 1px solid #f1f5f9;
-            border-bottom: 1px solid #f1f5f9;
+            border: 1px solid #f1f5f9;
         }
 
         .testimonial-card p {
@@ -594,16 +555,13 @@
 
         .stars {
             color: #f59e0b;
-            font-size: 0.85rem;
         }
 
-        .btn-maps {
+        .btn-maps, .btn-wa-main {
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 8px;
-            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-            color: white;
             text-align: center;
             padding: 14px;
             border-radius: 14px;
@@ -611,36 +569,18 @@
             font-weight: 700;
             font-size: 0.9rem;
             margin-top: 12px;
-            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
-            transition: all 0.2s ease;
         }
 
-        .btn-maps:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 25px rgba(59, 130, 246, 0.4);
+        .btn-maps {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: white;
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
         }
 
         .btn-wa-main {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
             background: linear-gradient(135deg, #22c55e, #16a34a);
             color: white;
-            text-align: center;
-            padding: 14px;
-            border-radius: 16px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 0.92rem;
-            margin-top: 14px;
             box-shadow: 0 8px 20px rgba(34, 197, 94, 0.3);
-            transition: all 0.2s ease;
-        }
-
-        .btn-wa-main:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 25px rgba(34, 197, 94, 0.4);
         }
 
         footer {
@@ -681,7 +621,6 @@
 
     <div class="container">
 
-        <!-- BANNER PROMO DENGAN ORNAMEN TIMUR TENGAH -->
         <div class="maulid-banner">
             <div class="middle-east-decor">
                 <div class="bg-moon">🌙</div>
@@ -691,10 +630,8 @@
 
             <div class="maulid-badge">🌟 BAROKAH MAULID NABI SAW 1448 H 🌟</div>
             <h3>Pakaian Bersih, Hati Tenang, Berkah Melimpah!</h3>
-            <p>Nikmati diskon spesial & bonus keharuman premium eksklusif khusus menyambut hari kelahiran Nabi Muhammad SAW minggu ini. Yuk, percayakan cucian Anda pada kami!</p>
-            <a href="promo.html" class="maulid-btn">
-                🎉 Klaim Promo Sekarang
-            </a>
+            <p>Nikmati diskon spesial & bonus keharuman premium eksklusif khusus menyambut hari kelahiran Nabi Muhammad SAW minggu ini.</p>
+            <a href="promo.html" class="maulid-btn">🎉 Klaim Promo Sekarang</a>
         </div>
 
         <div class="section-box">
@@ -705,17 +642,6 @@
                 <h3>💎 100% Racikan Formula Eksklusif</h3>
                 <div class="quality-item"><span>🧼</span><b>Sabun Deterjen:</b> Lembut di serat kain, ampuh angkat noda.</div>
                 <div class="quality-item"><span>🌸</span><b>Parfum Premium:</b> Wangi mewah tahan lama seharian.</div>
-            </div>
-
-            <div class="faq-ticker-container">
-                <div class="ticker-wrapper">
-                    <div class="ticker-content">
-                        <div class="ticker-item">⚡ Proses Kilat 3-4 Hari</div>
-                        <div class="ticker-item">💰 Harga Member Jauh Lebih Hemat</div>
-                        <div class="ticker-item">🛵 Layanan Antar Jemput Tersedia</div>
-                        <div class="ticker-item">⚡ Proses Kilat 3-4 Hari</div>
-                    </div>
-                </div>
             </div>
         </div>
 
@@ -728,7 +654,6 @@
             </div>
         </div>
 
-        <!-- KALKULATOR & ONGKIR MODERN -->
         <div id="kalkulator" class="section-box">
             <h2>🧮 Kalkulator & Estimasi Biaya</h2>
             
@@ -798,13 +723,8 @@
                 </div>
             </div>
 
-            <!-- FITUR ONGKIR SESUAI KETENTUAN JARAK -->
             <div class="calc-section-card" style="border: 1px solid rgba(244, 63, 94, 0.3); background: linear-gradient(135deg, #ffffff, #fff1f2);">
                 <div class="calc-section-title" style="color: var(--primary-dark);">🛵 Layanan Antar Jemput (Berdasarkan Jarak)</div>
-                <div style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 10px; line-height: 1.5;">
-                    💡 <b>Ketentuan Ongkir:</b> Dihitung di atas 3,5 km. Jarak di bawah itu / antar-jemput sendiri (Rp 0). Jarak 4 - 4,5 km (<b>Rp 7.000</b>), dan di atas itu (<b>Rp 13.000</b>). Silakan cek Google Maps untuk melihat jarak Anda dari toko kami!
-                </div>
-                
                 <div class="calc-group">
                     <label>Pilih Kategori Jarak Anda:</label>
                     <select id="pilihOngkir" class="calc-select" onchange="hitungTotal()">
@@ -813,10 +733,6 @@
                         <option value="13000">Jarak Di Atas 4,5 Km (Rp 13.000)</option>
                     </select>
                 </div>
-
-                <a href="https://maps.app.goo.gl/K3b4yoQHxTkgiiFn8" target="_blank" style="display: inline-flex; align-items: center; gap: 6px; font-size: 0.75rem; font-weight: 700; color: #1d4ed8; background: #e0f2fe; padding: 6px 12px; border-radius: 8px; text-decoration: none; margin-top: 4px;">
-                    <span>📍 Cek Jarak via Google Maps</span>
-                </a>
             </div>
 
             <div class="calc-result">
@@ -828,97 +744,25 @@
             </div>
         </div>
 
-        <!-- MEMBER BANNER PREVIEW -->
         <div class="section-box member-banner">
             <h3>🌟 Ingin Cuci Lebih Hemat Setiap Hari?</h3>
             <p style="font-size: 0.82rem; color: #78350f; margin-bottom: 4px;">Dapatkan diskon khusus, prioritas antrean, dan kuota cuci dengan harga spesial lewat program Member kami.</p>
             <a href="member.html" class="btn-to-member">✨ Lihat Paket & Keuntungan Member</a>
         </div>
 
-        <!-- PRICE LIST LENGKAP MODERN -->
         <div id="pricelist" class="section-box">
             <h2>📋 Daftar Harga Lengkap</h2>
             <div style="margin-bottom: 16px;">
                 <input type="text" id="searchInput" class="search-input" placeholder="🔍 Cari jenis layanan..." onkeyup="cariBarang()">
             </div>
             <div id="priceListContainer">
-                
-                <!-- STANDAR 3 - 4 HARI -->
                 <div class="price-card-group">
                     <div class="price-card-title">STANDAR [ 3 - 4 Hari ]</div>
                     <div class="price-item"><span>CUCI Setrika</span><span>Rp 6.500 / Kg</span></div>
                     <div class="price-item"><span>Cuci kering</span><span>Rp 4.500 / Kg</span></div>
                     <div class="price-item"><span>Setrika</span><span>Rp 4.500 / Kg</span></div>
                     <div class="price-item"><span>Dryer Only</span><span>Rp 4.500 / Kg</span></div>
-                    <div class="price-item"><span>Join Member</span><span>Rp 110.000 / 20 Kg</span></div>
                 </div>
-
-                <!-- EXPRESS 1 HARI -->
-                <div class="price-card-group">
-                    <div class="price-card-title">EXPRESS [ 1 Hari ]</div>
-                    <div class="price-item"><span>Cuci Setrika</span><span>Rp 13.000 / Kg</span></div>
-                    <div class="price-item"><span>Cuci Kering</span><span>Rp 10.000 / Kg</span></div>
-                    <div class="price-item"><span>Setrika Only</span><span>Rp 8.000 / Kg</span></div>
-                    <div class="price-item"><span>Dryer Only</span><span>Rp 3.500 / Kg</span></div>
-                </div>
-
-                <!-- KILAT 8 JAM -->
-                <div class="price-card-group">
-                    <div class="price-card-title">KILAT [ 8 Jam ]</div>
-                    <div class="price-item"><span>Cuci Setrika</span><span>Rp 20.000 / Kg</span></div>
-                    <div class="price-item"><span>Cuci Kering</span><span>Rp 15.000 / Kg</span></div>
-                    <div class="price-item"><span>Dryer Only</span><span>Rp 7.000 / Kg</span></div>
-                </div>
-
-                <!-- HARGA SATUAN -->
-                <div class="price-card-group">
-                    <div class="price-card-title">HARGA SATUAN & BARANG KHUSUS</div>
-                    <div class="price-item"><span>Bedcover Single</span><span>Rp 20.000</span></div>
-                    <div class="price-item"><span>Bedcover Double</span><span>Rp 25.000</span></div>
-                    <div class="price-item"><span>Bedcover Jumbo</span><span>Rp 30.000</span></div>
-                    <div class="price-item"><span>Boneka Kecil</span><span>Rp 15.000</span></div>
-                    <div class="price-item"><span>Boneka Sedang</span><span>Rp 20.000</span></div>
-                    <div class="price-item"><span>Boneka Besar</span><span>Rp 25.000</span></div>
-                    <div class="price-item"><span>Celana Chino</span><span>Rp 12.000</span></div>
-                    <div class="price-item"><span>Handuk</span><span>Rp 5.000</span></div>
-                    <div class="price-item"><span>Jaket Biasa</span><span>Rp 20.000</span></div>
-                    <div class="price-item"><span>Jaket Tebal</span><span>Rp 25.000</span></div>
-                    <div class="price-item"><span>Jaket Kulit</span><span>Rp 35.000</span></div>
-                    <div class="price-item"><span>Sajadah Tipis</span><span>Rp 5.000</span></div>
-                    <div class="price-item"><span>Sajadah Tebal</span><span>Rp 8.000</span></div>
-                    <div class="price-item"><span>Sajadah Super Tebal</span><span>Rp 11.000</span></div>
-                    <div class="price-item"><span>Seprai</span><span>Rp 5.000</span></div>
-                    <div class="price-item"><span>Seprai 1 set</span><span>Rp 7.500</span></div>
-                    <div class="price-item"><span>Selimut Tipis Kecil</span><span>Rp 5.000</span></div>
-                    <div class="price-item"><span>Selimut Tipis Besar</span><span>Rp 10.000</span></div>
-                    <div class="price-item"><span>Pakaian Putih</span><span>Rp 1.500</span></div>
-                    <div class="price-item"><span>Peci Putih</span><span>Rp 3.500</span></div>
-                    <div class="price-item"><span>Mukena 1 set</span><span>Rp 2.500</span></div>
-                    <div class="price-item"><span>Sepatu</span><span>Rp 25.000</span></div>
-                    <div class="price-item"><span>Sandal Crocs</span><span>Rp 25.000</span></div>
-                    <div class="price-item"><span>Karpet kecil</span><span>Rp 25.000</span></div>
-                    <div class="price-item"><span>Kantong Tidur</span><span>Rp 27.000</span></div>
-                    <div class="price-item"><span>Karpet Sedang</span><span>Rp 30.000</span></div>
-                    <div class="price-item"><span>Karpet Besar</span><span>Rp 35.000</span></div>
-                    <div class="price-item"><span>Jas</span><span>Rp 35.000</span></div>
-                </div>
-
-            </div>
-        </div>
-
-        <div id="testimoni" class="section-box">
-            <h2>💬 Testimoni Pelanggan</h2>
-            <div id="listTestimoni">
-                <div class="testimonial-card">
-                    <p>"Hasil laundry bersih banget, lipatan sangat rapi, dan aromanya tahan lama!"</p>
-                    <div class="testimonial-author"><span>Ibu Siska</span><div class="stars">⭐⭐⭐⭐⭐</div></div>
-                </div>
-            </div>
-            <div style="margin-top: 20px; border-top: 1px dashed #e2e8f0; padding-top: 15px;">
-                <h3 style="font-size: 0.9rem; font-weight: 700; margin-bottom: 10px; color: var(--text-main);">✍️ Tulis Ulasan Anda</h3>
-                <div class="calc-group"><label>Nama:</label><input type="text" id="inputNama" class="feedback-input" placeholder="Nama Anda"></div>
-                <div class="calc-group"><label>Pesan Ulasan:</label><textarea id="inputPesan" class="feedback-input" rows="2" placeholder="Bagikan pengalaman Anda..."></textarea></div>
-                <button type="button" class="btn-submit-feedback" onclick="tambahTestimoni()">✨ Kirim Ulasan</button>
             </div>
         </div>
 
@@ -932,7 +776,6 @@
 
     <footer>&copy; 2026 Queen Laundry<br>Website created AshrafNr.</footer>
 
-    <!-- SCRIPT JAVASCRIPT -->
     <script>
         function toggleMenu() {
             let menu = document.getElementById('dropdownMenu');
@@ -948,37 +791,7 @@
             
             let total = Math.round((((kiloan * berat) + (satuan * jumlah) + ongkir) / 500)) * 500;
             document.getElementById('hasilTotal').innerText = "Rp " + total.toLocaleString('id-ID');
-            document.getElementById('waOrderLink').href = `https://wa.me/6285770246502?text=${encodeURIComponent("Halo Queen Laundry, saya mau order dengan total estimasi Rp " + total.toLocaleString('id-ID') + " (Termasuk Ongkir)")}`;
-        }
-
-        function cariBarang() {
-            let input = document.getElementById('searchInput').value.toLowerCase();
-            document.querySelectorAll('.price-item').forEach(item => {
-                let nama = item.querySelector('span').textContent.toLowerCase();
-                item.style.display = nama.includes(input) ? "flex" : "none";
-            });
-        }
-
-        window.onload = function() {
-            let dataUlasan = JSON.parse(localStorage.getItem('queen_reviews')) || [];
-            dataUlasan.forEach(data => {
-                let listContainer = document.getElementById('listTestimoni');
-                let card = document.createElement('div');
-                card.className = 'testimonial-card';
-                card.innerHTML = `<p>"${data.pesan}"</p><div class="testimonial-author"><span>${data.nama}</span><div class="stars">⭐⭐⭐⭐⭐</div></div>`;
-                listContainer.appendChild(card);
-            });
-        };
-
-        function tambahTestimoni() {
-            let nama = document.getElementById('inputNama').value.trim();
-            let pesan = document.getElementById('inputPesan').value.trim();
-            if (!nama || !pesan) { alert("Harap isi nama dan pesan ulasan!"); return; }
-            let ulasanBaru = { nama, pesan };
-            let dataUlasan = JSON.parse(localStorage.getItem('queen_reviews')) || [];
-            dataUlasan.unshift(ulasanBaru);
-            localStorage.setItem('queen_reviews', JSON.stringify(dataUlasan));
-            location.reload();
+            document.getElementById('waOrderLink').href = `https://wa.me/6285770246502?text=${encodeURIComponent("Halo Queen Laundry, saya mau order dengan total estimasi Rp " + total.toLocaleString('id-ID'))}`;
         }
     </script>
 </body>
