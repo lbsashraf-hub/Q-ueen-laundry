@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Queen Laundry - Premium Price List</title>
+    <title>Queen Laundry - Kalkulator & Price List</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -65,9 +65,6 @@
             cursor: pointer;
             transition: background 0.2s;
         }
-        .hamburger-btn:active {
-            background: rgba(255, 255, 255, 0.4);
-        }
         .hamburger-btn span {
             display: block;
             width: 20px;
@@ -114,7 +111,7 @@
             border-radius: 10px;
             transition: background 0.2s, color 0.2s;
         }
-        .menu-list a:hover, .menu-list a:active {
+        .menu-list a:hover {
             background: #db2777;
             color: white;
         }
@@ -147,6 +144,87 @@
             font-size: 0.88rem;
             color: #4a5568;
             margin-bottom: 8px;
+        }
+
+        /* Highlight Keunggulan Sabun & Parfum */
+        .quality-banner {
+            background: linear-gradient(135deg, #fdf2f8, #fce7f3);
+            border: 1.5px solid #fbcfe8;
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+        .quality-banner h3 {
+            color: #be185d;
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .quality-item {
+            font-size: 0.84rem;
+            color: #4a5568;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+        .quality-item:last-child {
+            margin-bottom: 0;
+        }
+
+        /* SLIDE BERJALAN / FAQ MARQUEE STYLES */
+        .faq-ticker-container {
+            background: linear-gradient(135deg, #fff1f2, #ffe4e6);
+            border: 1px solid #f43f5e;
+            border-radius: 14px;
+            padding: 12px 14px;
+            margin-top: 14px;
+            overflow: hidden;
+            position: relative;
+        }
+        .faq-ticker-title {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: #be185d;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .ticker-wrapper {
+            display: flex;
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+        }
+        .ticker-content {
+            display: inline-flex;
+            gap: 40px;
+            animation: tickerScroll 25s linear infinite;
+            font-size: 0.82rem;
+            color: #881337;
+            font-weight: 500;
+        }
+        .ticker-content:hover {
+            animation-play-state: paused;
+        }
+        .ticker-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            border: 1px solid #fecdd3;
+        }
+        @keyframes tickerScroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
         }
 
         /* Galeri Foto Styles */
@@ -182,31 +260,49 @@
             font-weight: 500;
         }
 
-        /* Kalkulator Styles */
+        /* Kalkulator Styles - Kolom Terpisah */
+        .calc-section-card {
+            background: #f8fafc;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 14px;
+            padding: 14px;
+            margin-bottom: 14px;
+        }
+        .calc-section-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #be185d;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
         .calc-group {
-            margin-bottom: 12px;
+            margin-bottom: 10px;
+        }
+        .calc-group:last-child {
+            margin-bottom: 0;
         }
         .calc-group label {
-            font-size: 0.82rem;
+            font-size: 0.8rem;
             font-weight: 500;
             color: #4a5568;
             display: block;
-            margin-bottom: 4px;
+            margin-bottom: 3px;
         }
         .calc-select, .calc-input, .search-input, .feedback-input {
             width: 100%;
             padding: 10px 14px;
             border-radius: 12px;
-            border: 1.5px solid #e2e8f0;
-            font-size: 0.88rem;
+            border: 1.5px solid #cbd5e1;
+            font-size: 0.85rem;
             font-family: 'Poppins', sans-serif;
-            background: #f8fafc;
+            background: #ffffff;
             outline: none;
             transition: all 0.2s;
         }
         .calc-select:focus, .calc-input:focus, .search-input:focus, .feedback-input:focus {
             border-color: #db2777;
-            background: #fff;
             box-shadow: 0 0 0 4px rgba(219, 39, 119, 0.1);
         }
         .calc-result {
@@ -250,7 +346,7 @@
             background: #be185d;
         }
 
-        /* Member Card Special */
+        /* Member Card Special (Kolom Spesial Member) */
         .member-banner {
             background: linear-gradient(135deg, #fffbeb, #fef3c7);
             border: 2px dashed #f59e0b;
@@ -260,10 +356,42 @@
             font-size: 1.05rem;
             font-weight: 600;
             margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
-        .member-price {
-            color: #db2777 !important;
+        .member-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-top: 12px;
+            margin-bottom: 12px;
+        }
+        .member-card-item {
+            background: white;
+            border: 1.5px solid #f6ad55;
+            border-radius: 12px;
+            padding: 10px 6px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(245, 158, 11, 0.1);
+        }
+        .member-card-item .m-quota {
+            font-size: 0.75rem;
+            color: #718096;
+            font-weight: 600;
+        }
+        .member-card-item .m-price {
+            font-size: 0.95rem;
             font-weight: 700;
+            color: #d97706;
+            margin-top: 2px;
+        }
+        .member-benefit-box {
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 10px;
+            padding: 10px;
+            font-size: 0.82rem;
+            color: #92400e;
         }
 
         /* Testimoni Styles */
@@ -409,7 +537,7 @@
             <ul class="menu-list">
                 <li><a href="#kalkulator" onclick="toggleMenu()">🧮 Kalkulator Estimasi Harga</a></li>
                 <li><a href="#galeri" onclick="toggleMenu()">📸 Galeri & Suasana Laundry</a></li>
-                <li><a href="#member" onclick="toggleMenu()">🌟 Keuntungan Member</a></li>
+                <li><a href="#member" onclick="toggleMenu()">🌟 Paket & Keuntungan Member</a></li>
                 <li><a href="#pricelist" onclick="toggleMenu()">📋 Daftar Harga Lengkap</a></li>
                 <li><a href="#testimoni" onclick="toggleMenu()">💬 Testimoni & Ulasan</a></li>
                 <li><a href="#lokasi" onclick="toggleMenu()">📍 Lokasi & Jam Buka</a></li>
@@ -419,10 +547,43 @@
 
     <div class="container">
 
-        <!-- PROFIL -->
+        <!-- PROFIL & KUALITAS EKSKLUSIF -->
         <div class="section-box">
             <h2>✨ Tentang Kami</h2>
-            <p class="info-text">Queen Laundry hadir memberikan solusi terbaik untuk cucian Anda. Menggunakan deterjen ramah lingkungan dan parfum eksklusif pilihan agar pakaian wangi tahan lama.</p>
+            <p class="info-text" style="margin-bottom: 12px;">Queen Laundry hadir memberikan solusi terbaik untuk cucian Anda dengan hasil cucian yang higienis, bersih, dan harum maksimal.</p>
+            
+            <!-- Pemberitahuan Sabun & Parfum Asli Buatan Sendiri -->
+            <div class="quality-banner">
+                <h3>💎 100% Racikan Asli Queen Laundry</h3>
+                <div class="quality-item">
+                    <span>🧼</span>
+                    <div><b>Sabun Deterjen Asli:</b> Sabun cuci yang digunakan merupakan formula khusus racikan asli Queen Laundry yang ampuh mengangkat noda membandel namun tetap aman dan lembut di serat kain.</div>
+                </div>
+                <div class="quality-item" style="margin-top: 8px;">
+                    <span>🌸</span>
+                    <div><b>Parfum Eksklusif Asli:</b> Pewangi pakaian menggunakan parfum racikan khas Queen Laundry yang memberikan aroma wangi segar mewah dan tahan lama seharian.</div>
+                </div>
+            </div>
+
+            <!-- SLIDE BERJALAN (FAQ / PERTANYAAN SERING DIAJUKAN) -->
+            <div class="faq-ticker-container">
+                <div class="faq-ticker-title">💡 FAQ (Pertanyaan yang Sering Diajukan):</div>
+                <div class="ticker-wrapper">
+                    <div class="ticker-content">
+                        <div class="ticker-item">❓ Berapa lama proses pengerjaan standar? <b>👉 3 - 4 Hari</b></div>
+                        <div class="ticker-item">❓ Apa keuntungan member? <b>👉 Harga jauh lebih hemat (Paket: 55rb/10Kg, 110rb/20Kg, 125rb/25Kg)</b></div>
+                        <div class="ticker-item">❓ Apakah ada potongan untuk layanan Express? <b>👉 Ada! Potongan Rp 2.000 untuk member (dari 13rb jadi 11rb/Kg)</b></div>
+                        <div class="ticker-item">❓ Apakah tersedia layanan antar-jemput cucian? <b>👉 Tersedia untuk jarak > 3,5 Km</b></div>
+                        <div class="ticker-item">❓ Apakah sabun & parfumnya aman? <b>👉 100% racikan asli Queen Laundry, aman & wangi tahan lama!</b></div>
+                        <!-- Duplikasi untuk looping mulus -->
+                        <div class="ticker-item">❓ Berapa lama proses pengerjaan standar? <b>👉 3 - 4 Hari</b></div>
+                        <div class="ticker-item">❓ Apa keuntungan member? <b>👉 Harga jauh lebih hemat (Paket: 55rb/10Kg, 110rb/20Kg, 125rb/25Kg)</b></div>
+                        <div class="ticker-item">❓ Apakah ada potongan untuk layanan Express? <b>👉 Ada! Potongan Rp 2.000 untuk member (dari 13rb jadi 11rb/Kg)</b></div>
+                        <div class="ticker-item">❓ Apakah tersedia layanan antar-jemput cucian? <b>👉 Tersedia untuk jarak > 3,5 Km</b></div>
+                        <div class="ticker-item">❓ Apakah sabun & parfumnya aman? <b>👉 100% racikan asli Queen Laundry, aman & wangi tahan lama!</b></div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- GALERI FOTO -->
@@ -446,93 +607,92 @@
             </div>
         </div>
 
-        <!-- KALKULATOR HARGA & CEK JARAK ONGKIR -->
+        <!-- KALKULATOR HARGA DENGAN KOLOM KILOAN & SATUAN TERPISAH -->
         <div id="kalkulator" class="section-box">
             <h2>🧮 Kalkulator Estimasi Harga</h2>
-            <p class="info-text" style="margin-bottom: 10px;">Hitung total biaya cucian sekaligus cek jarak & ongkir:</p>
+            <p class="info-text" style="margin-bottom: 12px;">Pilih jenis layanan kiloan atau satuan sesuai kebutuhan Anda:</p>
             
-            <div class="calc-group">
-                <label>Pilih Kategori Layanan:</label>
-                <select id="pilihKategori" class="calc-select" onchange="gantiKategoriLayanan()">
-                    <option value="kiloan">Layanan Kiloan (Per Kg)</option>
-                    <option value="satuan">Layanan Barang Satuan</option>
-                </select>
+            <!-- KOLOM 1: LAYANAN KILOAN -->
+            <div class="calc-section-card">
+                <div class="calc-section-title">⚖️ 1. Kolom Layanan Kiloan</div>
+                <div class="calc-group">
+                    <label>Pilih Layanan Kiloan:</label>
+                    <select id="pilihLayananKiloan" class="calc-select" onchange="hitungTotal()">
+                        <option value="6500">Standar - Cuci Setrika (Rp 6.500/kg)</option>
+                        <option value="5500">Standar - Cuci Setrika [Member] (Rp 5.500/kg)</option>
+                        <option value="4500">Standar - Cuci Kering (Rp 4.500/kg)</option>
+                        <option value="4500">Standar - Setrika (Rp 4.500/kg)</option>
+                        <option value="4500">Standar - Dryer Only (Rp 4.500/kg)</option>
+                        <option value="13000">Express - Cuci Setrika (Rp 13.000/kg)</option>
+                        <option value="11000">Express - Cuci Setrika [Member - Potongan Rp 2rb] (Rp 11.000/kg)</option>
+                        <option value="10000">Express - Cuci Kering (Rp 10.000/kg)</option>
+                        <option value="8000">Express - Setrika Only (Rp 8.000/kg)</option>
+                        <option value="3500">Express - Dryer Only (Rp 3.500/kg)</option>
+                        <option value="20000">Kilat - Cuci Setrika (Rp 20.000/kg)</option>
+                        <option value="15000">Kilat - Cuci Kering (Rp 15.000/kg)</option>
+                        <option value="7000">Kilat - Dryer Only (Rp 7.000/kg)</option>
+                    </select>
+                </div>
+                <div class="calc-group" style="margin-top: 8px;">
+                    <label>Berat Cucian (Kg):</label>
+                    <input type="number" id="beratKg" class="calc-input" value="0" min="0" step="0.1" oninput="hitungTotal()">
+                </div>
             </div>
 
-            <!-- Opsi Kiloan -->
-            <div id="grupKiloan" class="calc-group">
-                <label>Pilih Layanan Kiloan:</label>
-                <select id="pilihLayananKiloan" class="calc-select" onchange="hitungTotal()">
-                    <option value="6500">Standar - Cuci Setrika (Rp 6.500/kg)</option>
-                    <option value="5500">Standar - Cuci Setrika [Member] (Rp 5.500/kg)</option>
-                    <option value="4500">Standar - Cuci Kering (Rp 4.500/kg)</option>
-                    <option value="4500">Standar - Setrika (Rp 4.500/kg)</option>
-                    <option value="4500">Standar - Dryer Only (Rp 4.500/kg)</option>
-                    <option value="13000">Express - Cuci Setrika (Rp 13.000/kg)</option>
-                    <option value="11000">Express - Cuci Setrika [Member] (Rp 11.000/kg)</option>
-                    <option value="10000">Express - Cuci Kering (Rp 10.000/kg)</option>
-                    <option value="8000">Express - Setrika Only (Rp 8.000/kg)</option>
-                    <option value="3500">Express - Dryer Only (Rp 3.500/kg)</option>
-                    <option value="20000">Kilat - Cuci Setrika (Rp 20.000/kg)</option>
-                    <option value="15000">Kilat - Cuci Kering (Rp 15.000/kg)</option>
-                    <option value="7000">Kilat - Dryer Only (Rp 7.000/kg)</option>
-                </select>
+            <!-- KOLOM 2: LAYANAN SATUAN -->
+            <div class="calc-section-card">
+                <div class="calc-section-title">🏷️ 2. Kolom Layanan Barang Satuan</div>
+                <div class="calc-group">
+                    <label>Pilih Barang Satuan:</label>
+                    <select id="pilihLayananSatuan" class="calc-select" onchange="hitungTotal()">
+                        <option value="0">-- Tidak ada barang satuan --</option>
+                        <option value="20000">Bedcover Single (Rp 20.000)</option>
+                        <option value="25000">Bedcover Double (Rp 25.000)</option>
+                        <option value="30000">Bedcover Jumbo (Rp 30.000)</option>
+                        <option value="15000">Boneka Kecil (Rp 15.000)</option>
+                        <option value="20000">Boneka Sedang (Rp 20.000)</option>
+                        <option value="25000">Boneka Besar (Rp 25.000)</option>
+                        <option value="12000">Celana Chino (Rp 12.000)</option>
+                        <option value="5000">Handuk (Rp 5.000)</option>
+                        <option value="20000">Jaket Biasa (Rp 20.000)</option>
+                        <option value="25000">Jaket Tebal (Rp 25.000)</option>
+                        <option value="35000">Jaket Kulit (Rp 35.000)</option>
+                        <option value="5000">Sajadah Tipis (Rp 5.000)</option>
+                        <option value="8000">Sajadah Tebal (Rp 8.000)</option>
+                        <option value="11000">Sajadah Super Tebal (Rp 11.000)</option>
+                        <option value="5000">Seprai (Rp 5.000)</option>
+                        <option value="7500">Seprai 1 set (Rp 7.500)</option>
+                        <option value="5000">Selimut Tipis Kecil (Rp 5.000)</option>
+                        <option value="10000">Selimut Tipis Besar (Rp 10.000)</option>
+                        <option value="1500">Pakaian Putih (Rp 1.500)</option>
+                        <option value="3500">Peci Putih (Rp 3.500)</option>
+                        <option value="2500">Mukena 1 set (Rp 2.500)</option>
+                        <option value="25000">Sepatu (Rp 25.000)</option>
+                        <option value="25000">Sandal Crocs (Rp 25.000)</option>
+                        <option value="25000">Karpet kecil (Rp 25.000)</option>
+                        <option value="27000">Kantong Tidur (Rp 27.000)</option>
+                        <option value="30000">Karpet Sedang (Rp 30.000)</option>
+                        <option value="35000">Karpet Besar (Rp 35.000)</option>
+                        <option value="35000">Jas (Rp 35.000)</option>
+                    </select>
+                </div>
+                <div class="calc-group" style="margin-top: 8px;">
+                    <label>Jumlah Pcs / Buah:</label>
+                    <input type="number" id="jumlahPcs" class="calc-input" value="0" min="0" step="1" oninput="hitungTotal()">
+                </div>
             </div>
 
-            <div id="grupBerat" class="calc-group">
-                <label>Berat Cucian (Kg):</label>
-                <input type="number" id="beratKg" class="calc-input" value="1" min="0.1" step="0.1" oninput="hitungTotal()">
-            </div>
-
-            <!-- Opsi Satuan -->
-            <div id="grupSatuan" class="calc-group" style="display: none;">
-                <label>Pilih Barang Satuan:</label>
-                <select id="pilihLayananSatuan" class="calc-select" onchange="hitungTotal()">
-                    <option value="20000">Bedcover Single (Rp 20.000)</option>
-                    <option value="25000">Bedcover Double (Rp 25.000)</option>
-                    <option value="30000">Bedcover Jumbo (Rp 30.000)</option>
-                    <option value="15000">Boneka Kecil (Rp 15.000)</option>
-                    <option value="20000">Boneka Sedang (Rp 20.000)</option>
-                    <option value="25000">Boneka Besar (Rp 25.000)</option>
-                    <option value="12000">Celana Chino (Rp 12.000)</option>
-                    <option value="5000">Handuk (Rp 5.000)</option>
-                    <option value="20000">Jaket Biasa (Rp 20.000)</option>
-                    <option value="25000">Jaket Tebal (Rp 25.000)</option>
-                    <option value="35000">Jaket Kulit (Rp 35.000)</option>
-                    <option value="5000">Sajadah Tipis (Rp 5.000)</option>
-                    <option value="8000">Sajadah Tebal (Rp 8.000)</option>
-                    <option value="11000">Sajadah Super Tebal (Rp 11.000)</option>
-                    <option value="5000">Seprai (Rp 5.000)</option>
-                    <option value="7500">Seprai 1 set (Rp 7.500)</option>
-                    <option value="5000">Selimut Tipis Kecil (Rp 5.000)</option>
-                    <option value="10000">Selimut Tipis Besar (Rp 10.000)</option>
-                    <option value="1500">Pakaian Putih (Rp 1.500)</option>
-                    <option value="3500">Peci Putih (Rp 3.500)</option>
-                    <option value="2500">Mukena 1 set (Rp 2.500)</option>
-                    <option value="25000">Sepatu (Rp 25.000)</option>
-                    <option value="25000">Sandal Crocs (Rp 25.000)</option>
-                    <option value="25000">Karpet kecil (Rp 25.000)</option>
-                    <option value="27000">Kantong Tidur (Rp 27.000)</option>
-                    <option value="30000">Karpet Sedang (Rp 30.000)</option>
-                    <option value="35000">Karpet Besar (Rp 35.000)</option>
-                    <option value="35000">Jas (Rp 35.000)</option>
-                </select>
-            </div>
-
-            <div id="grupJumlahSatuan" class="calc-group" style="display: none;">
-                <label>Jumlah Pcs / Buah:</label>
-                <input type="number" id="jumlahPcs" class="calc-input" value="1" min="1" step="1" oninput="hitungTotal()">
-            </div>
-
-            <!-- Layanan Antar-Jemput & Tombol Cek Jarak Terintegrasi -->
-            <div class="calc-group" style="background: #fdf2f8; padding: 12px; border-radius: 12px; border: 1px solid #fbcfe8;">
-                <label style="color: #be185d; font-weight: 600;">🚚 Layanan Antar-Jemput & Cek Jarak:</label>
-                <select id="pilihOngkir" class="calc-select" onchange="hitungTotal()" style="margin-top: 6px;">
-                    <option value="0">Antar sendiri / Ambil ke tempat (Rp 0)</option>
-                    <option value="5000">Antar Jemput Area Dekat (Rp 5.000)</option>
-                    <option value="10000">Antar Jemput Area Sedang (Rp 10.000)</option>
-                    <option value="15000">Antar Jemput Area Agak Jauh (Rp 15.000)</option>
-                </select>
+            <!-- LAYANAN ANTAR-JEMPUT & ONGKIR -->
+            <div class="calc-section-card" style="background: #fdf2f8; border-color: #fbcfe8;">
+                <div class="calc-section-title" style="color: #be185d;">🚚 Layanan Antar-Jemput & Ongkir</div>
+                <p style="font-size: 0.75rem; color: #718096; margin-bottom: 6px;">*Tarif dihitung untuk jarak diatas 3,5 Km dari Queen Laundry</p>
+                <div class="calc-group">
+                    <select id="pilihOngkir" class="calc-select" onchange="hitungTotal()">
+                        <option value="0">Antar sendiri / Ambil ke tempat (Rp 0)</option>
+                        <option value="7000">Antar Jemput Dekat (> 3,5 Km) - Rp 7.000</option>
+                        <option value="13000">Antar Jemput Jauh (> 3,5 Km) - Rp 13.000</option>
+                    </select>
+                </div>
                 <!-- Tombol Cek Jarak Cepat di dalam Kalkulator -->
                 <button type="button" class="btn-distance-calc" onclick="cekJarakDariHp()">
                     📍 Klik untuk Cek Jarak & Rute dari HP Anda
@@ -541,26 +701,48 @@
 
             <div class="calc-result">
                 <span>Estimasi Total Keseluruhan:</span>
-                <div id="hasilTotal" class="calc-total">Rp 6.500</div>
+                <div id="hasilTotal" class="calc-total">Rp 0</div>
                 <a id="waOrderLink" href="https://wa.me/6285770246502?text=Halo%20Queen%20Laundry,%20saya%20mau%20order%20layanan" target="_blank" class="btn-order-wa">
                     🚀 Order Layanan Ini via WhatsApp
                 </a>
             </div>
         </div>
 
-        <!-- JOIN MEMBER -->
+        <!-- JOIN MEMBER SPESIAL -->
         <div id="member" class="section-box member-banner">
-            <h3>🌟 Keuntungan Member</h3>
-            <p class="info-text">Biaya Daftar: <b>Rp 110.000 / 20 Kg</b></p>
-            <p class="info-text" style="margin-top: 6px;">
-                🔥 <b>Standar (Cuci Setrika):</b> <span style="text-decoration: line-through; color: #718096;">Rp 6.500</span> jadi <span class="member-price">Rp 5.500 / Kg</span><br>
-                🚀 <b>Express (Cuci Setrika):</b> <span style="text-decoration: line-through; color: #718096;">Rp 13.000</span> jadi <span class="member-price">Rp 11.000 / Kg</span>
-            </p>
+            <h3>🌟 Kolom Spesial Paket Member</h3>
+            <p class="info-text" style="font-size: 0.84rem;">Pilih paket member Queen Laundry di bawah ini dan nikmati keuntungan **harga jauh lebih hemat** untuk cucian harian Anda!</p>
+            
+            <!-- Grid Pilihan Paket Member -->
+            <div class="member-grid">
+                <div class="member-card-item">
+                    <div class="m-quota">Paket 10 Kg</div>
+                    <div class="m-price">Rp 55rb</div>
+                </div>
+                <div class="member-card-item" style="border-color: #d97706; background: #fffbeb; transform: scale(1.03); box-shadow: 0 6px 15px rgba(217, 119, 6, 0.2);">
+                    <div class="m-quota" style="color: #d97706; font-weight: 700;">Paket 20 Kg</div>
+                    <div class="m-price" style="color: #b45309;">Rp 110rb</div>
+                </div>
+                <div class="member-card-item">
+                    <div class="m-quota">Paket 25 Kg</div>
+                    <div class="m-price">Rp 125rb</div>
+                </div>
+            </div>
+
+            <div class="member-benefit-box">
+                🔥 <b>Benefit Utama Member:</b>
+                <ul style="margin-left: 16px; margin-top: 4px; font-size: 0.8rem;">
+                    <li><b>Layanan Standar:</b> Hemat cuci setrika dari <span style="text-decoration: line-through;">Rp 6.500</span> menjadi <b>Rp 5.500 / Kg</b>.</li>
+                    <li><b>Layanan Express:</b> Dapatkan **potongan harga khusus Rp 2.000** (dari <span style="text-decoration: line-through;">Rp 13.000</span> menjadi <b>Rp 11.000 / Kg</b>).</li>
+                    <li><b>Prioritas Pengerjaan:</b> Cucian diprioritaskan lebih cepat dan rapi.</li>
+                </ul>
+            </div>
         </div>
 
-        <!-- DAFTAR HARGA -->
+        <!-- DAFTAR HARGA LENGKAP -->
         <div id="pricelist" class="section-box">
             <h2>📋 Daftar Harga (Price List)</h2>
+            <p class="info-text" style="margin-bottom: 12px;">Berikut adalah rincian tarif layanan kiloan dan barang satuan:</p>
             
             <div style="margin-bottom: 12px;">
                 <input type="text" id="searchInput" class="search-input" placeholder="🔍 Cari nama barang (cth: karpet, bedcover)..." onkeyup="cariBarang()">
@@ -574,7 +756,7 @@
                 <div class="price-item badge-normal"><span>Dryer Only</span><span>Rp 4.500 / Kg</span></div>
 
                 <div class="category-title">EXPRESS (1 Hari)</div>
-                <div class="price-item"><span>Cuci Setrika (Member: Rp 11.000)</span><span>Rp 13.000 / Kg</span></div>
+                <div class="price-item"><span>Cuci Setrika (Member: Hemat Rp 2rb → Rp 11.000)</span><span>Rp 13.000 / Kg</span></div>
                 <div class="price-item badge-normal"><span>Cuci Kering</span><span>Rp 10.000 / Kg</span></div>
                 <div class="price-item badge-normal"><span>Setrika Only</span><span>Rp 8.000 / Kg</span></div>
                 <div class="price-item badge-normal"><span>Dryer Only</span><span>Rp 3.500 / Kg</span></div>
@@ -584,7 +766,7 @@
                 <div class="price-item badge-normal"><span>Cuci Kering</span><span>Rp 15.000 / Kg</span></div>
                 <div class="price-item badge-normal"><span>Dryer Only</span><span>Rp 7.000 / Kg</span></div>
 
-                <div class="category-title">HARGA SATUAN & BARANG LAINNYA</div>
+                <div class="category-title">BARANG SATUAN</div>
                 <div class="price-item badge-normal"><span>Bedcover Single</span><span>Rp 20.000</span></div>
                 <div class="price-item badge-normal"><span>Bedcover Double</span><span>Rp 25.000</span></div>
                 <div class="price-item badge-normal"><span>Bedcover Jumbo</span><span>Rp 30.000</span></div>
@@ -623,7 +805,7 @@
             
             <div id="listTestimoni">
                 <div class="testimonial-card">
-                    <p>"Hasil laundry-nya bersih banget, lipatannya rapi, dan wanginya tahan lama seharian. Suka banget sama pelayanannya!"</p>
+                    <p>"Hasil laundry-nya bersih banget, lipatannya rapi, dan wanginya tahan lama seharian karena pakai parfum khas Queen Laundry!"</p>
                     <div class="testimonial-author">
                         <span>— Ibu Siska, Sukarapih</span>
                         <div class="stars">⭐⭐⭐⭐⭐</div>
@@ -631,7 +813,7 @@
                 </div>
 
                 <div class="testimonial-card">
-                    <p>"Puas banget pakai layanan express-nya. Cepat, tepat waktu, dan pakaian putih jadi bersih cemerlang lagi."</p>
+                    <p>"Puas banget pakai layanan express-nya. Cepat, tepat waktu, dan pakaian putih jadi bersih cemerlang."</p>
                     <div class="testimonial-author">
                         <span>— Kak Rian, Mahasiswa</span>
                         <div class="stars">⭐⭐⭐⭐⭐</div>
@@ -656,7 +838,7 @@
                     <input type="text" id="inputNama" class="feedback-input" placeholder="Contoh: Siska / Kak Budi">
                 </div>
 
-                <div class="calc-group">
+                <div class="calc-group" style="margin-top: 10px;">
                     <label>Bintang Kepuasan:</label>
                     <select id="inputBintang" class="calc-select">
                         <option value="⭐⭐⭐⭐⭐">⭐⭐⭐⭐⭐ (Sangat Puas)</option>
@@ -667,7 +849,7 @@
                     </select>
                 </div>
 
-                <div class="calc-group">
+                <div class="calc-group" style="margin-top: 10px;">
                     <label>Pesan / Ulasan:</label>
                     <textarea id="inputPesan" class="feedback-input" rows="3" placeholder="Tulis pengalaman atau masukan Anda di sini..."></textarea>
                 </div>
@@ -708,65 +890,45 @@
             menu.classList.toggle('active');
         }
 
-        // Ganti tampilan input kalkulator berdasarkan kategori (Kiloan atau Satuan)
-        function gantiKategoriLayanan() {
-            let kategori = document.getElementById('pilihKategori').value;
-            let grupKiloan = document.getElementById('grupKiloan');
-            let grupBerat = document.getElementById('grupBerat');
-            let grupSatuan = document.getElementById('grupSatuan');
-            let grupJumlahSatuan = document.getElementById('grupJumlahSatuan');
-
-            if (kategori === 'kiloan') {
-                grupKiloan.style.display = 'block';
-                grupBerat.style.display = 'block';
-                grupSatuan.style.display = 'none';
-                grupJumlahSatuan.style.display = 'none';
-            } else {
-                grupKiloan.style.display = 'none';
-                grupBerat.style.display = 'none';
-                grupSatuan.style.display = 'block';
-                grupJumlahSatuan.style.display = 'block';
-            }
-            hitungTotal();
-        }
-
-        // Hitung total harga kiloan / satuan + ongkir
+        // Hitung total harga dari gabungan kolom Kiloan dan Kolom Satuan + Ongkir
         function hitungTotal() {
-            let kategori = document.getElementById('pilihKategori').value;
-            let subtotal = 0;
-            let detailOrderText = "";
+            // 1. Hitung Kiloan
+            let selectKiloan = document.getElementById('pilihLayananKiloan');
+            let textKiloan = selectKiloan.options[selectKiloan.selectedIndex].text;
+            let hargaPerKg = parseFloat(selectKiloan.value) || 0;
+            let berat = parseFloat(document.getElementById('beratKg').value) || 0;
+            if (berat < 0) berat = 0;
+            let subtotalKiloan = hargaPerKg * berat;
 
-            if (kategori === 'kiloan') {
-                let select = document.getElementById('pilihLayananKiloan');
-                let textLayanan = select.options[select.selectedIndex].text;
-                let hargaPerKg = parseFloat(select.value) || 0;
-                let berat = parseFloat(document.getElementById('beratKg').value) || 0;
-                if (berat < 0) berat = 0;
-                
-                subtotal = hargaPerKg * berat;
-                detailOrderText = `${textLayanan} dengan berat ${berat} Kg`;
-            } else {
-                let select = document.getElementById('pilihLayananSatuan');
-                let textSatuan = select.options[select.selectedIndex].text;
-                let hargaSatuan = parseFloat(select.value) || 0;
-                let jumlah = parseInt(document.getElementById('jumlahPcs').value) || 1;
-                if (jumlah < 1) jumlah = 1;
+            // 2. Hitung Satuan
+            let selectSatuan = document.getElementById('pilihLayananSatuan');
+            let textSatuan = selectSatuan.options[selectSatuan.selectedIndex].text;
+            let hargaSatuan = parseFloat(selectSatuan.value) || 0;
+            let jumlah = parseInt(document.getElementById('jumlahPcs').value) || 0;
+            if (jumlah < 0) jumlah = 0;
+            let subtotalSatuan = hargaSatuan * jumlah;
 
-                subtotal = hargaSatuan * jumlah;
-                detailOrderText = `${textSatuan} sebanyak ${jumlah} Pcs`;
-            }
-
-            // Hitung Ongkir
+            // 3. Hitung Ongkir
             let selectOngkir = document.getElementById('pilihOngkir');
             let textOngkir = selectOngkir.options[selectOngkir.selectedIndex].text;
             let biayaOngkir = parseFloat(selectOngkir.value) || 0;
 
-            let totalKotor = subtotal + biayaOngkir;
+            let totalKotor = subtotalKiloan + subtotalSatuan + biayaOngkir;
             let total = Math.round(totalKotor / 500) * 500; // pembulatan terdekat
             let formatRupiah = total.toLocaleString('id-ID', { maximumFractionDigits: 0 });
             
             document.getElementById('hasilTotal').innerText = "Rp " + formatRupiah;
             
+            // Susun teks pesan WhatsApp secara dinamis
+            let rincianPesanan = [];
+            if (berat > 0) {
+                rincianPesanan.push(`${textKiloan} (${berat} Kg)`);
+            }
+            if (jumlah > 0 && hargaSatuan > 0) {
+                rincianPesanan.push(`${textSatuan} (${jumlah} Pcs)`);
+            }
+            
+            let detailOrderText = rincianPesanan.length > 0 ? rincianPesanan.join(" dan ") : "layanan laundry";
             let pesanWa = `Halo Queen Laundry, saya mau order ${detailOrderText}. (Opsi Antar-Jemput: ${textOngkir}). Total estimasi harga Rp ${formatRupiah}. Mohon konfirmasinya ya!`;
             let encodedPesan = encodeURIComponent(pesanWa);
             document.getElementById('waOrderLink').href = `https://wa.me/6285770246502?text=${encodedPesan}`;
@@ -822,17 +984,17 @@
                 return;
             }
 
-            let ulasanVaru = {
+            let ulasanBaru = {
                 nama: nama,
                 bintang: bintang,
                 pesan: pesan
             };
 
             let dataUlasan = JSON.parse(localStorage.getItem('queen_reviews')) || [];
-            dataUlasan.unshift(ulasanVaru);
+            dataUlasan.unshift(ulasanBaru);
             localStorage.setItem('queen_reviews', JSON.stringify(dataUlasan));
 
-            tampilkanUlasanHtml(ulasanVaru, true);
+            tampilkanUlasanHtml(ulasanBaru, true);
 
             document.getElementById('inputNama').value = '';
             document.getElementById('inputPesan').value = '';
