@@ -919,17 +919,23 @@
             
             document.getElementById('hasilTotal').innerText = "Rp " + formatRupiah;
             
-            // Susun teks pesan WhatsApp secara dinamis dengan format rapi (berbaris)
+            // Susun teks pesan WhatsApp secara rapi dengan baris baru (\n)
             let rincianPesanan = [];
             if (berat > 0) {
-                rincianPesanan.push(`${textKiloan} (${berat} Kg)`);
+                rincianPesanan.push(`- ${textKiloan} (${berat} Kg)`);
             }
             if (jumlah > 0 && hargaSatuan > 0) {
-                rincianPesanan.push(`${textSatuan} (${jumlah} Pcs)`);
+                rincianPesanan.push(`- ${textSatuan} (${jumlah} Pcs)`);
             }
             
-            let detailOrderText = rincianPesanan.length > 0 ? rincianPesanan.join("\n- ") : "layanan laundry";
-            let pesanWa = `Halo Queen Laundry, saya mau order:%0A- ${detailOrderText}%0A%0A🚚 *Opsi Antar-Jemput:* ${textOngkir}%0A💰 *Total Estimasi:* Rp ${formatRupiah}%0A%0AMohon konfirmasinya ya, terima kasih!`;
+            let detailOrderText = rincianPesanan.length > 0 ? rincianPesanan.join("\n") : "- (Tidak ada layanan dipilih)";
+            
+            let pesanWa = "Halo Queen Laundry, saya mau order:\n" + 
+                          detailOrderText + "\n\n" + 
+                          "🚚 Opsi Antar-Jemput: " + textOngkir + "\n" + 
+                          "💰 Total Estimasi: Rp " + formatRupiah + "\n\n" + 
+                          "Mohon konfirmasinya ya, terima kasih!";
+
             let encodedPesan = encodeURIComponent(pesanWa);
             document.getElementById('waOrderLink').href = `https://wa.me/6285770246502?text=${encodedPesan}`;
         }
