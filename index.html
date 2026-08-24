@@ -14,10 +14,20 @@
             --card-bg: #ffffff;
             --text-main: #0f172a;
             --text-muted: #64748b;
+            --border-color: #e2e8f0;
             --radius-lg: 28px;
             --radius-md: 20px;
             --shadow-soft: 0 20px 40px -15px rgba(15, 23, 42, 0.05);
             --shadow-hover: 0 25px 50px -12px rgba(225, 29, 72, 0.15);
+        }
+
+        [data-theme="dark"] {
+            --bg-body: #090d16;
+            --card-bg: #111827;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #1f2937;
+            --shadow-soft: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
         }
 
         * {
@@ -26,6 +36,7 @@
             box-sizing: border-box;
             font-family: 'Plus Jakarta Sans', sans-serif;
             scroll-behavior: smooth;
+            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
         }
 
         body {
@@ -34,17 +45,14 @@
             line-height: 1.6;
             min-height: 100vh;
             padding-bottom: 60px;
-            background-image: 
-                radial-gradient(at 0% 0%, rgba(244, 63, 94, 0.05) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(14, 165, 233, 0.03) 0px, transparent 50%);
         }
 
         /* HEADER STYLING */
         header {
-            background: rgba(255, 255, 255, 0.85);
+            background: var(--card-bg);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+            border-bottom: 1px solid var(--border-color);
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -74,51 +82,52 @@
             font-weight: 600;
         }
 
-        .hamburger-btn {
-            background: #fff1f2;
-            border: 1px solid #fecdd3;
-            width: 44px;
-            height: 44px;
-            border-radius: 14px;
+        .header-actions {
             display: flex;
-            flex-direction: column;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .icon-btn, .hamburger-btn {
+            background: var(--bg-body);
+            border: 1px solid var(--border-color);
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            display: flex;
             justify-content: center;
             align-items: center;
-            gap: 5px;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 1rem;
+            transition: transform 0.2s ease;
         }
 
-        .hamburger-btn:hover {
-            background: var(--primary);
-            transform: scale(1.05);
-            box-shadow: 0 0 15px var(--accent-glow);
-        }
+        .icon-btn:hover, .hamburger-btn:hover { transform: scale(1.08); }
 
-        .hamburger-btn:hover span {
-            background: white;
+        .hamburger-btn {
+            flex-direction: column;
+            gap: 5px;
         }
 
         .hamburger-btn span {
             display: block;
-            width: 18px;
+            width: 16px;
             height: 2px;
             background: var(--primary);
             border-radius: 2px;
-            transition: all 0.3s ease;
         }
 
         .dropdown-menu {
             max-width: 600px;
             margin: 0 auto;
-            background: white;
+            background: var(--card-bg);
             border-radius: var(--radius-md);
             box-shadow: var(--shadow-hover);
             overflow: hidden;
             max-height: 0;
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             padding: 0 15px;
-            border: 1px solid #f1f5f9;
+            border: 1px solid var(--border-color);
         }
 
         .dropdown-menu.active {
@@ -143,13 +152,13 @@
             text-decoration: none;
             font-weight: 600;
             font-size: 0.85rem;
-            background: #f8fafc;
+            background: var(--bg-body);
             border-radius: 12px;
             transition: all 0.2s ease;
         }
 
         .menu-list a:hover {
-            background: #fff1f2;
+            background: rgba(225, 29, 72, 0.1);
             color: var(--primary);
             transform: translateX(6px);
         }
@@ -161,14 +170,13 @@
             padding: 0 16px;
         }
 
-        /* CARD SECTION MODERN */
         .section-box {
             background: var(--card-bg);
             border-radius: var(--radius-lg);
             padding: 24px;
             margin-bottom: 20px;
             box-shadow: var(--shadow-soft);
-            border: 1px solid rgba(226, 232, 240, 0.8);
+            border: 1px solid var(--border-color);
             position: relative;
             overflow: hidden;
             opacity: 0;
@@ -181,11 +189,6 @@
             transform: translateY(0);
         }
 
-        .section-box:hover {
-            box-shadow: var(--shadow-hover);
-            border-color: rgba(244, 63, 94, 0.2);
-        }
-
         .section-box h2 {
             color: var(--text-main);
             font-size: 1.15rem;
@@ -194,23 +197,72 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            letter-spacing: -0.3px;
         }
 
-        /* MARQUEE */
+        /* TOAST NOTIFICATION */
+        #toastBox {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 12px 20px;
+            border-radius: 16px;
+            box-shadow: var(--shadow-hover);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 9999;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            max-width: 90%;
+            width: 380px;
+        }
+
+        #toastBox.active { transform: translateX(-50%) translateY(0); }
+        .toast-icon { font-size: 1.2rem; }
+        .toast-text { font-size: 0.78rem; font-weight: 700; color: var(--text-main); }
+        .toast-sub { font-size: 0.7rem; color: var(--text-muted); }
+
+        /* BACK TO TOP BUTTON */
+        #backToTop {
+            position: fixed;
+            bottom: 25px;
+            right: 20px;
+            background: var(--primary-gradient);
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.1rem;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(225, 29, 72, 0.3);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        #backToTop.show { opacity: 1; visibility: visible; }
+        #backToTop:hover { transform: scale(1.1); }
+
+        /* MARQUEE & BANNER */
         .marquee-container {
-            background: linear-gradient(135deg, #fff1f2, #ffe4e6);
+            background: var(--card-bg);
             color: var(--primary);
             padding: 12px 16px;
             border-radius: 16px;
             margin-bottom: 20px;
-            border: 1px solid #fecdd3;
+            border: 1px solid var(--border-color);
             font-size: 0.82rem;
             font-weight: 700;
-            box-shadow: 0 4px 12px rgba(244, 63, 94, 0.05);
+            box-shadow: var(--shadow-soft);
         }
 
-        /* BANNER MAULID */
         .maulid-banner {
             background: linear-gradient(135deg, #064e3b 0%, #022c22 100%);
             color: white;
@@ -218,10 +270,8 @@
             border-radius: var(--radius-lg);
             text-align: center;
             margin-bottom: 20px;
-            box-shadow: 0 15px 35px rgba(6, 78, 59, 0.25);
             border: 2px solid #34d399;
-            position: relative;
-            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(6, 78, 59, 0.25);
         }
 
         .maulid-badge {
@@ -234,23 +284,10 @@
             border-radius: 20px;
             margin-bottom: 12px;
             text-transform: uppercase;
-            letter-spacing: 1px;
         }
 
-        .maulid-banner h3 {
-            font-size: 1.35rem;
-            font-weight: 800;
-            margin-bottom: 8px;
-            color: #fef08a;
-            letter-spacing: -0.3px;
-        }
-
-        .maulid-banner p {
-            font-size: 0.86rem;
-            margin-bottom: 18px;
-            opacity: 0.95;
-            line-height: 1.5;
-        }
+        .maulid-banner h3 { font-size: 1.35rem; font-weight: 800; margin-bottom: 8px; color: #fef08a; }
+        .maulid-banner p { font-size: 0.86rem; margin-bottom: 18px; opacity: 0.95; }
 
         .maulid-btn {
             background: linear-gradient(135deg, #fef08a, #f59e0b);
@@ -262,18 +299,12 @@
             font-size: 0.88rem;
             display: inline-block;
             box-shadow: 0 8px 20px rgba(245, 158, 11, 0.3);
-            transition: all 0.3s ease;
-        }
-
-        .maulid-btn:hover {
-            transform: translateY(-2px) scale(1.02);
-            background: linear-gradient(135deg, #fde047, #d97706);
         }
 
         /* FORMULA CARD */
         .formula-card {
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
+            background: var(--bg-body);
+            border: 1px solid var(--border-color);
             border-radius: var(--radius-md);
             padding: 18px;
             margin-top: 16px;
@@ -283,22 +314,16 @@
             display: flex;
             align-items: center;
             gap: 14px;
-            background: white;
+            background: var(--card-bg);
             padding: 14px;
             border-radius: 14px;
             margin-top: 10px;
-            border: 1px solid #f1f5f9;
-            transition: transform 0.2s ease;
-        }
-
-        .formula-item:hover {
-            transform: translateX(4px);
-            border-color: #fecdd3;
+            border: 1px solid var(--border-color);
         }
 
         .formula-icon {
             font-size: 1.3rem;
-            background: #fff1f2;
+            background: var(--bg-body);
             width: 44px;
             height: 44px;
             border-radius: 12px;
@@ -321,95 +346,40 @@
             border-radius: 16px;
             overflow: hidden;
             aspect-ratio: 1/1;
-            background: #f1f5f9;
+            background: var(--bg-body);
         }
 
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .gallery-item:hover img {
-            transform: scale(1.1);
-        }
-
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+        .gallery-item:hover img { transform: scale(1.1); }
         .gallery-caption {
-            position: absolute;
-            bottom: 0; left: 0; right: 0;
+            position: absolute; bottom: 0; left: 0; right: 0;
             background: linear-gradient(to top, rgba(15,23,42,0.8), transparent);
-            color: white;
-            font-size: 0.72rem;
-            font-weight: 700;
-            padding: 12px 6px 6px 6px;
-            text-align: center;
+            color: white; font-size: 0.72rem; font-weight: 700; padding: 12px 6px 6px 6px; text-align: center;
         }
 
-        /* KALKULATOR & FORM */
+        /* KALKULATOR */
         .calc-section-card {
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
+            background: var(--bg-body);
+            border: 1px solid var(--border-color);
             border-radius: 18px;
             padding: 16px;
             margin-bottom: 14px;
         }
 
-        .calc-section-title {
-            font-size: 0.88rem;
-            font-weight: 800;
-            color: var(--text-main);
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
+        .calc-section-title { font-size: 0.88rem; font-weight: 800; color: var(--text-main); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
         .calc-group { margin-bottom: 12px; }
-
-        .calc-group label {
-            font-size: 0.78rem;
-            font-weight: 700;
-            display: block;
-            margin-bottom: 6px;
-            color: var(--text-muted);
-        }
-
+        .calc-group label { font-size: 0.78rem; font-weight: 700; display: block; margin-bottom: 6px; color: var(--text-muted); }
         .calc-select, .calc-input, .search-input, .feedback-input {
-            width: 100%;
-            padding: 12px 14px;
-            border-radius: 14px;
-            border: 1px solid #cbd5e1;
-            font-size: 0.85rem;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background: #ffffff;
-            outline: none;
-            transition: all 0.2s ease;
+            width: 100%; padding: 12px 14px; border-radius: 14px; border: 1px solid var(--border-color);
+            font-size: 0.85rem; font-family: 'Plus Jakarta Sans', sans-serif; background: var(--card-bg); color: var(--text-main); outline: none;
         }
-
         .calc-select:focus, .calc-input:focus, .search-input:focus, .feedback-input:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 4px var(--accent-glow);
+            border-color: var(--primary); box-shadow: 0 0 0 4px var(--accent-glow);
         }
 
-        .calc-result {
-            background: linear-gradient(135deg, #fff1f2, #ffe4e6);
-            border: 1px solid #fecdd3;
-            padding: 20px;
-            border-radius: var(--radius-md);
-            text-align: center;
-            margin-top: 16px;
-        }
+        .calc-result { background: var(--bg-body); border: 1px solid var(--border-color); padding: 20px; border-radius: var(--radius-md); text-align: center; margin-top: 16px; }
+        .calc-total { font-size: 1.6rem; font-weight: 800; color: var(--primary); margin: 6px 0 14px 0; }
 
-        .calc-total {
-            font-size: 1.6rem;
-            font-weight: 800;
-            color: var(--primary);
-            margin: 6px 0 14px 0;
-            letter-spacing: -0.5px;
-        }
-
-        /* TOMBOL UTAMA DENGAN EFEK PULSE */
         @keyframes pulseGlow {
             0% { box-shadow: 0 0 0 0 rgba(225, 29, 72, 0.4); }
             70% { box-shadow: 0 0 0 14px rgba(225, 29, 72, 0); }
@@ -423,152 +393,53 @@
         }
 
         .btn-order-wa, .btn-submit-feedback, .btn-to-sabun-page {
-            display: block;
-            background: var(--primary-gradient);
-            color: white;
-            text-align: center;
-            padding: 14px;
-            border-radius: 14px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 0.9rem;
-            border: none;
-            cursor: pointer;
-            width: 100%;
-            box-shadow: 0 8px 25px rgba(225, 29, 72, 0.3);
-            transition: all 0.2s ease;
+            display: block; background: var(--primary-gradient); color: white; text-align: center;
+            padding: 14px; border-radius: 14px; text-decoration: none; font-weight: 700; font-size: 0.9rem;
+            border: none; cursor: pointer; width: 100%; box-shadow: 0 8px 25px rgba(225, 29, 72, 0.3);
             animation: pulseGlow 2.5s infinite;
         }
 
-        .btn-order-wa:hover, .btn-submit-feedback:hover, .btn-to-sabun-page:hover {
-            transform: translateY(-2px);
-            filter: brightness(1.1);
-        }
+        /* PRICE LIST & TESTIMONI */
+        .price-card-group { background: var(--bg-body); border: 1px solid var(--border-color); border-radius: 16px; padding: 16px; margin-bottom: 14px; }
+        .price-card-title { font-size: 0.85rem; font-weight: 800; color: var(--primary); background: var(--card-bg); padding: 6px 12px; border-radius: 8px; display: inline-block; margin-bottom: 12px; border: 1px solid var(--border-color); }
+        .price-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; font-size: 0.85rem; border-bottom: 1px dashed var(--border-color); padding-bottom: 8px; font-weight: 500; }
+        .price-item span:last-child { font-weight: 700; color: var(--primary); background: var(--card-bg); padding: 4px 10px; border-radius: 8px; font-size: 0.8rem; border: 1px solid var(--border-color); }
 
-        /* PRICE LIST */
-        .price-card-group {
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 16px;
-            padding: 16px;
-            margin-bottom: 14px;
-            transition: all 0.2s ease;
-        }
+        .testimonial-card { background: var(--bg-body); border-left: 4px solid var(--primary); padding: 14px; border-radius: 12px; margin-bottom: 12px; border: 1px solid var(--border-color); }
+        .testimonial-card p { font-size: 0.84rem; font-style: italic; color: var(--text-main); margin-bottom: 8px; }
+        .testimonial-author { font-size: 0.78rem; font-weight: 700; color: var(--text-muted); display: flex; justify-content: space-between; align-items: center; }
+        .stars { color: #f59e0b; }
 
-        .price-card-group:hover {
-            border-color: #fecdd3;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.03);
-        }
-
-        .price-card-title {
-            font-size: 0.85rem;
-            font-weight: 800;
-            color: var(--primary);
-            background: #fff1f2;
-            padding: 6px 12px;
-            border-radius: 8px;
-            display: inline-block;
-            margin-bottom: 12px;
-        }
-
-        .price-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 8px;
-            font-size: 0.85rem;
-            border-bottom: 1px dashed #e2e8f0;
-            padding-bottom: 8px;
-            font-weight: 500;
-        }
-
-        .price-item span:last-child {
-            font-weight: 700;
-            color: var(--primary);
-            background: #fff1f2;
-            padding: 4px 10px;
-            border-radius: 8px;
-            font-size: 0.8rem;
-        }
-
-        /* TESTIMONI */
-        .testimonial-card {
-            background: #f8fafc;
-            border-left: 4px solid var(--primary);
-            padding: 14px;
+        .address-box {
+            background: var(--bg-body);
+            border: 1px dashed var(--border-color);
+            padding: 12px;
             border-radius: 12px;
             margin-bottom: 12px;
-            border-top: 1px solid #f1f5f9;
-            border-right: 1px solid #f1f5f9;
-            border-bottom: 1px solid #f1f5f9;
+            cursor: pointer;
+            position: relative;
         }
+        .address-box:hover { border-color: var(--primary); }
 
-        .testimonial-card p {
-            font-size: 0.84rem;
-            font-style: italic;
-            color: var(--text-main);
-            margin-bottom: 8px;
-        }
+        .btn-maps { display: flex; justify-content: center; align-items: center; gap: 8px; background: linear-gradient(135deg, #3b82f6, #1d4ed8); color: white; text-align: center; padding: 14px; border-radius: 14px; text-decoration: none; font-weight: 700; font-size: 0.9rem; margin-top: 12px; }
+        .btn-wa-main { display: flex; justify-content: center; align-items: center; gap: 8px; background: linear-gradient(135deg, #22c55e, #16a34a); color: white; text-align: center; padding: 14px; border-radius: 16px; text-decoration: none; font-weight: 700; font-size: 0.92rem; margin-top: 14px; animation: pulseGreen 2.5s infinite; }
 
-        .testimonial-author {
-            font-size: 0.78rem;
-            font-weight: 700;
-            color: var(--text-muted);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .stars { color: #f59e0b; font-size: 0.85rem; }
-
-        /* TOMBOL SOSIAL */
-        .btn-maps {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
-            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-            color: white;
-            text-align: center;
-            padding: 14px;
-            border-radius: 14px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 0.9rem;
-            margin-top: 12px;
-            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
-            transition: transform 0.2s ease;
-        }
-
-        .btn-wa-main {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
-            background: linear-gradient(135deg, #22c55e, #16a34a);
-            color: white;
-            text-align: center;
-            padding: 14px;
-            border-radius: 16px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 0.92rem;
-            margin-top: 14px;
-            box-shadow: 0 8px 20px rgba(34, 197, 94, 0.3);
-            transition: transform 0.2s ease;
-            animation: pulseGreen 2.5s infinite;
-        }
-
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            color: var(--text-muted);
-            font-size: 0.75rem;
-            font-weight: 600;
-        }
+        footer { text-align: center; margin-top: 40px; color: var(--text-muted); font-size: 0.75rem; font-weight: 600; }
     </style>
 </head>
 <body>
+
+    <!-- Toast Floating Notification -->
+    <div id="toastBox">
+        <div class="toast-icon" id="toastIcon">✨</div>
+        <div>
+            <div class="toast-text" id="toastTitle">Promo Spesial Aktif!</div>
+            <div class="toast-sub" id="toastSub">Diskon eksklusif Maulid Nabi siap digunakan.</div>
+        </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" onclick="scrollToTop(); playClickSound();">↑</button>
 
     <header>
         <div class="header-container">
@@ -576,22 +447,25 @@
                 <h1>👑 Queen Laundry</h1>
                 <p>Modern & Professional Care</p>
             </div>
-            <button class="hamburger-btn" onclick="toggleMenu()" aria-label="Menu">
-                <span></span><span></span><span></span>
-            </button>
+            <div class="header-actions">
+                <button class="icon-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Ubah Tema">🌙</button>
+                <button class="hamburger-btn" onclick="toggleMenu()" aria-label="Menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
         </div>
 
         <div id="dropdownMenu" class="dropdown-menu">
             <ul class="menu-list">
-                <li><a href="promo.html">🎉 Klaim Promo Maulid Nabi</a></li>
-                <li><a href="sabun.html">🧼 Sabun Laundry Premium (5L)</a></li>
-                <li><a href="#kalkulator" onclick="toggleMenu()">🧮 Kalkulator & Estimasi Ongkir</a></li>
-                <li><a href="#galeri" onclick="toggleMenu()">📸 Galeri & Suasana Laundry</a></li>
-                <li><a href="member.html">🌟 Keuntungan & Gabung Member</a></li>
-                <li><a href="garansi.html">🛡️ Ketentuan Garansi</a></li>
-                <li><a href="#pricelist" onclick="toggleMenu()">📋 Daftar Harga Lengkap</a></li>
-                <li><a href="#testimoni" onclick="toggleMenu()">💬 Testimoni & Ulasan</a></li>
-                <li><a href="#lokasi" onclick="toggleMenu()">📍 Lokasi & Kontak</a></li>
+                <li><a href="promo.html" onclick="playClickSound()">🎉 Klaim Promo Maulid Nabi</a></li>
+                <li><a href="sabun.html" onclick="playClickSound()">🧼 Sabun Laundry Premium (5L)</a></li>
+                <li><a href="#kalkulator" onclick="toggleMenu(); playClickSound()">🧮 Kalkulator & Estimasi Ongkir</a></li>
+                <li><a href="#galeri" onclick="toggleMenu(); playClickSound()">📸 Galeri & Suasana Laundry</a></li>
+                <li><a href="member.html" onclick="playClickSound()">🌟 Keuntungan & Gabung Member</a></li>
+                <li><a href="garansi.html" onclick="playClickSound()">🛡️ Ketentuan Garansi</a></li>
+                <li><a href="#pricelist" onclick="toggleMenu(); playClickSound()">📋 Daftar Harga Lengkap</a></li>
+                <li><a href="#testimoni" onclick="toggleMenu(); playClickSound()">💬 Testimoni & Ulasan</a></li>
+                <li><a href="#lokasi" onclick="toggleMenu(); playClickSound()">📍 Lokasi & Kontak</a></li>
             </ul>
         </div>
     </header>
@@ -608,7 +482,7 @@
             <div class="maulid-badge">🌟 BAROKAH MAULID NABI SAW 1448 H 🌟</div>
             <h3>Pakaian Bersih, Hati Tenang, Berkah Melimpah!</h3>
             <p>Nikmati diskon spesial & bonus keharuman eksklusif khusus menyambut hari kelahiran Nabi Muhammad SAW minggu ini.</p>
-            <a href="promo.html" class="maulid-btn">🎉 Klaim Promo Sekarang</a>
+            <a href="promo.html" class="maulid-btn" onclick="playClickSound()">🎉 Klaim Promo Sekarang</a>
         </div>
 
         <div class="section-box">
@@ -637,7 +511,7 @@
         <div class="section-box">
             <h2>🧼 Produk Sabun Laundry Premium</h2>
             <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">Dapatkan kesegaran dan kebersihan laundry profesional langsung di rumah Anda.</p>
-            <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 16px; padding: 16px; margin-bottom: 14px;">
+            <div style="background: var(--bg-body); border: 1px solid var(--border-color); border-radius: 16px; padding: 16px; margin-bottom: 14px;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
                     <span style="font-size: 0.82rem; font-weight: 600; color: var(--text-muted);">Kemasan Jerigen 5 Liter</span>
                     <span style="font-size: 0.82rem; font-weight: 600; color: var(--text-muted); text-decoration: line-through;">Rp 45.000</span>
@@ -647,7 +521,7 @@
                     <span style="font-size: 1.1rem; font-weight: 800; color: var(--primary);">Rp 37.000</span>
                 </div>
             </div>
-            <a href="sabun.html" class="btn-to-sabun-page">✨ Lihat Detail & Pilih Varian Sabun</a>
+            <a href="sabun.html" class="btn-to-sabun-page" onclick="playClickSound()">✨ Lihat Detail & Pilih Varian Sabun</a>
         </div>
 
         <div id="galeri" class="section-box">
@@ -666,18 +540,11 @@
                 <div class="calc-section-title">⚖️ Layanan Kiloan</div>
                 <div class="calc-group">
                     <label>Pilih Jenis Layanan:</label>
-                    <select id="pilihLayananKiloan" class="calc-select" onchange="hitungTotal()">
+                    <select id="pilihLayananKiloan" class="calc-select" onchange="hitungTotal(); playClickSound()">
                         <option value="6500">Standar - Cuci Setrika (Rp 6.500/kg)</option>
                         <option value="4500">Standar - Cuci Kering (Rp 4.500/kg)</option>
-                        <option value="4500">Standar - Setrika (Rp 4.500/kg)</option>
-                        <option value="4500">Standar - Dryer Only (Rp 4.500/kg)</option>
                         <option value="13000">Express - Cuci Setrika (Rp 13.000/kg)</option>
-                        <option value="10000">Express - Cuci Kering (Rp 10.000/kg)</option>
-                        <option value="8000">Express - Setrika Only (Rp 8.000/kg)</option>
-                        <option value="3500">Express - Dryer Only (Rp 3.500/kg)</option>
                         <option value="20000">Kilat - Cuci Setrika (Rp 20.000/kg)</option>
-                        <option value="15000">Kilat - Cuci Kering (Rp 15.000/kg)</option>
-                        <option value="7000">Kilat - Dryer Only (Rp 7.000/kg)</option>
                     </select>
                 </div>
                 <div class="calc-group">
@@ -690,20 +557,11 @@
                 <div class="calc-section-title">🏷️ Layanan Barang Satuan</div>
                 <div class="calc-group">
                     <label>Pilih Barang Satuan:</label>
-                    <select id="pilihLayananSatuan" class="calc-select" onchange="hitungTotal()">
+                    <select id="pilihLayananSatuan" class="calc-select" onchange="hitungTotal(); playClickSound()">
                         <option value="0">-- Tidak ada --</option>
                         <option value="20000">Bedcover Single (Rp 20.000)</option>
                         <option value="25000">Bedcover Double (Rp 25.000)</option>
-                        <option value="30000">Bedcover Jumbo (Rp 30.000)</option>
-                        <option value="15000">Boneka Kecil (Rp 15.000)</option>
-                        <option value="20000">Boneka Sedang (Rp 20.000)</option>
-                        <option value="25000">Boneka Besar (Rp 25.000)</option>
-                        <option value="12000">Celana Chino (Rp 12.000)</option>
-                        <option value="5000">Handuk (Rp 5.000)</option>
-                        <option value="20000">Jaket Biasa (Rp 20.000)</option>
-                        <option value="25000">Jaket Tebal (Rp 25.000)</option>
-                        <option value="35000">Jaket Kulit (Rp 35.000)</option>
-                        <option value="35000">Jas (Rp 35.000)</option>
+                        <option value="35000">Jaket Kulit / Jas (Rp 35.000)</option>
                     </select>
                 </div>
                 <div class="calc-group">
@@ -716,7 +574,7 @@
                 <div class="calc-section-title">🛵 Layanan Antar Jemput</div>
                 <div class="calc-group">
                     <label>Pilih Kategori Jarak:</label>
-                    <select id="pilihOngkir" class="calc-select" onchange="hitungTotal()">
+                    <select id="pilihOngkir" class="calc-select" onchange="hitungTotal(); playClickSound()">
                         <option value="0">Antar Jemput Sendiri / < 3,5 Km (Rp 0)</option>
                         <option value="7000">Jarak 4 - 4,5 Km (Rp 7.000)</option>
                         <option value="13000">Jarak > 4,5 Km (Rp 13.000)</option>
@@ -727,7 +585,7 @@
             <div class="calc-result">
                 <span style="font-size: 0.82rem; font-weight: 700; color: var(--text-muted);">Estimasi Total Keseluruhan</span>
                 <div id="hasilTotal" class="calc-total">Rp 0</div>
-                <a id="waOrderLink" href="https://wa.me/6285770246502?text=Halo%20Queen%20Laundry" target="_blank" class="btn-order-wa">
+                <a id="waOrderLink" href="https://wa.me/6285770246502?text=Halo%20Queen%20Laundry" target="_blank" class="btn-order-wa" onclick="playClickSound()">
                     🚀 Order Layanan Ini via WhatsApp
                 </a>
             </div>
@@ -736,7 +594,7 @@
         <div class="section-box" style="background: linear-gradient(135deg, #fffbeb, #fef3c7); border-color: #fde68a;">
             <h3 style="font-size: 1rem; font-weight: 800; color: #d97706; margin-bottom: 6px;">🌟 Ingin Cuci Lebih Hemat?</h3>
             <p style="font-size: 0.82rem; color: #78350f; margin-bottom: 12px;">Dapatkan diskon khusus, prioritas antrean, dan kuota cuci dengan bergabung jadi member.</p>
-            <a href="member.html" style="display: block; background: linear-gradient(135deg, #f59e0b, #d97706); color: white; text-align: center; padding: 12px; border-radius: 12px; text-decoration: none; font-weight: 700; font-size: 0.85rem;">✨ Lihat Paket Member</a>
+            <a href="member.html" style="display: block; background: linear-gradient(135deg, #f59e0b, #d97706); color: white; text-align: center; padding: 12px; border-radius: 12px; text-decoration: none; font-weight: 700; font-size: 0.85rem;" onclick="playClickSound()">✨ Lihat Paket Member</a>
         </div>
 
         <div id="pricelist" class="section-box">
@@ -750,13 +608,6 @@
                     <div class="price-item"><span>Cuci Setrika</span><span>Rp 6.500 / Kg</span></div>
                     <div class="price-item"><span>Cuci Kering</span><span>Rp 4.500 / Kg</span></div>
                     <div class="price-item"><span>Setrika</span><span>Rp 4.500 / Kg</span></div>
-                    <div class="price-item"><span>Dryer Only</span><span>Rp 4.500 / Kg</span></div>
-                </div>
-                <div class="price-card-group">
-                    <div class="price-card-title">EXPRESS [ 1 Hari ]</div>
-                    <div class="price-item"><span>Cuci Setrika</span><span>Rp 13.000 / Kg</span></div>
-                    <div class="price-item"><span>Cuci Kering</span><span>Rp 10.000 / Kg</span></div>
-                    <div class="price-item"><span>Setrika Only</span><span>Rp 8.000 / Kg</span></div>
                 </div>
             </div>
         </div>
@@ -769,29 +620,94 @@
                     <div class="testimonial-author"><span>Ibu Siska</span><div class="stars">⭐⭐⭐⭐⭐</div></div>
                 </div>
             </div>
-            <div style="margin-top: 16px; border-top: 1px dashed #cbd5e1; padding-top: 14px;">
+            <div style="margin-top: 16px; border-top: 1px dashed var(--border-color); padding-top: 14px;">
                 <h3 style="font-size: 0.9rem; font-weight: 700; margin-bottom: 10px;">✍️ Tulis Ulasan Anda</h3>
                 <div class="calc-group"><label>Nama:</label><input type="text" id="inputNama" class="feedback-input" placeholder="Nama Anda"></div>
                 <div class="calc-group"><label>Pesan Ulasan:</label><textarea id="inputPesan" class="feedback-input" rows="2" placeholder="Bagikan pengalaman Anda..."></textarea></div>
-                <button type="button" class="btn-submit-feedback" onclick="tambahTestimoni()">✨ Kirim Ulasan</button>
+                <button type="button" class="btn-submit-feedback" onclick="tambahTestimoni(); playClickSound()">✨ Kirim Ulasan</button>
             </div>
         </div>
 
         <div id="lokasi" class="section-box">
             <h2>📍 Lokasi & Kontak</h2>
-            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 6px;"><b>Alamat:</b> Kp. Jl. Cihaur, Sukarapih, Kec. Sukarame, Tasikmalaya</p>
+            <div class="address-box" onclick="salinAlamat()" title="Klik untuk menyalin alamat">
+                <p style="font-size: 0.85rem; color: var(--text-main); margin-bottom: 2px;"><b>Alamat:</b> Kp. Jl. Cihaur, Sukarapih, Kec. Sukarame, Tasikmalaya</p>
+                <span style="font-size: 0.7rem; color: var(--primary); font-weight: 700;">📋 Ketuk untuk menyalin alamat</span>
+            </div>
             <div id="statusToko" style="display: inline-block; padding: 4px 10px; border-radius: 20px; font-size: 0.72rem; font-weight: 700; margin-bottom: 14px;"></div>
-            <a href="https://maps.app.goo.gl/K3b4yoQHxTkgiiFn8" target="_blank" class="btn-maps">🗺️ Buka di Google Maps</a>
-            <a href="https://wa.me/6285770246502?text=Halo%20Queen%20Laundry" target="_blank" class="btn-wa-main">💬 Hubungi Admin via WhatsApp</a>
+            <a href="https://maps.app.goo.gl/K3b4yoQHxTkgiiFn8" target="_blank" class="btn-maps" onclick="playClickSound()">🗺️ Buka di Google Maps</a>
+            <a href="https://wa.me/6285770246502?text=Halo%20Queen%20Laundry" target="_blank" class="btn-wa-main" onclick="playClickSound()">💬 Hubungi Admin via WhatsApp</a>
         </div>
     </div>
 
     <footer>&copy; 2026 Queen Laundry<br>Website created AshrafNr.</footer>
 
     <script>
+        // Efek Suara Interaktif
+        function playClickSound() {
+            try {
+                let audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                let osc = audioCtx.createOscillator();
+                let gain = audioCtx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(600, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(800, audioCtx.currentTime + 0.05);
+                gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.05);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.05);
+            } catch (e) {}
+        }
+
         function toggleMenu() {
+            playClickSound();
             document.getElementById('dropdownMenu').classList.toggle('active');
         }
+
+        function toggleTheme() {
+            playClickSound();
+            let currentTheme = document.documentElement.getAttribute('data-theme');
+            let newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('queen_theme', newTheme);
+            document.getElementById('themeToggleBtn').innerText = newTheme === 'dark' ? '☀️' : '🌙';
+        }
+
+        // Fitur Salin Alamat Otomatis
+        function salinAlamat() {
+            playClickSound();
+            let teksAlamat = "Kp. Jl. Cihaur, Sukarapih, Kec. Sukarame, Tasikmalaya";
+            navigator.clipboard.writeText(teksAlamat).then(() => {
+                showToast("📋 Alamat Disalin!", "Berhasil menyalin alamat ke clipboard.");
+            });
+        }
+
+        // Sistem Toast Notification Dinamis
+        function showToast(title, sub, icon = "✨") {
+            let box = document.getElementById('toastBox');
+            document.getElementById('toastTitle').innerText = title;
+            document.getElementById('toastSub').innerText = sub;
+            document.getElementById('toastIcon').innerText = icon;
+            box.classList.add('active');
+            setTimeout(() => {
+                box.classList.remove('active');
+            }, 3500);
+        }
+
+        // Munculkan Toast berkala sebagai Social Proof otomatis
+        const toastMessages = [
+            { t: "⚡ Layanan Kilat Ready", s: "Pakaian bersih kilat selesai dalam hitungan jam!" },
+            { t: "🛵 Antar Jemput Tersedia", s: "Tinggal pesan, kurir kami siap jemput cucian Anda." },
+            { t: "🌟 Diskon Maulid Nabi", s: "Nikmati potongan harga spesial minggu ini." }
+        ];
+        let toastIndex = 0;
+        setInterval(() => {
+            let msg = toastMessages[toastIndex];
+            showToast(msg.t, msg.s);
+            toastIndex = (toastIndex + 1) % toastMessages.length;
+        }, 12000);
 
         function hitungTotal() {
             let kiloan = parseFloat(document.getElementById('pilihLayananKiloan').value) || 0;
@@ -833,7 +749,15 @@
             }
         }
 
+        // Scroll Event untuk Back-to-Top & Animasi Box
         window.addEventListener('scroll', function() {
+            let btnTop = document.getElementById('backToTop');
+            if (window.scrollY > 300) {
+                btnTop.classList.add('show');
+            } else {
+                btnTop.classList.remove('show');
+            }
+
             document.querySelectorAll('.section-box').forEach(box => {
                 if (box.getBoundingClientRect().top < window.innerHeight - 50) {
                     box.classList.add('show');
@@ -841,7 +765,15 @@
             });
         });
 
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
         window.onload = function() {
+            let savedTheme = localStorage.getItem('queen_theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            document.getElementById('themeToggleBtn').innerText = savedTheme === 'dark' ? '☀️' : '🌙';
+
             cekStatusToko();
             window.dispatchEvent(new Event('scroll'));
             
