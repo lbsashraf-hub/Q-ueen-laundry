@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sabun Deterjen 5L - Queen Laundry</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #f43f5e;
+            --primary-dark: #e11d48;
+            --primary-light: #fff1f2;
+            --accent: #fb7185;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --bg-gradient: linear-gradient(135deg, #fff5f7 0%, #fff1f2 100%);
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --shadow: 0 10px 30px -5px rgba(244, 63, 94, 0.08);
+            --radius: 24px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--bg-gradient);
+            color: var(--text-main);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding-bottom: 50px;
+            transition: background 0.3s ease;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(244, 63, 94, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 0.9rem 1rem;
+        }
+
+        .header-container {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--primary-light);
+            color: var(--primary-dark);
+            padding: 8px 14px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.8rem;
+            transition: all 0.2s ease;
+            border: 1px solid rgba(244, 63, 94, 0.2);
+        }
+
+        .back-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .brand-title {
+            font-size: 1rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #e11d48, #fb7185);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto 0 auto;
+            padding: 0 16px;
+        }
+
+        /* --- PRODUCT HERO SECTION --- */
+        .product-hero {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius);
+            padding: 24px;
+            margin-bottom: 18px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            text-align: center;
+        }
+
+        .product-image-container {
+            width: 100%;
+            border-radius: 18px;
+            overflow: hidden;
+            background: #ffffff;
+            margin-bottom: 16px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .product-image-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .promo-badge-float {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: var(--primary);
+            color: white;
+            font-size: 0.72rem;
+            font-weight: 800;
+            padding: 6px 14px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+        }
+
+        .product-title {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 8px;
+            letter-spacing: -0.3px;
+        }
+
+        .product-desc {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        /* --- PILIHAN VARIAN AROMA --- */
+        .variant-container {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .variant-label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .variant-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+
+        .variant-options label {
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 10px 6px;
+            text-align: center;
+            cursor: pointer;
+            background: #f8fafc;
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--text-main);
+            transition: all 0.2s ease;
+            display: block;
+        }
+
+        .variant-options input[type="radio"] {
+            display: none;
+        }
+
+        .variant-options input[type="radio"]:checked + span {
+            color: var(--primary-dark);
+        }
+
+        .variant-options label:has(input[type="radio"]:checked) {
+            border-color: var(--primary);
+            background: var(--primary-light);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        /* --- KOTAK HARGA MODERN --- */
+        .price-box-modern {
+            background: linear-gradient(135deg, #fff1f2 0%, #ffe4e6 100%);
+            border: 1.5px solid rgba(244, 63, 94, 0.25);
+            padding: 16px 20px;
+            border-radius: 18px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .price-left {
+            text-align: left;
+        }
+
+        .price-tag-label {
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 2px;
+            display: block;
+        }
+
+        .price-original-strikethrough {
+            font-size: 0.85rem;
+            text-decoration: line-through;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .price-right {
+            text-align: right;
+        }
+
+        .price-current-large {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--primary-dark);
+            line-height: 1.1;
+            letter-spacing: -0.5px;
+        }
+
+        .save-badge {
+            background: var(--primary);
+            color: white;
+            font-size: 0.65rem;
+            font-weight: 800;
+            padding: 3px 8px;
+            border-radius: 6px;
+            display: inline-block;
+            margin-top: 4px;
+        }
+
+        .btn-buy-wa {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            color: white;
+            text-align: center;
+            padding: 15px;
+            border-radius: 16px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            width: 100%;
+            box-shadow: 0 8px 20px rgba(34, 197, 94, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .btn-buy-wa:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px rgba(34, 197, 94, 0.4);
+        }
+
+        /* --- SECTION KEUNGGULAN --- */
+        .section-box {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius);
+            padding: 24px;
+            margin-bottom: 18px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .section-box h2 {
+            color: var(--text-main);
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            letter-spacing: -0.3px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            background: #f8fafc;
+            padding: 14px;
+            border-radius: 14px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .feature-icon {
+            font-size: 1.4rem;
+            background: var(--primary-light);
+            width: 42px;
+            height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            flex-shrink: 0;
+        }
+
+        .feature-text h4 {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 2px;
+        }
+
+        .feature-text p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* --- CARA PENGGUNAAN --- */
+        .step-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .step-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.85rem;
+            color: var(--text-main);
+            background: #fff1f2;
+            padding: 12px 14px;
+            border-radius: 12px;
+            border: 1px solid rgba(244, 63, 94, 0.15);
+            font-weight: 500;
+        }
+
+        .step-number {
+            background: var(--primary);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body id="page-body">
+
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="back-btn">
+                <span>←</span> Kembali ke Beranda
+            </a>
+            <div class="brand-title">👑 Queen Care</div>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <!-- UTAMA PRODUK -->
+        <div class="product-hero">
+            <div class="product-image-container">
+                <div class="promo-badge-float">🔥 Harga Promo</div>
+                <img id="product-img" src="sabun-sakura.png" alt="Sabun Deterjen Queen Laundry 5 Liter">
+            </div>
+
+            <h1 class="product-title" id="product-title-text">Sabun Deterjen Sakura (5 Liter)</h1>
+            <p class="product-desc" id="product-desc-text">
+                Deterjen cair konsentrat dengan aroma bunga sakura. Diformulasikan khusus untuk membersihkan pakaian sehari-hari secara efektif, menjaga warna tetap cerah, serta nyaman digunakan untuk mencuci rutin.
+            </p>
+
+            <!-- PILIHAN VARIAN AROMA -->
+            <div class="variant-container">
+                <label class="variant-label">Pilih Varian Aroma:</label>
+                <div class="variant-options">
+                    <label>
+                        <input type="radio" name="variant" value="Sakura" checked onclick="changeVariant('Sakura')">
+                        <span>🌸 Sakura</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="variant" value="Ocean Fresh" onclick="changeVariant('Ocean Fresh')">
+                        <span>🌊 Ocean Fresh</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="variant" value="Orange Exotic" onclick="changeVariant('Orange Exotic')">
+                        <span>🍊 Orange Exotic</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- KOTAK HARGA MODERN -->
+            <div class="price-box-modern" id="price-box-theme">
+                <div class="price-left">
+                    <span class="price-tag-label">Harga Normal</span>
+                    <span class="price-original-strikethrough">Rp 45.000</span>
+                </div>
+                <div class="price-right">
+                    <span class="price-tag-label" style="color: var(--primary-dark);">Harga Spesial</span>
+                    <div class="price-current-large">Rp 37.000</div>
+                    <span class="save-badge">Hemat Rp 8.000</span>
+                </div>
+            </div>
+
+            <a id="wa-link" href="https://wa.me/6285770246502?text=Halo%20Queen%20Laundry,%20saya%20tertarik%20membeli%20Sabun%20Deterjen%20Varian%20Sakura%205%20Liter%20seharga%20Rp%2037.000.%20Bagaimana%20cara%20pemesanannya?" target="_blank" class="btn-buy-wa">
+                🛒 Pesan Sekarang via WhatsApp
+            </a>
+        </div>
+
+        <!-- KEUNGGULAN PRODUK -->
+        <div class="section-box">
+            <h2>✨ Keunggulan Produk</h2>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">🌿</div>
+                    <div class="feature-text">
+                        <h4>Wangi Tahan Lama</h4>
+                        <p>Memberikan kesegaran aroma pilihan yang tahan lama pada pakaian setelah dicuci dan dikeringkan.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🛡️</div>
+                    <div class="feature-text">
+                        <h4>Bersih Sehari-hari</h4>
+                        <p>Membantu mengangkat kotoran, debu, dan noda ringan yang menempel pada pakaian keluarga.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🤲</div>
+                    <div class="feature-text">
+                        <h4>Nyaman di Tangan</h4>
+                        <p>Menggunakan formula standar yang ramah di kulit untuk penggunaan cuci manual maupun mesin.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">💧</div>
+                    <div class="feature-text">
+                        <h4>Serbaguna</h4>
+                        <p>Aman dan cocok digunakan untuk berbagai jenis bahan pakaian sehari-hari.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CARA PENGGUNAAN -->
+        <div class="section-box">
+            <h2>💡 Panduan Penggunaan</h2>
+            <div class="step-list">
+                <div class="step-item">
+                    <div class="step-number">1</div>
+                    <div><b>Pencucian Manual:</b> Larutkan secukupnya ke dalam air, rendam sebentar pakaian, lalu kucek perlahan.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">2</div>
+                    <div><b>Mesin Cuci:</b> Tuangkan takaran secukupnya ke dalam laci atau langsung ke tabung mesin cuci sesuai kapasitas cucian.</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>&copy; 2026 Queen Laundry<br>Website created AshrafNr.</footer>
+
+    <script>
+        function changeVariant(variantName) {
+            const productImg = document.getElementById('product-img');
+            const titleText = document.getElementById('product-title-text');
+            const descText = document.getElementById('product-desc-text');
+            const waLink = document.getElementById('wa-link');
+            const root = document.documentElement;
+
+            let imgFile = 'sabun-sakura.png';
+            let primaryColor = '#f43f5e';
+            let primaryDark = '#e11d48';
+            let primaryLight = '#fff1f2';
+            let bgGradient = 'linear-gradient(135deg, #fff5f7 0%, #fff1f2 100%)';
+            let descContent = 'Deterjen cair konsentrat dengan aroma bunga sakura. Diformulasikan khusus untuk membersihkan pakaian sehari-hari secara efektif, menjaga warna tetap cerah, serta nyaman digunakan untuk mencuci rutin.';
+
+            if (variantName === 'Ocean Fresh') {
+                imgFile = 'sabun-ocean-fresh.png'; // Ganti nama file gambar ungu sesuai file Anda
+                primaryColor = '#8b5cf6'; // Nuansa Ungu
+                primaryDark = '#7c3aed';
+                primaryLight = '#f5f3ff';
+                bgGradient = 'linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%)';
+                descContent = 'Deterjen cair konsentrat dengan aroma Ocean Fresh. Wangi segar seperti hembusan angin laut, membersihkan maksimal serta menjaga kesegaran pakaian lebih lama.';
+            } else if (variantName === 'Orange Exotic') {
+                imgFile = 'sabun-orange.png'; // Ganti nama file gambar orange sesuai file Anda
+                primaryColor = '#f97316'; // Nuansa Orange
+                primaryDark = '#ea580c';
+                primaryLight = '#fff7ed';
+                bgGradient = 'linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%)';
+                descContent = 'Deterjen cair konsentrat dengan aroma Orange Exotic. Memberikan kesegaran buah jeruk yang ceria, efektif mengangkat kotoran membandel, dan harum sepanjang hari.';
+            }
+
+            // Terapkan perubahan tema warna dan gambar secara dinamis
+            root.style.setProperty('--primary', primaryColor);
+            root.style.setProperty('--primary-dark', primaryDark);
+            root.style.setProperty('--primary-light', primaryLight);
+            document.body.style.background = bgGradient;
+
+            productImg.src = imgFile;
+            titleText.innerText = `Sabun Deterjen ${variantName} (5 Liter)`;
+            descText.innerText = descContent;
+
+            const encodedText = encodeURIComponent(`Halo Queen Laundry, saya tertarik membeli Sabun Deterjen Varian ${variantName} 5 Liter seharga Rp 37.000. Bagaimana cara pemesanannya?`);
+            waLink.href = `https://wa.me/6285770246502?text=${encodedText}`;
+        }
+    </script>
+</body>
+</html>
