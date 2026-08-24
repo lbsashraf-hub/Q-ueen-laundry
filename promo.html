@@ -165,19 +165,20 @@
             top: 0; right: 0;
             background: linear-gradient(135deg, #f59e0b, #d97706);
             color: white;
-            font-size: 0.7rem;
+            font-size: 0.62rem;
             font-weight: 800;
-            padding: 6px 14px;
-            border-bottom-left-radius: 14px;
+            padding: 4px 12px;
+            border-bottom-left-radius: 12px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.3px;
         }
 
         .promo-title {
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 800;
             color: var(--text-main);
             margin-bottom: 6px;
+            padding-right: 70px; /* Jarak agar tidak menabrak tag promo di kanan */
             display: flex;
             align-items: center;
             gap: 8px;
@@ -264,11 +265,32 @@
         <div class="section-box">
             <h3>🎁 Pilihan Paket Promo Spesial</h3>
 
-            <!-- Promo 1 -->
+            <!-- Promo Bedcover Single -->
             <div class="promo-card">
                 <div class="promo-tag">Diskon Spesial</div>
                 <div class="promo-title">🛏️ Bedcover Single Care</div>
                 <div class="promo-desc">Cuci bersih menyeluruh, higienis, dan harum tahan lama khusus untuk ukuran single.</div>
+                <div class="price-box">
+                    <div>
+                        <span style="font-size: 0.72rem; color: var(--text-muted); display: block;">Normal</span>
+                        <span class="price-normal">Rp 20.000</span>
+                    </div>
+                    <span style="color: var(--text-muted);">➔</span>
+                    <div style="text-align: right;">
+                        <span style="font-size: 0.72rem; color: var(--primary); display: block; font-weight: 700;">Promo Maulid</span>
+                        <span class="price-discount">Rp 15.000</span>
+                    </div>
+                </div>
+                <a href="https://wa.me/6285770246502?text=Halo%20Queen%20Laundry,%20saya%20mau%20klaim%20Promo%20Bedcover%20Single%20Maulid" target="_blank" class="btn-claim">
+                    🎉 Klaim Promo Ini via WhatsApp
+                </a>
+            </div>
+
+            <!-- Promo Bedcover Double (Baru) -->
+            <div class="promo-card">
+                <div class="promo-tag">Diskon Spesial</div>
+                <div class="promo-title">🛏️ Bedcover Double Care</div>
+                <div class="promo-desc">Pencucian optimal untuk bedcover ukuran double agar kembali segar dan wangi tahan lama.</div>
                 <div class="price-box">
                     <div>
                         <span style="font-size: 0.72rem; color: var(--text-muted); display: block;">Normal</span>
@@ -280,12 +302,12 @@
                         <span class="price-discount">Rp 20.000</span>
                     </div>
                 </div>
-                <a href="https://wa.me/6285770246502?text=Halo%20Queen%20Laundry,%20saya%20mau%20klaim%20Promo%20Bedcover%20Single%20Maulid" target="_blank" class="btn-claim">
+                <a href="https://wa.me/6285770246502?text=Halo%20Queen%20Laundry,%20saya%20mau%20klaim%20Promo%20Bedcover%20Double%20Maulid" target="_blank" class="btn-claim">
                     🎉 Klaim Promo Ini via WhatsApp
                 </a>
             </div>
 
-            <!-- Promo 2 -->
+            <!-- Promo Kiloan -->
             <div class="promo-card">
                 <div class="promo-tag">Hemat Kilat</div>
                 <div class="promo-title">✨ Cuci Setrika Kiloan Berkah</div>
