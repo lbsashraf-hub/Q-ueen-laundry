@@ -152,7 +152,6 @@
             padding: 0 16px;
         }
 
-        /* --- STYLING TEKS BERJALAN (MARQUEE) --- */
         .marquee-container {
             background: linear-gradient(135deg, #ffe4e6, #fff1f2);
             color: var(--primary-dark);
@@ -165,7 +164,6 @@
             font-weight: 700;
         }
 
-        /* --- BANNER PROMO DENGAN ORNAMEN TIMUR TENGAH --- */
         .maulid-banner {
             background: linear-gradient(135deg, #022c22 0%, #064e3b 50%, #047857 100%);
             color: white;
@@ -195,21 +193,6 @@
             z-index: 2;
         }
 
-        .maulid-banner::before {
-            content: '';
-            position: absolute;
-            top: -50%; left: -50%; width: 200%; height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.06), transparent);
-            transform: rotate(30deg);
-            animation: shine 6s infinite linear;
-            pointer-events: none;
-        }
-
-        @keyframes shine {
-            0% { transform: translateY(-100%) rotate(30deg); }
-            100% { transform: translateY(100%) rotate(30deg); }
-        }
-
         .maulid-badge {
             display: inline-block;
             background: linear-gradient(135deg, #f59e0b, #d97706);
@@ -229,7 +212,6 @@
             font-weight: 800;
             margin-bottom: 6px;
             letter-spacing: -0.3px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
             color: #fef08a;
         }
 
@@ -256,7 +238,6 @@
 
         .maulid-btn:hover {
             transform: translateY(-3px) scale(1.03);
-            box-shadow: 0 10px 25px rgba(245, 158, 11, 0.6);
             background: linear-gradient(135deg, #fde047, #d97706);
             color: #fff;
         }
@@ -288,7 +269,6 @@
             border-radius: 20px;
             padding: 18px;
             margin-top: 14px;
-            box-shadow: 0 8px 20px rgba(244, 63, 94, 0.05);
         }
 
         .formula-header {
@@ -317,7 +297,6 @@
             padding: 12px 14px;
             border-radius: 14px;
             border: 1px solid #f1f5f9;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
         }
 
         .formula-icon {
@@ -364,11 +343,7 @@
             overflow: hidden;
             aspect-ratio: 1/1;
             background: #f1f5f9;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
-            transition: transform 0.3s ease;
         }
-
-        .gallery-item:hover { transform: translateY(-4px); }
 
         .gallery-item img {
             width: 100%;
@@ -474,7 +449,6 @@
 
         .btn-order-wa:hover, .btn-submit-feedback:hover {
             transform: translateY(-2px);
-            box-shadow: 0 12px 25px rgba(244, 63, 94, 0.4);
         }
 
         .member-banner {
@@ -495,12 +469,6 @@
             font-weight: 700;
             font-size: 0.85rem;
             margin-top: 12px;
-            box-shadow: 0 6px 15px rgba(245, 158, 11, 0.3);
-            transition: all 0.2s ease;
-        }
-        .btn-to-member:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(245, 158, 11, 0.4);
         }
 
         .price-card-group {
@@ -520,7 +488,6 @@
             border-radius: 8px;
             display: inline-block;
             margin-bottom: 12px;
-            letter-spacing: 0.3px;
         }
 
         .price-item {
@@ -533,8 +500,6 @@
             padding-bottom: 8px;
             font-weight: 500;
         }
-
-        .price-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
 
         .price-item span:last-child {
             font-weight: 700;
@@ -551,9 +516,7 @@
             padding: 14px;
             border-radius: 12px;
             margin-bottom: 12px;
-            border-top: 1px solid #f1f5f9;
-            border-right: 1px solid #f1f5f9;
-            border-bottom: 1px solid #f1f5f9;
+            border: 1px solid #f1f5f9;
         }
 
         .testimonial-card p {
@@ -589,12 +552,6 @@
             font-size: 0.9rem;
             margin-top: 12px;
             box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
-            transition: all 0.2s ease;
-        }
-
-        .btn-maps:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 25px rgba(59, 130, 246, 0.4);
         }
 
         .btn-wa-main {
@@ -612,12 +569,6 @@
             font-size: 0.92rem;
             margin-top: 14px;
             box-shadow: 0 8px 20px rgba(34, 197, 94, 0.3);
-            transition: all 0.2s ease;
-        }
-
-        .btn-wa-main:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 25px rgba(34, 197, 94, 0.4);
         }
 
         .sabun-card-modern {
@@ -628,23 +579,6 @@
             margin-top: 14px;
             margin-bottom: 16px;
             box-shadow: 0 10px 25px -5px rgba(244, 63, 94, 0.08);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .sabun-card-modern::before {
-            content: '';
-            position: absolute;
-            top: 0; right: 0; width: 100px; height: 100px;
-            background: radial-gradient(circle, rgba(244, 63, 94, 0.08) 0%, transparent 70%);
-            pointer-events: none;
-        }
-
-        .sabun-badge-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 14px;
         }
 
         .sabun-tag-vol {
@@ -654,8 +588,6 @@
             font-weight: 800;
             padding: 5px 12px;
             border-radius: 30px;
-            letter-spacing: 0.3px;
-            box-shadow: 0 4px 12px rgba(244, 63, 94, 0.25);
         }
 
         .sabun-price-row {
@@ -669,24 +601,9 @@
             border: 1px solid #f1f5f9;
         }
 
-        .sabun-price-label {
-            font-size: 0.82rem;
-            font-weight: 600;
-            color: var(--text-muted);
-        }
-
-        .sabun-price-normal {
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: var(--text-muted);
-            text-decoration: line-through;
-        }
-
-        .sabun-price-promo {
-            font-size: 1.05rem;
-            font-weight: 800;
-            color: var(--primary-dark);
-        }
+        .sabun-price-label { font-size: 0.82rem; font-weight: 600; color: var(--text-muted); }
+        .sabun-price-normal { font-size: 0.85rem; font-weight: 600; color: var(--text-muted); text-decoration: line-through; }
+        .sabun-price-promo { font-size: 1.05rem; font-weight: 800; color: var(--primary-dark); }
 
         .btn-to-sabun-page {
             display: flex;
@@ -702,15 +619,8 @@
             font-weight: 700;
             font-size: 0.9rem;
             width: 100%;
-            box-shadow: 0 8px 20px rgba(244, 63, 94, 0.3);
-            transition: all 0.3s ease;
             margin-top: 14px;
-        }
-
-        .btn-to-sabun-page:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 25px rgba(244, 63, 94, 0.4);
-            background: linear-gradient(135deg, #e11d48, #be123c);
+            box-shadow: 0 8px 20px rgba(244, 63, 94, 0.3);
         }
 
         footer {
@@ -745,21 +655,19 @@
                 <li><a href="garansi.html">🛡️ Ketentuan Garansi</a></li>
                 <li><a href="#pricelist" onclick="toggleMenu()">📋 Daftar Harga Lengkap</a></li>
                 <li><a href="#testimoni" onclick="toggleMenu()">💬 Testimoni & Ulasan</a></li>
-                <li><a href="#lokasi" onclick="toggleMenu()">📍 Lokasi & Jam Buka</a></li>
+                <li><a href="#lokasi" onclick="toggleMenu()">📍 Lokasi & Kontak</a></li>
             </ul>
         </div>
     </header>
 
     <div class="container">
 
-        <!-- TEKS BERJALAN (MARQUEE) DIGABUNG DI POSISI PALING ATAS -->
         <div class="marquee-container">
             <marquee behavior="scroll" direction="left" scrollamount="5">
-                ✨ Selamat Datang di Queen Laundry! Nikmati layanan cuci bersih, wangi, dan rapi. &nbsp;&bull;&nbsp; ⚡ Proses Kilat & Layanan Antar Jemput Tersedia! &nbsp;&bull;&nbsp; 💰 Harga Member Jauh Lebih Hemat! &nbsp;&bull;&nbsp; Cek promo spesial Maulid Nabi di bawah ini! ✨
+                ✨ Selamat Datang di Queen Laundry! Nikmati layanan cuci bersih, wangi, dan rapi. &nbsp;&bull;&nbsp; ⚡ Proses Kilat & Layanan Antar Jemput Tersedia! &nbsp;&bull;&nbsp; 💬 Hubungi Admin via WhatsApp untuk Info & Pemesanan! ✨
             </marquee>
         </div>
 
-        <!-- BANNER PROMO DENGAN ORNAMEN TIMUR TENGAH -->
         <div class="maulid-banner">
             <div class="middle-east-decor">
                 <div class="bg-moon">🌙</div>
@@ -802,7 +710,6 @@
             </div>
         </div>
 
-        <!-- SECTION PRODUK SABUN LAUNDRY -->
         <div class="section-box" id="sabun-section">
             <h2>🧼 Produk Sabun Laundry Premium</h2>
             <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 14px;">
@@ -810,7 +717,7 @@
             </p>
             
             <div class="sabun-card-modern">
-                <div class="sabun-badge-container">
+                <div style="margin-bottom: 14px;">
                     <span class="sabun-tag-vol">✨ Kemasan Jerigen 5 Liter</span>
                 </div>
                 
@@ -839,7 +746,6 @@
             </div>
         </div>
 
-        <!-- KALKULATOR & ONGKIR MODERN -->
         <div id="kalkulator" class="section-box">
             <h2>🧮 Kalkulator & Estimasi Biaya</h2>
             
@@ -909,11 +815,10 @@
                 </div>
             </div>
 
-            <!-- FITUR ONGKIR SESUAI KETENTUAN JARAK -->
             <div class="calc-section-card" style="border: 1px solid rgba(244, 63, 94, 0.3); background: linear-gradient(135deg, #ffffff, #fff1f2);">
                 <div class="calc-section-title" style="color: var(--primary-dark);">🛵 Layanan Antar Jemput (Berdasarkan Jarak)</div>
                 <div style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 10px; line-height: 1.5;">
-                    💡 <b>Ketentuan Ongkir:</b> Dihitung di atas 3,5 km. Jarak di bawah itu / antar-jemput sendiri (Rp 0). Jarak 4 - 4,5 km (<b>Rp 7.000</b>), dan di atas itu (<b>Rp 13.000</b>). Silakan cek Google Maps untuk melihat jarak Anda dari toko kami!
+                    💡 <b>Ketentuan Ongkir:</b> Dihitung di atas 3,5 km. Di bawah itu / antar-jemput sendiri (Rp 0). Jarak 4 - 4,5 km (<b>Rp 7.000</b>), dan di atas itu (<b>Rp 13.000</b>).
                 </div>
                 
                 <div class="calc-group">
@@ -939,14 +844,12 @@
             </div>
         </div>
 
-        <!-- MEMBER BANNER PREVIEW -->
         <div class="section-box member-banner">
             <h3>🌟 Ingin Cuci Lebih Hemat Setiap Hari?</h3>
             <p style="font-size: 0.82rem; color: #78350f; margin-bottom: 4px;">Dapatkan diskon khusus, prioritas antrean, dan kuota cuci dengan harga spesial lewat program Member kami.</p>
             <a href="member.html" class="btn-to-member">✨ Lihat Paket & Keuntungan Member</a>
         </div>
 
-        <!-- PRICE LIST LENGKAP MODERN -->
         <div id="pricelist" class="section-box">
             <h2>📋 Daftar Harga Lengkap</h2>
             <div style="margin-bottom: 16px;">
@@ -1030,8 +933,11 @@
         </div>
 
         <div id="lokasi" class="section-box">
-            <h2>📍 Lokasi & Jam Operasional</h2>
-            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;"><b>Alamat:</b> Kp. Jl. Cihaur, Sukarapih, Kec. Sukarame, Tasikmalaya</p>
+            <h2>📍 Lokasi & Kontak</h2>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 6px;"><b>Alamat:</b> Kp. Jl. Cihaur, Sukarapih, Kec. Sukarame, Tasikmalaya</p>
+            
+            <div id="statusToko" style="display: inline-block; padding: 4px 10px; border-radius: 20px; font-size: 0.72rem; font-weight: 700; margin-bottom: 14px;"></div>
+
             <a href="https://maps.app.goo.gl/K3b4yoQHxTkgiiFn8" target="_blank" class="btn-maps">🗺️ Buka di Google Maps</a>
             <a href="https://wa.me/6285770246502?text=Halo%20Queen%20Laundry" target="_blank" class="btn-wa-main">💬 Hubungi Admin via WhatsApp</a>
         </div>
@@ -1039,7 +945,6 @@
 
     <footer>&copy; 2026 Queen Laundry<br>Website created AshrafNr.</footer>
 
-    <!-- SCRIPT JAVASCRIPT -->
     <script>
         function toggleMenu() {
             let menu = document.getElementById('dropdownMenu');
@@ -1049,8 +954,12 @@
         function hitungTotal() {
             let kiloan = parseFloat(document.getElementById('pilihLayananKiloan').value) || 0;
             let berat = parseFloat(document.getElementById('beratKg').value) || 0;
+            if (berat < 0) berat = 0;
+            
             let satuan = parseFloat(document.getElementById('pilihLayananSatuan').value) || 0;
             let jumlah = parseInt(document.getElementById('jumlahPcs').value) || 0;
+            if (jumlah < 0) jumlah = 0;
+
             let ongkir = parseFloat(document.getElementById('pilihOngkir').value) || 0;
             
             let total = Math.round((((kiloan * berat) + (satuan * jumlah) + ongkir) / 500)) * 500;
@@ -1066,7 +975,27 @@
             });
         }
 
+        function cekStatusToko() {
+            let sekarang = new Date();
+            let jam = sekarang.getHours();
+            let statusEl = document.getElementById('statusToko');
+            
+            if(statusEl) {
+                if(jam >= 8 && jam < 20) {
+                    statusEl.innerText = "🟢 Sedang Buka - Yuk Laundry Sekarang!";
+                    statusEl.style.background = "#dcfce7";
+                    statusEl.style.color = "#15803d";
+                } else {
+                    statusEl.innerText = "🔴 Sedang Tutup - Buka Besok Jam 08:00";
+                    statusEl.style.background = "#fee2e2";
+                    statusEl.style.color = "#b91c1c";
+                }
+            }
+        }
+
         window.onload = function() {
+            cekStatusToko();
+            
             let dataUlasan = JSON.parse(localStorage.getItem('queen_reviews')) || [];
             dataUlasan.forEach(data => {
                 let listContainer = document.getElementById('listTestimoni');
@@ -1080,11 +1009,14 @@
         function tambahTestimoni() {
             let nama = document.getElementById('inputNama').value.trim();
             let pesan = document.getElementById('inputPesan').value.trim();
-            if (!nama || !pesan) { alert("Harap isi nama dan pesan ulasan!"); return; }
+            if (!nama || !pesan) { alert("Harap isi nama dan pesan ulasan terlebih dahulu ya!"); return; }
+            
             let ulasanBaru = { nama, pesan };
             let dataUlasan = JSON.parse(localStorage.getItem('queen_reviews')) || [];
             dataUlasan.unshift(ulasanBaru);
             localStorage.setItem('queen_reviews', JSON.stringify(dataUlasan));
+            
+            alert("Terima kasih, " + nama + "! Ulasan Anda berhasil ditambahkan. ✨");
             location.reload();
         }
     </script>
