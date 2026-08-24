@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promo Spesial Maulid Nabi - Queen Laundry</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #047857;
+            --primary-dark: #022c22;
+            --accent: #f59e0b;
+            --bg-gradient: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --shadow: 0 10px 30px -5px rgba(4, 120, 87, 0.1);
+            --radius: 24px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--bg-gradient);
+            color: #1e293b;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding-bottom: 40px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(4, 120, 87, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 0.9rem 1rem;
+        }
+
+        .header-container {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-info h1 {
+            font-size: 1.15rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #047857, #065f46);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .back-btn {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            background: #d1fae5;
+            padding: 8px 14px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto 0 auto;
+            padding: 0 16px;
+        }
+
+        /* AUDIO PLAYER SHOLAWAT */
+        .music-player-card {
+            background: linear-gradient(135deg, #064e3b, #047857);
+            color: white;
+            padding: 14px 18px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 18px;
+            box-shadow: 0 8px 20px rgba(4, 120, 87, 0.25);
+            border: 1px solid #34d399;
+        }
+
+        .music-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .music-info span {
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: -0.2px;
+        }
+
+        .btn-audio-toggle {
+            background: #fef08a;
+            color: #78350f;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 12px;
+            font-size: 0.78rem;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .btn-audio-toggle:hover {
+            background: #fde047;
+            transform: scale(1.03);
+        }
+
+        /* HERO PROMO BANNER */
+        .hero-promo {
+            background: linear-gradient(135deg, #022c22 0%, #064e3b 60%, #047857 100%);
+            color: white;
+            padding: 32px 20px;
+            border-radius: var(--radius);
+            text-align: center;
+            margin-bottom: 20px;
+            box-shadow: 0 15px 35px rgba(4, 120, 87, 0.3);
+            position: relative;
+            overflow: hidden;
+            border: 2px solid #34d399;
+        }
+
+        .hero-decor {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .h-moon {
+            position: absolute;
+            top: -10px; right: -10px;
+            font-size: 5rem;
+            opacity: 0.12;
+        }
+
+        .h-camel {
+            position: absolute;
+            bottom: -15px; left: -10px;
+            font-size: 4.5rem;
+            opacity: 0.1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .badge-event {
+            display: inline-block;
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 800;
+            padding: 5px 16px;
+            border-radius: 20px;
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+        }
+
+        .hero-promo h2 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+            color: #fef08a;
+            letter-spacing: -0.5px;
+        }
+
+        .hero-promo p {
+            font-size: 0.88rem;
+            opacity: 0.95;
+            font-weight: 500;
+            line-height: 1.5;
+        }
+
+        /* CARD PROMO ITEM */
+        .promo-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius);
+            padding: 24px 22px 22px 22px;
+            margin-bottom: 16px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .promo-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .promo-tag {
+            position: absolute;
+            top: 0; right: 0;
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+            font-size: 0.68rem;
+            font-weight: 800;
+            padding: 5px 14px;
+            border-bottom-left-radius: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .promo-title {
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: var(--primary-dark);
+            margin-bottom: 6px;
+            padding-right: 70px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .promo-desc {
+            font-size: 0.83rem;
+            color: #64748b;
+            margin-bottom: 14px;
+            font-weight: 500;
+        }
+
+        /* PRICE COMPARISON */
+        .price-box {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #f0fdf4;
+            padding: 12px 16px;
+            border-radius: 14px;
+            border: 1px dashed #34d399;
+            margin-bottom: 14px;
+        }
+
+        .old-price {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            text-decoration: line-through;
+            font-weight: 600;
+        }
+
+        .new-price {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--primary);
+            letter-spacing: -0.5px;
+        }
+
+        .arrow-icon {
+            font-size: 1rem;
+            color: #059669;
+        }
+
+        /* CLAIM BUTTON */
+        .btn-claim {
+            display: block;
+            background: linear-gradient(135deg, #059669, #047857);
+            color: white;
+            text-align: center;
+            padding: 13px;
+            border-radius: 14px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.88rem;
+            box-shadow: 0 6px 20px rgba(5, 150, 105, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .btn-claim:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(5, 150, 105, 0.4);
+            background: linear-gradient(135deg, #047857, #022c22);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #64748b;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <div class="brand-info">
+                <h1>👑 Queen Laundry</h1>
+            </div>
+            <a href="index.html" class="back-btn">← Kembali ke Beranda</a>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <!-- PEMUTAR LAGU SHOLAWAT / AUDIO RELIGI -->
+        <div class="music-player-card">
+            <div class="music-info">
+                <span style="font-size: 1.2rem;">🎶</span>
+                <div>
+                    <span style="display: block;">Suasana Maulid Nabi</span>
+                    <span id="audioStatus" style="font-size: 0.72rem; opacity: 0.85; font-weight: 500;">Klik putar untuk alunan sholawat</span>
+                </div>
+            </div>
+            <button id="audioToggleBtn" class="btn-audio-toggle" onclick="toggleAudio()">▶ Putar Sholawat</button>
+            <!-- Menggunakan sumber audio internet publik resmi yang stabil format MP3 -->
+            <audio id="sholawatAudio" preload="auto" loop>
+                <source src="https://actions.google.com/sounds/v1/ambiences/islamic_prayer_ambient.ogg" type="audio/ogg">
+                <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf756.mp3?filename=islamic-background-music-111893.mp3" type="audio/mpeg">
+            </audio>
+        </div>
+
+        <!-- HERO BANNER -->
+        <div class="hero-promo">
+            <div class="hero-decor">
+                <div class="h-moon">🌙</div>
+                <div class="h-camel">🐪</div>
+            </div>
+            <div class="hero-content">
+                <div class="badge-event">🌟 Khusus Maulid Nabi SAW 🌟</div>
+                <h2>Berkah Berlimpah, Laundry Makin Hemat!</h2>
+                <p>Manfaatkan penawaran spesial eksklusif minggu ini untuk perawatan pakaian & perlengkapan tidur terbaik Anda.</p>
+            </div>
+        </div>
+
+        <!-- PROMO 1: BEDCOVER SINGLE -->
+        <div class="promo-card">
+            <div class="promo-tag">Diskon Spesial</div>
+            <div class="promo-title">🛌 Bedcover Single Care</div>
+            <div class="promo-desc">Cuci bersih menyeluruh, higienis, dan harum tahan lama khusus untuk ukuran single.</div>
+            <div class="price-box">
+                <div>
+                    <span style="font-size: 0.72rem; color: #64748b; display: block; font-weight: 600;">Normal</span>
+                    <span class="old-price">Rp 25.000</span>
+                </div>
+                <span class="arrow-icon">➔</span>
+                <div>
+                    <span style="font-size: 0.72rem; color: #059669; display: block; font-weight: 600;">Promo Maulid</span>
+                    <span class="new-price">Rp 20.000</span>
+                </div>
+            </div>
+            <a href="https://wa.me/6285770246502?text=Halo%20Queen%20Laundry,%20saya%20mau%20klaim%20Promo%20Bedcover%20Single%20jadi%20Rp%2020.000" target="_blank" class="btn-claim">
+                🎉 Klaim Promo Ini via WhatsApp
+            </a>
+        </div>
+
+        <!-- PROMO 2: BEDCOVER DOUBLE -->
+        <div class="promo-card">
+            <div class="promo-tag">Diskon Spesial</div>
+            <div class="promo-title">🛏️ Bedcover Double Care</div>
+            <div class="promo-desc">Perawatan ekstra bersih untuk bedcover double kesayangan Anda agar bebas dari tungau & bau apek.</div>
+            <div class="price-box">
+                <div>
+                    <span style="font-size: 0.72rem; color: #64748b; display: block; font-weight: 600;">Normal</span>
+                    <span class="old-price">Rp 25.000</span>
+                </div>
+                <span class="arrow-icon">➔</span>
+                <div>
+                    <span style="font-size: 0.72rem; color: #059669; display: block; font-weight: 600;">Promo Maulid</span>
+                    <span class="new-price">Rp 20.000</span>
+                </div>
+            </div>
+            <a href="https://wa.me/6285770246502?text=Halo%20Queen%20Laundry,%20saya%20mau%20klaim%20Promo%20Bedcover%20Double%20jadi%20Rp%2020.000" target="_blank" class="btn-claim">
+                🎉 Klaim Promo Ini via WhatsApp
+            </a>
+        </div>
+
+        <!-- PROMO 3: LAUNDRY 5KG FREE 1KG -->
+        <div class="promo-card">
+            <div class="promo-tag">Bonus Melimpah</div>
+            <div class="promo-title">⚡ Laundry Kiloan: 5 Kg Free 1 Kg</div>
+            <div class="promo-desc">Setiap akumulasi cuci kiloan 5 Kg, Anda berhak mendapatkan gratis tambahan cuci 1 Kg langsung! Lebih puas dan hemat.</div>
+            <div style="background: #fef3c7; border: 1px dashed #f59e0b; padding: 10px 14px; border-radius: 12px; margin-bottom: 14px; font-size: 0.8rem; color: #b45309; font-weight: 700;">
+                🎁 Berlaku kelipatan untuk semua layanan cuci kiloan reguler!
+            </div>
+            <a href="https://wa.me/6285770246502?text=Halo%20Queen%20Laundry,%20saya%20mau%20klaim%20Promo%20Laundry%205Kg%20Free%201Kg" target="_blank" class="btn-claim">
+                🎉 Klaim Promo Ini via WhatsApp
+            </a>
+        </div>
+    </div>
+
+    <footer>&copy; 2026 Queen Laundry<br>Website created AshrafNr.</footer>
+
+    <script>
+        function toggleAudio() {
+            let audio = document.getElementById('sholawatAudio');
+            let btn = document.getElementById('audioToggleBtn');
+            let status = document.getElementById('audioStatus');
+            
+            if (audio.paused) {
+                audio.play().then(() => {
+                    btn.innerText = "⏸ Jeda Sholawat";
+                    status.innerText = "Alunan sholawat sedang diputar...";
+                }).catch(error => {
+                    alert("Gagal memutar audio, pastikan koneksi internet stabil.");
+                });
+            } else {
+                audio.pause();
+                btn.innerText = "▶ Putar Sholawat";
+                status.innerText = "Klik putar untuk alunan sholawat";
+            }
+        }
+    </script>
+</body>
+</html>
