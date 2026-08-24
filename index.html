@@ -7,16 +7,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #f43f5e;
-            --primary-dark: #e11d48;
-            --primary-light: #fff1f2;
-            --accent: #fb7185;
-            --text-main: #1e293b;
+            --primary: #e11d48;
+            --primary-gradient: linear-gradient(135deg, #f43f5e 0%, #be123c 100%);
+            --accent-glow: rgba(244, 63, 94, 0.25);
+            --bg-body: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #0f172a;
             --text-muted: #64748b;
-            --bg-gradient: linear-gradient(135deg, #fff5f7 0%, #fff1f2 100%);
-            --card-bg: rgba(255, 255, 255, 0.85);
-            --shadow: 0 10px 30px -5px rgba(244, 63, 94, 0.08);
-            --radius: 24px;
+            --radius-lg: 28px;
+            --radius-md: 20px;
+            --shadow-soft: 0 20px 40px -15px rgba(15, 23, 42, 0.05);
+            --shadow-hover: 0 25px 50px -12px rgba(225, 29, 72, 0.15);
         }
 
         * {
@@ -28,22 +29,26 @@
         }
 
         body {
-            background: var(--bg-gradient);
+            background: var(--bg-body);
             color: var(--text-main);
             line-height: 1.6;
             min-height: 100vh;
-            padding-bottom: 50px;
+            padding-bottom: 60px;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(244, 63, 94, 0.05) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(14, 165, 233, 0.03) 0px, transparent 50%);
         }
 
+        /* HEADER STYLING */
         header {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-bottom: 1px solid rgba(244, 63, 94, 0.1);
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
             position: sticky;
             top: 0;
             z-index: 1000;
-            padding: 0.9rem 1rem;
+            padding: 0.8rem 1.2rem;
         }
 
         .header-container {
@@ -55,9 +60,9 @@
         }
 
         .brand-info h1 {
-            font-size: 1.15rem;
+            font-size: 1.2rem;
             font-weight: 800;
-            background: linear-gradient(135deg, #e11d48, #fb7185);
+            background: var(--primary-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             letter-spacing: -0.5px;
@@ -66,14 +71,14 @@
         .brand-info p {
             font-size: 0.72rem;
             color: var(--text-muted);
-            font-weight: 500;
+            font-weight: 600;
         }
 
         .hamburger-btn {
-            background: var(--primary-light);
-            border: 1px solid rgba(244, 63, 94, 0.2);
-            width: 42px;
-            height: 42px;
+            background: #fff1f2;
+            border: 1px solid #fecdd3;
+            width: 44px;
+            height: 44px;
             border-radius: 14px;
             display: flex;
             flex-direction: column;
@@ -81,12 +86,15 @@
             align-items: center;
             gap: 5px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .hamburger-btn:hover {
             background: var(--primary);
+            transform: scale(1.05);
+            box-shadow: 0 0 15px var(--accent-glow);
         }
+
         .hamburger-btn:hover span {
             background: white;
         }
@@ -104,13 +112,13 @@
             max-width: 600px;
             margin: 0 auto;
             background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-hover);
             overflow: hidden;
             max-height: 0;
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             padding: 0 15px;
-            border: 1px solid rgba(0,0,0,0.04);
+            border: 1px solid #f1f5f9;
         }
 
         .dropdown-menu.active {
@@ -141,56 +149,79 @@
         }
 
         .menu-list a:hover {
-            background: var(--primary);
-            color: white;
-            transform: translateX(4px);
+            background: #fff1f2;
+            color: var(--primary);
+            transform: translateX(6px);
         }
 
+        /* CONTAINER UTAMA */
         .container {
             max-width: 600px;
             margin: 20px auto 0 auto;
             padding: 0 16px;
         }
 
-        .marquee-container {
-            background: linear-gradient(135deg, #ffe4e6, #fff1f2);
-            color: var(--primary-dark);
-            padding: 10px 14px;
-            border-radius: 14px;
+        /* CARD SECTION MODERN */
+        .section-box {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 24px;
             margin-bottom: 20px;
-            border: 1px solid rgba(244, 63, 94, 0.2);
-            box-shadow: 0 4px 12px rgba(244, 63, 94, 0.05);
-            font-size: 0.82rem;
-            font-weight: 700;
+            box-shadow: var(--shadow-soft);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
+        .section-box.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-box:hover {
+            box-shadow: var(--shadow-hover);
+            border-color: rgba(244, 63, 94, 0.2);
+        }
+
+        .section-box h2 {
+            color: var(--text-main);
+            font-size: 1.15rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            letter-spacing: -0.3px;
+        }
+
+        /* MARQUEE */
+        .marquee-container {
+            background: linear-gradient(135deg, #fff1f2, #ffe4e6);
+            color: var(--primary);
+            padding: 12px 16px;
+            border-radius: 16px;
+            margin-bottom: 20px;
+            border: 1px solid #fecdd3;
+            font-size: 0.82rem;
+            font-weight: 700;
+            box-shadow: 0 4px 12px rgba(244, 63, 94, 0.05);
+        }
+
+        /* BANNER MAULID */
         .maulid-banner {
-            background: linear-gradient(135deg, #022c22 0%, #064e3b 50%, #047857 100%);
+            background: linear-gradient(135deg, #064e3b 0%, #022c22 100%);
             color: white;
             padding: 28px 20px;
-            border-radius: 24px;
+            border-radius: var(--radius-lg);
             text-align: center;
             margin-bottom: 20px;
-            box-shadow: 0 14px 35px rgba(4, 120, 87, 0.35);
+            box-shadow: 0 15px 35px rgba(6, 78, 59, 0.25);
             border: 2px solid #34d399;
             position: relative;
             overflow: hidden;
-        }
-
-        .middle-east-decor {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .bg-moon { position: absolute; top: -15px; right: -15px; font-size: 5rem; opacity: 0.12; color: #fef08a; }
-        .bg-camel { position: absolute; bottom: -10px; left: -10px; font-size: 4.5rem; opacity: 0.1; }
-        .bg-stars { position: absolute; top: 15px; left: 20px; font-size: 1.5rem; opacity: 0.25; }
-
-        .maulid-badge, .maulid-banner h3, .maulid-banner p, .maulid-btn {
-            position: relative;
-            z-index: 2;
         }
 
         .maulid-badge {
@@ -201,139 +232,87 @@
             font-weight: 800;
             padding: 5px 14px;
             border-radius: 20px;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             text-transform: uppercase;
             letter-spacing: 1px;
-            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
         }
 
         .maulid-banner h3 {
             font-size: 1.35rem;
             font-weight: 800;
-            margin-bottom: 6px;
-            letter-spacing: -0.3px;
+            margin-bottom: 8px;
             color: #fef08a;
+            letter-spacing: -0.3px;
         }
 
         .maulid-banner p {
             font-size: 0.86rem;
-            margin-bottom: 16px;
+            margin-bottom: 18px;
             opacity: 0.95;
             line-height: 1.5;
-            font-weight: 500;
         }
 
         .maulid-btn {
             background: linear-gradient(135deg, #fef08a, #f59e0b);
             color: #78350f;
-            padding: 12px 22px;
+            padding: 12px 24px;
             border-radius: 14px;
             text-decoration: none;
             font-weight: 800;
             font-size: 0.88rem;
             display: inline-block;
-            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
+            box-shadow: 0 8px 20px rgba(245, 158, 11, 0.3);
             transition: all 0.3s ease;
         }
 
         .maulid-btn:hover {
-            transform: translateY(-3px) scale(1.03);
+            transform: translateY(-2px) scale(1.02);
             background: linear-gradient(135deg, #fde047, #d97706);
-            color: #fff;
         }
 
-        .section-box {
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            border-radius: var(--radius);
-            padding: 24px;
-            margin-bottom: 18px;
-            box-shadow: var(--shadow);
-            border: 1px solid rgba(255, 255, 255, 0.8);
-        }
-
-        .section-box h2 {
-            color: var(--text-main);
-            font-size: 1.1rem;
-            font-weight: 700;
-            margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            letter-spacing: -0.3px;
-        }
-
+        /* FORMULA CARD */
         .formula-card {
-            background: linear-gradient(135deg, #ffffff 0%, #fff5f7 100%);
-            border: 1px solid rgba(244, 63, 94, 0.2);
-            border-radius: 20px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: var(--radius-md);
             padding: 18px;
-            margin-top: 14px;
-        }
-
-        .formula-header {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.9rem;
-            font-weight: 800;
-            color: var(--primary-dark);
-            margin-bottom: 14px;
-            padding-bottom: 10px;
-            border-bottom: 1px dashed rgba(244, 63, 94, 0.2);
-        }
-
-        .formula-list {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
+            margin-top: 16px;
         }
 
         .formula-item {
             display: flex;
-            align-items: flex-start;
-            gap: 12px;
+            align-items: center;
+            gap: 14px;
             background: white;
-            padding: 12px 14px;
+            padding: 14px;
             border-radius: 14px;
+            margin-top: 10px;
             border: 1px solid #f1f5f9;
+            transition: transform 0.2s ease;
+        }
+
+        .formula-item:hover {
+            transform: translateX(4px);
+            border-color: #fecdd3;
         }
 
         .formula-icon {
-            font-size: 1.25rem;
-            background: var(--primary-light);
-            width: 38px;
-            height: 38px;
-            border-radius: 10px;
+            font-size: 1.3rem;
+            background: #fff1f2;
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
         }
 
-        .formula-content {
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-        }
-
-        .formula-title {
-            font-size: 0.84rem;
-            font-weight: 700;
-            color: var(--text-main);
-        }
-
-        .formula-desc {
-            font-size: 0.78rem;
-            color: var(--text-muted);
-            line-height: 1.4;
-            font-weight: 500;
-        }
-
+        /* GALERI GRID */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
+            gap: 10px;
             margin-top: 12px;
         }
 
@@ -349,30 +328,36 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
         }
 
         .gallery-caption {
             position: absolute;
             bottom: 0; left: 0; right: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            background: linear-gradient(to top, rgba(15,23,42,0.8), transparent);
             color: white;
             font-size: 0.72rem;
-            font-weight: 600;
-            padding: 12px 8px 6px 8px;
+            font-weight: 700;
+            padding: 12px 6px 6px 6px;
             text-align: center;
         }
 
+        /* KALKULATOR & FORM */
         .calc-section-card {
             background: #f8fafc;
             border: 1px solid #e2e8f0;
-            border-radius: 16px;
+            border-radius: 18px;
             padding: 16px;
             margin-bottom: 14px;
         }
 
         .calc-section-title {
             font-size: 0.88rem;
-            font-weight: 700;
+            font-weight: 800;
             color: var(--text-main);
             margin-bottom: 10px;
             display: flex;
@@ -384,9 +369,9 @@
 
         .calc-group label {
             font-size: 0.78rem;
-            font-weight: 600;
+            font-weight: 700;
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 6px;
             color: var(--text-muted);
         }
 
@@ -404,35 +389,42 @@
 
         .calc-select:focus, .calc-input:focus, .search-input:focus, .feedback-input:focus {
             border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(244, 63, 94, 0.15);
+            box-shadow: 0 0 0 4px var(--accent-glow);
         }
 
         .calc-result {
             background: linear-gradient(135deg, #fff1f2, #ffe4e6);
-            border: 1px solid rgba(244, 63, 94, 0.2);
-            padding: 18px;
-            border-radius: 18px;
+            border: 1px solid #fecdd3;
+            padding: 20px;
+            border-radius: var(--radius-md);
             text-align: center;
             margin-top: 16px;
         }
 
-        .calc-result span {
-            font-size: 0.82rem;
-            font-weight: 600;
-            color: var(--text-muted);
-        }
-
         .calc-total {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-weight: 800;
-            color: var(--primary-dark);
-            margin: 4px 0 12px 0;
+            color: var(--primary);
+            margin: 6px 0 14px 0;
             letter-spacing: -0.5px;
         }
 
-        .btn-order-wa, .btn-submit-feedback {
+        /* TOMBOL UTAMA DENGAN EFEK PULSE */
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 0 0 rgba(225, 29, 72, 0.4); }
+            70% { box-shadow: 0 0 0 14px rgba(225, 29, 72, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(225, 29, 72, 0); }
+        }
+
+        @keyframes pulseGreen {
+            0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4); }
+            70% { box-shadow: 0 0 0 14px rgba(34, 197, 94, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+        }
+
+        .btn-order-wa, .btn-submit-feedback, .btn-to-sabun-page {
             display: block;
-            background: linear-gradient(135deg, #f43f5e, #e11d48);
+            background: var(--primary-gradient);
             color: white;
             text-align: center;
             padding: 14px;
@@ -443,47 +435,36 @@
             border: none;
             cursor: pointer;
             width: 100%;
-            box-shadow: 0 8px 20px rgba(244, 63, 94, 0.3);
+            box-shadow: 0 8px 25px rgba(225, 29, 72, 0.3);
             transition: all 0.2s ease;
+            animation: pulseGlow 2.5s infinite;
         }
 
-        .btn-order-wa:hover, .btn-submit-feedback:hover {
+        .btn-order-wa:hover, .btn-submit-feedback:hover, .btn-to-sabun-page:hover {
             transform: translateY(-2px);
+            filter: brightness(1.1);
         }
 
-        .member-banner {
-            background: linear-gradient(135deg, #fffbeb, #fef3c7);
-            border: 1px solid #fde68a;
-        }
-
-        .member-banner h3 { color: #d97706; margin-bottom: 8px; }
-
-        .btn-to-member {
-            display: block;
-            background: linear-gradient(135deg, #f59e0b, #d97706);
-            color: white;
-            text-align: center;
-            padding: 12px;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 0.85rem;
-            margin-top: 12px;
-        }
-
+        /* PRICE LIST */
         .price-card-group {
             background: #f8fafc;
             border: 1px solid #e2e8f0;
             border-radius: 16px;
             padding: 16px;
             margin-bottom: 14px;
+            transition: all 0.2s ease;
+        }
+
+        .price-card-group:hover {
+            border-color: #fecdd3;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.03);
         }
 
         .price-card-title {
             font-size: 0.85rem;
             font-weight: 800;
-            color: var(--primary-dark);
-            background: var(--primary-light);
+            color: var(--primary);
+            background: #fff1f2;
             padding: 6px 12px;
             border-radius: 8px;
             display: inline-block;
@@ -496,27 +477,30 @@
             align-items: center;
             margin-bottom: 8px;
             font-size: 0.85rem;
-            border-bottom: 1px dashed #f1f5f9;
+            border-bottom: 1px dashed #e2e8f0;
             padding-bottom: 8px;
             font-weight: 500;
         }
 
         .price-item span:last-child {
             font-weight: 700;
-            color: var(--primary-dark);
-            background: var(--primary-light);
+            color: var(--primary);
+            background: #fff1f2;
             padding: 4px 10px;
             border-radius: 8px;
             font-size: 0.8rem;
         }
 
+        /* TESTIMONI */
         .testimonial-card {
             background: #f8fafc;
             border-left: 4px solid var(--primary);
             padding: 14px;
             border-radius: 12px;
             margin-bottom: 12px;
-            border: 1px solid #f1f5f9;
+            border-top: 1px solid #f1f5f9;
+            border-right: 1px solid #f1f5f9;
+            border-bottom: 1px solid #f1f5f9;
         }
 
         .testimonial-card p {
@@ -537,6 +521,7 @@
 
         .stars { color: #f59e0b; font-size: 0.85rem; }
 
+        /* TOMBOL SOSIAL */
         .btn-maps {
             display: flex;
             justify-content: center;
@@ -552,6 +537,7 @@
             font-size: 0.9rem;
             margin-top: 12px;
             box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+            transition: transform 0.2s ease;
         }
 
         .btn-wa-main {
@@ -569,58 +555,8 @@
             font-size: 0.92rem;
             margin-top: 14px;
             box-shadow: 0 8px 20px rgba(34, 197, 94, 0.3);
-        }
-
-        .sabun-card-modern {
-            background: linear-gradient(135deg, #ffffff 0%, #fff5f7 100%);
-            border: 1px solid rgba(244, 63, 94, 0.2);
-            border-radius: 20px;
-            padding: 20px;
-            margin-top: 14px;
-            margin-bottom: 16px;
-            box-shadow: 0 10px 25px -5px rgba(244, 63, 94, 0.08);
-        }
-
-        .sabun-tag-vol {
-            background: linear-gradient(135deg, #f43f5e, #e11d48);
-            color: white;
-            font-size: 0.75rem;
-            font-weight: 800;
-            padding: 5px 12px;
-            border-radius: 30px;
-        }
-
-        .sabun-price-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 10px 14px;
-            border-radius: 12px;
-            margin-bottom: 8px;
-            border: 1px solid #f1f5f9;
-        }
-
-        .sabun-price-label { font-size: 0.82rem; font-weight: 600; color: var(--text-muted); }
-        .sabun-price-normal { font-size: 0.85rem; font-weight: 600; color: var(--text-muted); text-decoration: line-through; }
-        .sabun-price-promo { font-size: 1.05rem; font-weight: 800; color: var(--primary-dark); }
-
-        .btn-to-sabun-page {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
-            background: linear-gradient(135deg, #f43f5e, #e11d48);
-            color: white;
-            text-align: center;
-            padding: 14px;
-            border-radius: 14px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 0.9rem;
-            width: 100%;
-            margin-top: 14px;
-            box-shadow: 0 8px 20px rgba(244, 63, 94, 0.3);
+            transition: transform 0.2s ease;
+            animation: pulseGreen 2.5s infinite;
         }
 
         footer {
@@ -628,7 +564,7 @@
             margin-top: 40px;
             color: var(--text-muted);
             font-size: 0.75rem;
-            font-weight: 500;
+            font-weight: 600;
         }
     </style>
 </head>
@@ -669,18 +605,10 @@
         </div>
 
         <div class="maulid-banner">
-            <div class="middle-east-decor">
-                <div class="bg-moon">🌙</div>
-                <div class="bg-camel">🐪</div>
-                <div class="bg-stars">✨ ⭐</div>
-            </div>
-
             <div class="maulid-badge">🌟 BAROKAH MAULID NABI SAW 1448 H 🌟</div>
             <h3>Pakaian Bersih, Hati Tenang, Berkah Melimpah!</h3>
-            <p>Nikmati diskon spesial & bonus keharuman premium eksklusif khusus menyambut hari kelahiran Nabi Muhammad SAW minggu ini. Yuk, percayakan cucian Anda pada kami!</p>
-            <a href="promo.html" class="maulid-btn">
-                🎉 Klaim Promo Sekarang
-            </a>
+            <p>Nikmati diskon spesial & bonus keharuman eksklusif khusus menyambut hari kelahiran Nabi Muhammad SAW minggu ini.</p>
+            <a href="promo.html" class="maulid-btn">🎉 Klaim Promo Sekarang</a>
         </div>
 
         <div class="section-box">
@@ -688,53 +616,38 @@
             <p style="font-size: 0.85rem; color: var(--text-muted);">Queen Laundry menghadirkan standar kebersihan kelas dunia dengan teknologi modern serta penanganan personal untuk setiap helai pakaian Anda.</p>
             
             <div class="formula-card">
-                <div class="formula-header">
-                    <span>💎</span> 100% Racikan Formula Eksklusif
-                </div>
-                <div class="formula-list">
-                    <div class="formula-item">
-                        <div class="formula-icon">🧼</div>
-                        <div class="formula-content">
-                            <span class="formula-title">Sabun Deterjen</span>
-                            <span class="formula-desc">Lembut di serat kain, ampuh angkat noda tanpa merusak warna pakaian.</span>
-                        </div>
+                <div style="font-size: 0.85rem; font-weight: 800; color: var(--primary); margin-bottom: 8px;">💎 100% Racikan Formula Eksklusif</div>
+                <div class="formula-item">
+                    <div class="formula-icon">🧼</div>
+                    <div>
+                        <div style="font-size: 0.84rem; font-weight: 700;">Sabun Deterjen</div>
+                        <div style="font-size: 0.78rem; color: var(--text-muted);">Lembut di serat kain, ampuh angkat noda tanpa merusak warna.</div>
                     </div>
-                    <div class="formula-item">
-                        <div class="formula-icon">🌸</div>
-                        <div class="formula-content">
-                            <span class="formula-title">Parfum Premium</span>
-                            <span class="formula-desc">Memberikan keharuman mewah yang tahan lama seharian penuh.</span>
-                        </div>
+                </div>
+                <div class="formula-item">
+                    <div class="formula-icon">🌸</div>
+                    <div>
+                        <div style="font-size: 0.84rem; font-weight: 700;">Parfum Premium</div>
+                        <div style="font-size: 0.78rem; color: var(--text-muted);">Memberikan keharuman mewah yang tahan lama seharian penuh.</div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="section-box" id="sabun-section">
+        <div class="section-box">
             <h2>🧼 Produk Sabun Laundry Premium</h2>
-            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 14px;">
-                Dapatkan kesegaran dan kebersihan laundry profesional langsung di rumah Anda. Formula melimpah dengan kualitas terbaik!
-            </p>
-            
-            <div class="sabun-card-modern">
-                <div style="margin-bottom: 14px;">
-                    <span class="sabun-tag-vol">✨ Kemasan Jerigen 5 Liter</span>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">Dapatkan kesegaran dan kebersihan laundry profesional langsung di rumah Anda.</p>
+            <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 16px; padding: 16px; margin-bottom: 14px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.82rem; font-weight: 600; color: var(--text-muted);">Kemasan Jerigen 5 Liter</span>
+                    <span style="font-size: 0.82rem; font-weight: 600; color: var(--text-muted); text-decoration: line-through;">Rp 45.000</span>
                 </div>
-                
-                <div class="sabun-price-row">
-                    <span class="sabun-price-label">Harga Normal</span>
-                    <span class="sabun-price-normal">Rp 45.000</span>
-                </div>
-                
-                <div class="sabun-price-row" style="background: rgba(244, 63, 94, 0.04); border-color: rgba(244, 63, 94, 0.15);">
-                    <span class="sabun-price-label" style="font-weight: 700; color: var(--primary-dark);">Harga Promo Spesial</span>
-                    <span class="sabun-price-promo">Rp 37.000</span>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-size: 0.85rem; font-weight: 800; color: var(--primary);">Harga Promo Spesial</span>
+                    <span style="font-size: 1.1rem; font-weight: 800; color: var(--primary);">Rp 37.000</span>
                 </div>
             </div>
-
-            <a href="sabun.html" class="btn-to-sabun-page">
-                <span>✨</span> Lihat Detail & Pilih Varian Sabun
-            </a>
+            <a href="sabun.html" class="btn-to-sabun-page">✨ Lihat Detail & Pilih Varian Sabun</a>
         </div>
 
         <div id="galeri" class="section-box">
@@ -790,22 +703,6 @@
                         <option value="20000">Jaket Biasa (Rp 20.000)</option>
                         <option value="25000">Jaket Tebal (Rp 25.000)</option>
                         <option value="35000">Jaket Kulit (Rp 35.000)</option>
-                        <option value="5000">Sajadah Tipis (Rp 5.000)</option>
-                        <option value="8000">Sajadah Tebal (Rp 8.000)</option>
-                        <option value="11000">Sajadah Super Tebal (Rp 11.000)</option>
-                        <option value="5000">Seprai (Rp 5.000)</option>
-                        <option value="7500">Seprai 1 set (Rp 7.500)</option>
-                        <option value="5000">Selimut Tipis Kecil (Rp 5.000)</option>
-                        <option value="10000">Selimut Tipis Besar (Rp 10.000)</option>
-                        <option value="1500">Pakaian Putih (Rp 1.500)</option>
-                        <option value="3500">Peci Putih (Rp 3.500)</option>
-                        <option value="2500">Mukena 1 set (Rp 2.500)</option>
-                        <option value="25000">Sepatu (Rp 25.000)</option>
-                        <option value="25000">Sandal Crocs (Rp 25.000)</option>
-                        <option value="25000">Karpet kecil (Rp 25.000)</option>
-                        <option value="27000">Kantong Tidur (Rp 27.000)</option>
-                        <option value="30000">Karpet Sedang (Rp 30.000)</option>
-                        <option value="35000">Karpet Besar (Rp 35.000)</option>
                         <option value="35000">Jas (Rp 35.000)</option>
                     </select>
                 </div>
@@ -815,28 +712,20 @@
                 </div>
             </div>
 
-            <div class="calc-section-card" style="border: 1px solid rgba(244, 63, 94, 0.3); background: linear-gradient(135deg, #ffffff, #fff1f2);">
-                <div class="calc-section-title" style="color: var(--primary-dark);">🛵 Layanan Antar Jemput (Berdasarkan Jarak)</div>
-                <div style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 10px; line-height: 1.5;">
-                    💡 <b>Ketentuan Ongkir:</b> Dihitung di atas 3,5 km. Di bawah itu / antar-jemput sendiri (Rp 0). Jarak 4 - 4,5 km (<b>Rp 7.000</b>), dan di atas itu (<b>Rp 13.000</b>).
-                </div>
-                
+            <div class="calc-section-card">
+                <div class="calc-section-title">🛵 Layanan Antar Jemput</div>
                 <div class="calc-group">
-                    <label>Pilih Kategori Jarak Anda:</label>
+                    <label>Pilih Kategori Jarak:</label>
                     <select id="pilihOngkir" class="calc-select" onchange="hitungTotal()">
-                        <option value="0">Antar Jemput Sendiri / Di Bawah 3,5 Km (Rp 0)</option>
+                        <option value="0">Antar Jemput Sendiri / < 3,5 Km (Rp 0)</option>
                         <option value="7000">Jarak 4 - 4,5 Km (Rp 7.000)</option>
-                        <option value="13000">Jarak Di Atas 4,5 Km (Rp 13.000)</option>
+                        <option value="13000">Jarak > 4,5 Km (Rp 13.000)</option>
                     </select>
                 </div>
-
-                <a href="https://maps.app.goo.gl/K3b4yoQHxTkgiiFn8" target="_blank" style="display: inline-flex; align-items: center; gap: 6px; font-size: 0.75rem; font-weight: 700; color: #1d4ed8; background: #e0f2fe; padding: 6px 12px; border-radius: 8px; text-decoration: none; margin-top: 4px;">
-                    <span>📍 Cek Jarak via Google Maps</span>
-                </a>
             </div>
 
             <div class="calc-result">
-                <span>Estimasi Total Keseluruhan (Termasuk Ongkir)</span>
+                <span style="font-size: 0.82rem; font-weight: 700; color: var(--text-muted);">Estimasi Total Keseluruhan</span>
                 <div id="hasilTotal" class="calc-total">Rp 0</div>
                 <a id="waOrderLink" href="https://wa.me/6285770246502?text=Halo%20Queen%20Laundry" target="_blank" class="btn-order-wa">
                     🚀 Order Layanan Ini via WhatsApp
@@ -844,10 +733,10 @@
             </div>
         </div>
 
-        <div class="section-box member-banner">
-            <h3>🌟 Ingin Cuci Lebih Hemat Setiap Hari?</h3>
-            <p style="font-size: 0.82rem; color: #78350f; margin-bottom: 4px;">Dapatkan diskon khusus, prioritas antrean, dan kuota cuci dengan harga spesial lewat program Member kami.</p>
-            <a href="member.html" class="btn-to-member">✨ Lihat Paket & Keuntungan Member</a>
+        <div class="section-box" style="background: linear-gradient(135deg, #fffbeb, #fef3c7); border-color: #fde68a;">
+            <h3 style="font-size: 1rem; font-weight: 800; color: #d97706; margin-bottom: 6px;">🌟 Ingin Cuci Lebih Hemat?</h3>
+            <p style="font-size: 0.82rem; color: #78350f; margin-bottom: 12px;">Dapatkan diskon khusus, prioritas antrean, dan kuota cuci dengan bergabung jadi member.</p>
+            <a href="member.html" style="display: block; background: linear-gradient(135deg, #f59e0b, #d97706); color: white; text-align: center; padding: 12px; border-radius: 12px; text-decoration: none; font-weight: 700; font-size: 0.85rem;">✨ Lihat Paket Member</a>
         </div>
 
         <div id="pricelist" class="section-box">
@@ -856,63 +745,19 @@
                 <input type="text" id="searchInput" class="search-input" placeholder="🔍 Cari jenis layanan..." onkeyup="cariBarang()">
             </div>
             <div id="priceListContainer">
-                
                 <div class="price-card-group">
                     <div class="price-card-title">STANDAR [ 3 - 4 Hari ]</div>
-                    <div class="price-item"><span>CUCI Setrika</span><span>Rp 6.500 / Kg</span></div>
-                    <div class="price-item"><span>Cuci kering</span><span>Rp 4.500 / Kg</span></div>
+                    <div class="price-item"><span>Cuci Setrika</span><span>Rp 6.500 / Kg</span></div>
+                    <div class="price-item"><span>Cuci Kering</span><span>Rp 4.500 / Kg</span></div>
                     <div class="price-item"><span>Setrika</span><span>Rp 4.500 / Kg</span></div>
                     <div class="price-item"><span>Dryer Only</span><span>Rp 4.500 / Kg</span></div>
-                    <div class="price-item"><span>Join Member</span><span>Rp 110.000 / 20 Kg</span></div>
                 </div>
-
                 <div class="price-card-group">
                     <div class="price-card-title">EXPRESS [ 1 Hari ]</div>
                     <div class="price-item"><span>Cuci Setrika</span><span>Rp 13.000 / Kg</span></div>
                     <div class="price-item"><span>Cuci Kering</span><span>Rp 10.000 / Kg</span></div>
                     <div class="price-item"><span>Setrika Only</span><span>Rp 8.000 / Kg</span></div>
-                    <div class="price-item"><span>Dryer Only</span><span>Rp 3.500 / Kg</span></div>
                 </div>
-
-                <div class="price-card-group">
-                    <div class="price-card-title">KILAT [ 8 Jam ]</div>
-                    <div class="price-item"><span>Cuci Setrika</span><span>Rp 20.000 / Kg</span></div>
-                    <div class="price-item"><span>Cuci Kering</span><span>Rp 15.000 / Kg</span></div>
-                    <div class="price-item"><span>Dryer Only</span><span>Rp 7.000 / Kg</span></div>
-                </div>
-
-                <div class="price-card-group">
-                    <div class="price-card-title">HARGA SATUAN & BARANG KHUSUS</div>
-                    <div class="price-item"><span>Bedcover Single</span><span>Rp 20.000</span></div>
-                    <div class="price-item"><span>Bedcover Double</span><span>Rp 25.000</span></div>
-                    <div class="price-item"><span>Bedcover Jumbo</span><span>Rp 30.000</span></div>
-                    <div class="price-item"><span>Boneka Kecil</span><span>Rp 15.000</span></div>
-                    <div class="price-item"><span>Boneka Sedang</span><span>Rp 20.000</span></div>
-                    <div class="price-item"><span>Boneka Besar</span><span>Rp 25.000</span></div>
-                    <div class="price-item"><span>Celana Chino</span><span>Rp 12.000</span></div>
-                    <div class="price-item"><span>Handuk</span><span>Rp 5.000</span></div>
-                    <div class="price-item"><span>Jaket Biasa</span><span>Rp 20.000</span></div>
-                    <div class="price-item"><span>Jaket Tebal</span><span>Rp 25.000</span></div>
-                    <div class="price-item"><span>Jaket Kulit</span><span>Rp 35.000</span></div>
-                    <div class="price-item"><span>Sajadah Tipis</span><span>Rp 5.000</span></div>
-                    <div class="price-item"><span>Sajadah Tebal</span><span>Rp 8.000</span></div>
-                    <div class="price-item"><span>Sajadah Super Tebal</span><span>Rp 11.000</span></div>
-                    <div class="price-item"><span>Seprai</span><span>Rp 5.000</span></div>
-                    <div class="price-item"><span>Seprai 1 set</span><span>Rp 7.500</span></div>
-                    <div class="price-item"><span>Selimut Tipis Kecil</span><span>Rp 5.000</span></div>
-                    <div class="price-item"><span>Selimut Tipis Besar</span><span>Rp 10.000</span></div>
-                    <div class="price-item"><span>Pakaian Putih</span><span>Rp 1.500</span></div>
-                    <div class="price-item"><span>Peci Putih</span><span>Rp 3.500</span></div>
-                    <div class="price-item"><span>Mukena 1 set</span><span>Rp 2.500</span></div>
-                    <div class="price-item"><span>Sepatu</span><span>Rp 25.000</span></div>
-                    <div class="price-item"><span>Sandal Crocs</span><span>Rp 25.000</span></div>
-                    <div class="price-item"><span>Karpet kecil</span><span>Rp 25.000</span></div>
-                    <div class="price-item"><span>Kantong Tidur</span><span>Rp 27.000</span></div>
-                    <div class="price-item"><span>Karpet Sedang</span><span>Rp 30.000</span></div>
-                    <div class="price-item"><span>Karpet Besar</span><span>Rp 35.000</span></div>
-                    <div class="price-item"><span>Jas</span><span>Rp 35.000</span></div>
-                </div>
-
             </div>
         </div>
 
@@ -924,8 +769,8 @@
                     <div class="testimonial-author"><span>Ibu Siska</span><div class="stars">⭐⭐⭐⭐⭐</div></div>
                 </div>
             </div>
-            <div style="margin-top: 20px; border-top: 1px dashed #e2e8f0; padding-top: 15px;">
-                <h3 style="font-size: 0.9rem; font-weight: 700; margin-bottom: 10px; color: var(--text-main);">✍️ Tulis Ulasan Anda</h3>
+            <div style="margin-top: 16px; border-top: 1px dashed #cbd5e1; padding-top: 14px;">
+                <h3 style="font-size: 0.9rem; font-weight: 700; margin-bottom: 10px;">✍️ Tulis Ulasan Anda</h3>
                 <div class="calc-group"><label>Nama:</label><input type="text" id="inputNama" class="feedback-input" placeholder="Nama Anda"></div>
                 <div class="calc-group"><label>Pesan Ulasan:</label><textarea id="inputPesan" class="feedback-input" rows="2" placeholder="Bagikan pengalaman Anda..."></textarea></div>
                 <button type="button" class="btn-submit-feedback" onclick="tambahTestimoni()">✨ Kirim Ulasan</button>
@@ -935,9 +780,7 @@
         <div id="lokasi" class="section-box">
             <h2>📍 Lokasi & Kontak</h2>
             <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 6px;"><b>Alamat:</b> Kp. Jl. Cihaur, Sukarapih, Kec. Sukarame, Tasikmalaya</p>
-            
             <div id="statusToko" style="display: inline-block; padding: 4px 10px; border-radius: 20px; font-size: 0.72rem; font-weight: 700; margin-bottom: 14px;"></div>
-
             <a href="https://maps.app.goo.gl/K3b4yoQHxTkgiiFn8" target="_blank" class="btn-maps">🗺️ Buka di Google Maps</a>
             <a href="https://wa.me/6285770246502?text=Halo%20Queen%20Laundry" target="_blank" class="btn-wa-main">💬 Hubungi Admin via WhatsApp</a>
         </div>
@@ -947,8 +790,7 @@
 
     <script>
         function toggleMenu() {
-            let menu = document.getElementById('dropdownMenu');
-            if (menu) menu.classList.toggle('active');
+            document.getElementById('dropdownMenu').classList.toggle('active');
         }
 
         function hitungTotal() {
@@ -961,10 +803,10 @@
             if (jumlah < 0) jumlah = 0;
 
             let ongkir = parseFloat(document.getElementById('pilihOngkir').value) || 0;
-            
             let total = Math.round((((kiloan * berat) + (satuan * jumlah) + ongkir) / 500)) * 500;
+            
             document.getElementById('hasilTotal').innerText = "Rp " + total.toLocaleString('id-ID');
-            document.getElementById('waOrderLink').href = `https://wa.me/6285770246502?text=${encodeURIComponent("Halo Queen Laundry, saya mau order dengan total estimasi Rp " + total.toLocaleString('id-ID') + " (Termasuk Ongkir)")}`;
+            document.getElementById('waOrderLink').href = `https://wa.me/6285770246502?text=${encodeURIComponent("Halo Queen Laundry, saya mau order dengan estimasi total Rp " + total.toLocaleString('id-ID'))}`;
         }
 
         function cariBarang() {
@@ -976,10 +818,8 @@
         }
 
         function cekStatusToko() {
-            let sekarang = new Date();
-            let jam = sekarang.getHours();
+            let jam = new Date().getHours();
             let statusEl = document.getElementById('statusToko');
-            
             if(statusEl) {
                 if(jam >= 8 && jam < 20) {
                     statusEl.innerText = "🟢 Sedang Buka - Yuk Laundry Sekarang!";
@@ -993,12 +833,21 @@
             }
         }
 
+        window.addEventListener('scroll', function() {
+            document.querySelectorAll('.section-box').forEach(box => {
+                if (box.getBoundingClientRect().top < window.innerHeight - 50) {
+                    box.classList.add('show');
+                }
+            });
+        });
+
         window.onload = function() {
             cekStatusToko();
+            window.dispatchEvent(new Event('scroll'));
             
             let dataUlasan = JSON.parse(localStorage.getItem('queen_reviews')) || [];
+            let listContainer = document.getElementById('listTestimoni');
             dataUlasan.forEach(data => {
-                let listContainer = document.getElementById('listTestimoni');
                 let card = document.createElement('div');
                 card.className = 'testimonial-card';
                 card.innerHTML = `<p>"${data.pesan}"</p><div class="testimonial-author"><span>${data.nama}</span><div class="stars">⭐⭐⭐⭐⭐</div></div>`;
@@ -1009,14 +858,13 @@
         function tambahTestimoni() {
             let nama = document.getElementById('inputNama').value.trim();
             let pesan = document.getElementById('inputPesan').value.trim();
-            if (!nama || !pesan) { alert("Harap isi nama dan pesan ulasan terlebih dahulu ya!"); return; }
+            if (!nama || !pesan) { alert("Harap isi nama dan pesan ulasan terlebih dahulu!"); return; }
             
-            let ulasanBaru = { nama, pesan };
             let dataUlasan = JSON.parse(localStorage.getItem('queen_reviews')) || [];
-            dataUlasan.unshift(ulasanBaru);
+            dataUlasan.unshift({ nama, pesan });
             localStorage.setItem('queen_reviews', JSON.stringify(dataUlasan));
             
-            alert("Terima kasih, " + nama + "! Ulasan Anda berhasil ditambahkan. ✨");
+            alert("Terima kasih, ulasan Anda berhasil ditambahkan! ✨");
             location.reload();
         }
     </script>
