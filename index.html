@@ -533,7 +533,7 @@
 
         <div id="dropdownMenu" class="dropdown-menu">
             <ul class="menu-list">
-                <li><a href="#kalkulator" onclick="toggleMenu()">🧮 Kalkulator Estimasi Harga</a></li>
+                <li><a href="#kalkulator" onclick="toggleMenu()">🧮 Kalkulator & Estimasi Ongkir</a></li>
                 <li><a href="#galeri" onclick="toggleMenu()">📸 Galeri & Suasana Laundry</a></li>
                 <li><a href="member.html">🌟 Keuntungan & Gabung Member</a></li>
                 <li><a href="garansi.html">🛡️ Ketentuan Garansi</a></li>
@@ -560,7 +560,7 @@
                     <div class="ticker-content">
                         <div class="ticker-item">⚡ Proses Kilat 3-4 Hari</div>
                         <div class="ticker-item">💰 Harga Member Jauh Lebih Hemat</div>
-                        <div class="ticker-item">🌟 Cek Halaman Khusus Member di Menu Atas</div>
+                        <div class="ticker-item">🛵 Layanan Antar Jemput Tersedia</div>
                         <div class="ticker-item">⚡ Proses Kilat 3-4 Hari</div>
                     </div>
                 </div>
@@ -576,9 +576,9 @@
             </div>
         </div>
 
-        <!-- KALKULATOR -->
+        <!-- KALKULATOR & ONGKIR -->
         <div id="kalkulator" class="section-box">
-            <h2>🧮 Kalkulator Estimasi Harga</h2>
+            <h2>🧮 Kalkulator & Estimasi Biaya</h2>
             
             <div class="calc-section-card">
                 <div class="calc-section-title">⚖️ Layanan Kiloan</div>
@@ -618,8 +618,22 @@
                 </div>
             </div>
 
+            <!-- FITUR ONGKIR TAMBAHAN -->
+            <div class="calc-section-card">
+                <div class="calc-section-title">🛵 Layanan Antar Jemput (Ongkir)</div>
+                <div class="calc-group">
+                    <label>Pilih Opsi Antar Jemput:</label>
+                    <select id="pilihOngkir" class="calc-select" onchange="hitungTotal()">
+                        <option value="0">Antar Jemput Sendiri ke Toko (Rp 0)</option>
+                        <option value="5000">Area Dekat / Radius &lt; 3 km (Rp 5.000)</option>
+                        <option value="10000">Area Menengah / 3 - 6 km (Rp 10.000)</option>
+                        <option value="15000">Area Luar / 6 - 10 km (Rp 15.000)</option>
+                    </select>
+                </div>
+            </div>
+
             <div class="calc-result">
-                <span>Estimasi Total Keseluruhan</span>
+                <span>Estimasi Total Keseluruhan (Termasuk Ongkir)</span>
                 <div id="hasilTotal" class="calc-total">Rp 0</div>
                 <a id="waOrderLink" href="https://wa.me/6285770246502?text=Halo%20Queen%20Laundry" target="_blank" class="btn-order-wa">
                     🚀 Order Layanan Ini via WhatsApp
@@ -676,7 +690,7 @@
 
     <footer>&copy; 2026 Queen Laundry<br>Website created AshrafNr.</footer>
 
-    <!-- SCRIPT JAVASCRIPT UNTUK MENU DAN KALKULATOR -->
+    <!-- SCRIPT JAVASCRIPT -->
     <script>
         function toggleMenu() {
             let menu = document.getElementById('dropdownMenu');
@@ -688,10 +702,11 @@
             let berat = parseFloat(document.getElementById('beratKg').value) || 0;
             let satuan = parseFloat(document.getElementById('pilihLayananSatuan').value) || 0;
             let jumlah = parseInt(document.getElementById('jumlahPcs').value) || 0;
+            let ongkir = parseFloat(document.getElementById('pilihOngkir').value) || 0;
             
-            let total = Math.round(((kiloan * berat) + (satuan * jumlah)) / 500) * 500;
+            let total = Math.round((((kiloan * berat) + (satuan * jumlah) + ongkir) / 500)) * 500;
             document.getElementById('hasilTotal').innerText = "Rp " + total.toLocaleString('id-ID');
-            document.getElementById('waOrderLink').href = `https://wa.me/6285770246502?text=${encodeURIComponent("Halo Queen Laundry, saya mau order total estimasi Rp " + total.toLocaleString('id-ID'))}`;
+            document.getElementById('waOrderLink').href = `https://wa.me/6285770246502?text=${encodeURIComponent("Halo Queen Laundry, saya mau order dengan total estimasi Rp " + total.toLocaleString('id-ID') + " (Termasuk Ongkir)")}`;
         }
 
         function cariBarang() {
