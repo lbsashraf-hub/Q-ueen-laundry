@@ -311,6 +311,75 @@
             letter-spacing: -0.3px;
         }
 
+        /* --- DESAIN FORMULA EKSKLUSIF MODERN & RAPI --- */
+        .formula-card-modern {
+            background: linear-gradient(135deg, #fff5f7 0%, #fff1f2 100%);
+            border: 1.5px solid rgba(244, 63, 94, 0.2);
+            border-radius: 20px;
+            padding: 18px;
+            margin-top: 15px;
+            box-shadow: 0 4px 15px rgba(244, 63, 94, 0.05);
+        }
+
+        .formula-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+            font-weight: 800;
+            color: var(--primary-dark);
+            margin-bottom: 14px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(244, 63, 94, 0.15);
+        }
+
+        .formula-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+
+        .formula-item {
+            background: #ffffff;
+            padding: 12px 14px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border: 1px solid rgba(244, 63, 94, 0.1);
+            transition: transform 0.2s ease;
+        }
+
+        .formula-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(244, 63, 94, 0.08);
+        }
+
+        .formula-icon {
+            font-size: 1.3rem;
+            background: var(--primary-light);
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            flex-shrink: 0;
+        }
+
+        .formula-content h4 {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 2px;
+        }
+
+        .formula-content p {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -601,31 +670,31 @@
             <a href="promo.html" class="maulid-btn">🎁 Klaim Promo Sekarang</a>
         </div>
 
-        <!-- TENTANG KAMI & FORMULA EKSKLUSIF -->
+        <!-- TENTANG KAMI & FORMULA EKSKLUSIF YANG SUDAH RAPI -->
         <div class="section-box">
             <h2>✨ Tentang Kami</h2>
-            <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 20px; line-height: 1.6;">
+            <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 15px; line-height: 1.6;">
                 Queen Laundry menghadirkan standar kebersihan kelas dunia dengan teknologi modern serta penanganan personal untuk setiap helai pakaian Anda.
             </p>
 
-            <!-- KOTAK RACIKAN FORMULA EKSKLUSIF MODERN -->
-            <div style="background: linear-gradient(135deg, #fff5f7 0%, #fff1f2 100%); border: 1.5px solid rgba(244, 63, 94, 0.2); border-radius: 20px; padding: 18px; margin-top: 15px; box-shadow: 0 4px 15px rgba(244, 63, 94, 0.05);">
-                <div style="display: flex; align-items: center; gap: 8px; font-size: 0.95rem; font-weight: 800; color: var(--primary-dark); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid rgba(244, 63, 94, 0.15);">
+            <!-- KOTAK RACIKAN FORMULA EKSKLUSIF (VERSI MODERN, RAPI & BERSIH) -->
+            <div class="formula-card-modern">
+                <div class="formula-header">
                     <span>💎</span> 100% Racikan Formula Eksklusif
                 </div>
-                <div style="display: grid; grid-template-columns: 1fr; gap: 10px;">
-                    <div style="background: #ffffff; padding: 12px 14px; border-radius: 14px; display: flex; align-items: center; gap: 12px; border: 1px solid rgba(244, 63, 94, 0.1);">
-                        <div style="font-size: 1.3rem; background: var(--primary-light); width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; border-radius: 10px; flex-shrink: 0;">🧼</div>
-                        <div>
-                            <h4 style="font-size: 0.85rem; font-weight: 700; color: var(--text-main); margin-bottom: 2px;">Sabun Deterjen</h4>
-                            <p style="font-size: 0.78rem; color: var(--text-muted); line-height: 1.4;">Lembut di serat kain, ampuh angkat noda.</p>
+                <div class="formula-grid">
+                    <div class="formula-item">
+                        <div class="formula-icon">🧼</div>
+                        <div class="formula-content">
+                            <h4>Sabun Deterjen</h4>
+                            <p>Lembut di serat kain, ampuh angkat noda.</p>
                         </div>
                     </div>
-                    <div style="background: #ffffff; padding: 12px 14px; border-radius: 14px; display: flex; align-items: center; gap: 12px; border: 1px solid rgba(244, 63, 94, 0.1);">
-                        <div style="font-size: 1.3rem; background: var(--primary-light); width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; border-radius: 10px; flex-shrink: 0;">🌸</div>
-                        <div>
-                            <h4 style="font-size: 0.85rem; font-weight: 700; color: var(--text-main); margin-bottom: 2px;">Parfum Premium</h4>
-                            <p style="font-size: 0.78rem; color: var(--text-muted); line-height: 1.4;">Wangi mewah tahan lama seharian.</p>
+                    <div class="formula-item">
+                        <div class="formula-icon">🌸</div>
+                        <div class="formula-content">
+                            <h4>Parfum Premium</h4>
+                            <p>Wangi mewah tahan lama seharian.</p>
                         </div>
                     </div>
                 </div>
