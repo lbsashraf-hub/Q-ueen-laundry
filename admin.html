@@ -267,13 +267,18 @@
             data.push({ nama, saldo, expiredDate });
             localStorage.setItem('queen_members', JSON.stringify(data));
             
-            // 2. Sinkronisasi otomatis ke Server Bot di panel.ryhar.my.id
+            // 2. Sinkronisasi otomatis lengkap dengan saldo & expiredDate ke Server Bot di panel.ryhar.my.id
             try {
-                await fetch('http://panel.ryhar.my.id:3000/api/tambah-member', {
+                let response = await fetch('http://panel.ryhar.my.id:3000/api/tambah-member', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ nama: nama })
+                    body: JSON.stringify({ nama: nama, saldo: saldo, expiredDate: expiredDate })
                 });
+
+                let result = await response.json();
+                if (!response.ok) {
+                    console.warn("Catatan server bot:", result.pesan);
+                }
             } catch (error) {
                 console.error('Gagal mengirim ke server bot:', error);
             }
