@@ -7,16 +7,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #d946ef; /* Fuchsia/Pink Mewah Berkelas */
+            --primary: #d946ef;
             --primary-gradient: linear-gradient(135deg, #f472b6 0%, #db2777 100%);
             --gold: #d97706;
             --gold-gradient: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
             --accent-glow: rgba(219, 39, 119, 0.15);
-            --bg-body: #fff5f8; /* Soft Blush Pink Background yang sangat lembut & bersih */
+            --bg-body: #fff5f8;
             --card-bg: #ffffff;
             --text-main: #3f3f46;
             --text-muted: #71717a;
-            --border-color: #fbcfe8; /* Border pink tipis yang elegan */
+            --border-color: #fbcfe8;
             --radius-lg: 24px;
             --radius-md: 16px;
             --shadow-soft: 0 12px 35px -10px rgba(219, 39, 119, 0.08);
@@ -49,7 +49,6 @@
             padding-bottom: 60px;
         }
 
-        /* HEADER STYLING */
         header {
             background: var(--card-bg);
             backdrop-filter: blur(20px);
@@ -133,7 +132,7 @@
         }
 
         .dropdown-menu.active {
-            max-height: 700px;
+            max-height: 800px;
             padding: 15px;
             margin-top: 12px;
         }
@@ -166,7 +165,6 @@
             transform: translateX(6px);
         }
 
-        /* CONTAINER UTAMA */
         .container {
             max-width: 600px;
             margin: 20px auto 0 auto;
@@ -202,7 +200,6 @@
             gap: 10px;
         }
 
-        /* TOAST NOTIFICATION */
         #toastBox {
             position: fixed;
             bottom: 20px;
@@ -227,7 +224,6 @@
         .toast-text { font-size: 0.78rem; font-weight: 700; color: var(--text-main); }
         .toast-sub { font-size: 0.7rem; color: var(--text-muted); }
 
-        /* BACK TO TOP BUTTON */
         #backToTop {
             position: fixed;
             bottom: 25px;
@@ -253,7 +249,6 @@
         #backToTop.show { opacity: 1; visibility: visible; }
         #backToTop:hover { transform: scale(1.1); }
 
-        /* MARQUEE & BANNER */
         .marquee-container {
             background: var(--card-bg);
             color: #db2777;
@@ -304,7 +299,6 @@
             box-shadow: 0 8px 20px rgba(217, 119, 6, 0.25);
         }
 
-        /* FORMULA CARD */
         .formula-card {
             background: var(--bg-body);
             border: 1px solid var(--border-color);
@@ -337,7 +331,6 @@
             border: 1px solid var(--border-color);
         }
 
-        /* GALERI GRID */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -362,7 +355,6 @@
             color: white; font-size: 0.72rem; font-weight: 700; padding: 12px 6px 6px 6px; text-align: center;
         }
 
-        /* KALKULATOR */
         .calc-section-card {
             background: var(--bg-body);
             border: 1px solid var(--border-color);
@@ -399,7 +391,6 @@
             animation: pulseGlow 2.5s infinite;
         }
 
-        /* PRICE LIST & TESTIMONI */
         .price-card-group { background: var(--bg-body); border: 1px solid var(--border-color); border-radius: 16px; padding: 16px; margin-bottom: 14px; }
         .price-card-title { font-size: 0.85rem; font-weight: 800; color: #db2777; background: var(--card-bg); padding: 6px 12px; border-radius: 8px; display: inline-block; margin-bottom: 12px; border: 1px solid var(--border-color); }
         .price-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; font-size: 0.85rem; border-bottom: 1px dashed var(--border-color); padding-bottom: 8px; font-weight: 500; }
@@ -421,11 +412,20 @@
         }
         .address-box:hover { border-color: #db2777; }
 
-        /* Tombol maps & wa disesuaikan agar senada dengan konsep mewah soft pink */
         .btn-maps { display: flex; justify-content: center; align-items: center; gap: 8px; background: #271c24; color: #fdf2f8; text-align: center; padding: 14px; border-radius: 14px; text-decoration: none; font-weight: 700; font-size: 0.9rem; margin-top: 12px; border: 1px solid #581c87; }
         .btn-wa-main { display: flex; justify-content: center; align-items: center; gap: 8px; background: var(--primary-gradient); color: white; text-align: center; padding: 14px; border-radius: 16px; text-decoration: none; font-weight: 700; font-size: 0.92rem; margin-top: 14px; box-shadow: 0 8px 25px rgba(219, 39, 119, 0.25); }
 
         footer { text-align: center; margin-top: 40px; color: var(--text-muted); font-size: 0.75rem; font-weight: 600; }
+
+        .secret-admin {
+            color: var(--border-color);
+            text-decoration: none;
+            font-weight: 800;
+            transition: color 0.3s;
+        }
+        .secret-admin:hover {
+            color: #db2777;
+        }
     </style>
 </head>
 <body>
@@ -440,7 +440,7 @@
     </div>
 
     <!-- Back to Top Button -->
-    <button id="backToTop" onclick="scrollToTop(); playClickSound();">↑</button>
+    <button id="backToTop" onclick="scrollToTop(); playClickSound();">⬆️</button>
 
     <header>
         <div class="header-container">
@@ -460,9 +460,10 @@
             <ul class="menu-list">
                 <li><a href="promo.html" onclick="playClickSound()">🎉 Klaim Promo Maulid Nabi</a></li>
                 <li><a href="sabun.html" onclick="playClickSound()">🧼 Sabun Laundry Premium (5L)</a></li>
+                <li><a href="datamember.html" onclick="playClickSound()">💳 Cek Sisa Saldo & Kuota Member</a></li>
                 <li><a href="#kalkulator" onclick="toggleMenu(); playClickSound()">🧮 Kalkulator & Estimasi Ongkir</a></li>
-                <li><a href="#galeri" onclick="toggleMenu(); playClickSound()">📸 Galeri & Suasana Laundry</a></li>
-                <li><a href="member.html" onclick="playClickSound()">🌟 Keuntungan & Gabung Member</a></li>
+                <li><a href="#galeri" onclick="toggleMenu(); playClickSound()">🖼️ Galeri & Suasana Laundry</a></li>
+                <li><a href="member.html" onclick="playClickSound()">⭐ Keuntungan & Gabung Member</a></li>
                 <li><a href="garansi.html" onclick="playClickSound()">🛡️ Ketentuan Garansi</a></li>
                 <li><a href="#pricelist" onclick="toggleMenu(); playClickSound()">📋 Daftar Harga Lengkap</a></li>
                 <li><a href="#testimoni" onclick="toggleMenu(); playClickSound()">💬 Testimoni & Ulasan</a></li>
@@ -475,7 +476,7 @@
 
         <div class="marquee-container">
             <marquee behavior="scroll" direction="left" scrollamount="5">
-                ✨ Selamat Datang di Queen Laundry! Nikmati layanan cuci bersih, wangi, dan rapi. &nbsp;&bull;&nbsp; ⚡ Proses Kilat & Layanan Antar Jemput Tersedia! &nbsp;&bull;&nbsp; 💬 Hubungi Admin via WhatsApp untuk Info & Pemesanan! ✨
+                ✨ Selamat Datang di Queen Laundry! Nikmati layanan cuci bersih, wangi, dan rapi. &nbsp;&bull;&nbsp; 🚀 Proses Kilat & Layanan Antar Jemput Tersedia! &nbsp;&bull;&nbsp; 💬 Hubungi Admin via WhatsApp untuk Info & Pemesanan! ✨
             </marquee>
         </div>
 
@@ -483,17 +484,17 @@
             <div class="maulid-badge">🌟 BAROKAH MAULID NABI SAW 1448 H 🌟</div>
             <h3>Pakaian Bersih, Hati Tenang, Berkah Melimpah!</h3>
             <p>Nikmati diskon spesial & bonus keharuman eksklusif khusus menyambut hari kelahiran Nabi Muhammad SAW minggu ini.</p>
-            <a href="promo.html" class="maulid-btn" onclick="playClickSound()">🎉 Klaim Promo Sekarang</a>
+            <a href="promo.html" class="maulid-btn" onclick="playClickSound()">🎁 Klaim Promo Sekarang</a>
         </div>
 
         <div class="section-box">
-            <h2>✨ Tentang Kami</h2>
+            <h2>ℹ️ Tentang Kami</h2>
             <p style="font-size: 0.85rem; color: var(--text-muted);">Queen Laundry menghadirkan standar kebersihan kelas dunia dengan teknologi modern serta penanganan personal untuk setiap helai pakaian Anda.</p>
             
             <div class="formula-card">
-                <div style="font-size: 0.85rem; font-weight: 800; color: #db2777; margin-bottom: 8px;">💎 100% Racikan Formula Eksklusif</div>
+                <div style="font-size: 0.85rem; font-weight: 800; color: #db2777; margin-bottom: 8px;">✨ 100% Racikan Formula Eksklusif</div>
                 <div class="formula-item">
-                    <div class="formula-icon">🧼</div>
+                    <div class="formula-icon">💧</div>
                     <div>
                         <div style="font-size: 0.84rem; font-weight: 700;">Sabun Deterjen</div>
                         <div style="font-size: 0.78rem; color: var(--text-muted);">Lembut di serat kain, ampuh angkat noda tanpa merusak warna.</div>
@@ -509,6 +510,13 @@
             </div>
         </div>
 
+        <!-- Tombol Akses Cepat Cek Saldo & Data Member -->
+        <div class="section-box" style="background: var(--card-bg); border-color: var(--border-color); text-align: center;">
+            <h3 style="font-size: 1.05rem; font-weight: 800; color: #db2777; margin-bottom: 6px;">💳 Cek Saldo & Kuota Member Anda</h3>
+            <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 14px;">Ingin tahu sisa kuota kiloan atau saldo member aktif Anda di Queen Laundry?</p>
+            <a href="datamember.html" style="display: inline-block; background: var(--primary-gradient); color: white; text-align: center; padding: 12px 24px; border-radius: 14px; text-decoration: none; font-weight: 700; font-size: 0.88rem; box-shadow: 0 8px 25px rgba(219, 39, 119, 0.25);" onclick="playClickSound()">🔍 Buka Halaman Cek Data Member</a>
+        </div>
+
         <div class="section-box">
             <h2>🧼 Produk Sabun Laundry Premium</h2>
             <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">Dapatkan kesegaran dan kebersihan laundry profesional langsung di rumah Anda.</p>
@@ -522,11 +530,11 @@
                     <span style="font-size: 1.1rem; font-weight: 800; color: #db2777;">Rp 37.000</span>
                 </div>
             </div>
-            <a href="sabun.html" class="btn-to-sabun-page" onclick="playClickSound()">✨ Lihat Detail & Pilih Varian Sabun</a>
+            <a href="sabun.html" class="btn-to-sabun-page" onclick="playClickSound()">🛍️ Lihat Detail & Pilih Varian Sabun</a>
         </div>
 
         <div id="galeri" class="section-box">
-            <h2>📸 Galeri & Suasana</h2>
+            <h2>🖼️ Galeri & Suasana</h2>
             <div class="gallery-grid">
                 <div class="gallery-item"><img src="https://images.unsplash.com/photo-1545173168-9f1947eebb7f?w=400&auto=format&fit=crop&q=60" alt="Mesin"><div class="gallery-caption">Mesin Modern</div></div>
                 <div class="gallery-item"><img src="https://images.unsplash.com/photo-1582735689369-4fe89db7114c?w=400&auto=format&fit=crop&q=60" alt="Lipatan"><div class="gallery-caption">Lipatan Presisi</div></div>
@@ -562,7 +570,7 @@
             </div>
 
             <div class="calc-section-card">
-                <div class="calc-section-title">🏷️ Layanan Barang Satuan</div>
+                <div class="calc-section-title">👔 Layanan Barang Satuan</div>
                 <div class="calc-group">
                     <label>Pilih Barang Satuan:</label>
                     <select id="pilihLayananSatuan" class="calc-select" onchange="hitungTotal(); playClickSound()">
@@ -620,15 +628,15 @@
                 <div id="hasilTotal" class="calc-total">Rp 0</div>
                 <div id="hasilEstimasi" class="calc-estimation">Estimasi Selesai: 3 - 4 Hari</div>
                 <a id="waOrderLink" href="https://wa.me/6285770246502?text=Halo%20Queen%20Laundry" target="_blank" class="btn-order-wa" onclick="playClickSound()">
-                    🚀 Order Layanan Ini via WhatsApp
+                    💬 Order Layanan Ini via WhatsApp
                 </a>
             </div>
         </div>
 
         <div class="section-box" style="background: var(--card-bg); border-color: var(--border-color);">
-            <h3 style="font-size: 1rem; font-weight: 800; color: #db2777; margin-bottom: 6px;">🌟 Join Member Lebih Hemat!</h3>
+            <h3 style="font-size: 1rem; font-weight: 800; color: #db2777; margin-bottom: 6px;">✨ Join Member Lebih Hemat!</h3>
             <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 12px;">Daftar member sekarang seharga <b>Rp 110.000 / 20 Kg</b> untuk keuntungan maksimal.</p>
-            <a href="member.html" style="display: block; background: var(--primary-gradient); color: white; text-align: center; padding: 12px; border-radius: 12px; text-decoration: none; font-weight: 700; font-size: 0.85rem;" onclick="playClickSound()">✨ Gabung Member Sekarang</a>
+            <a href="member.html" style="display: block; background: var(--primary-gradient); color: white; text-align: center; padding: 12px; border-radius: 12px; text-decoration: none; font-weight: 700; font-size: 0.85rem;" onclick="playClickSound()">⭐ Gabung Member Sekarang</a>
         </div>
 
         <div id="pricelist" class="section-box">
@@ -707,7 +715,7 @@
                 <h3 style="font-size: 0.9rem; font-weight: 700; margin-bottom: 10px;">✍️ Tulis Ulasan Anda</h3>
                 <div class="calc-group"><label>Nama:</label><input type="text" id="inputNama" class="feedback-input" placeholder="Nama Anda"></div>
                 <div class="calc-group"><label>Pesan Ulasan:</label><textarea id="inputPesan" class="feedback-input" rows="2" placeholder="Bagikan pengalaman Anda..."></textarea></div>
-                <button type="button" class="btn-submit-feedback" onclick="tambahTestimoni(); playClickSound()">✨ Kirim Ulasan</button>
+                <button type="button" class="btn-submit-feedback" onclick="tambahTestimoni(); playClickSound()">🚀 Kirim Ulasan</button>
             </div>
         </div>
 
@@ -715,7 +723,7 @@
             <h2>📍 Lokasi & Kontak</h2>
             <div class="address-box" onclick="salinAlamat()" title="Klik untuk menyalin alamat">
                 <p style="font-size: 0.85rem; color: var(--text-main); margin-bottom: 2px;"><b>Alamat:</b> Kp. Jl. Cihaur, Sukarapih, Kec. Sukarame, Tasikmalaya</p>
-                <span style="font-size: 0.7rem; color: #db2777; font-weight: 700;">📋 Ketuk untuk menyalin alamat</span>
+                <span style="font-size: 0.7rem; color: #db2777; font-weight: 700;">📌 Ketuk untuk menyalin alamat</span>
             </div>
             <div id="statusToko" style="display: inline-block; padding: 4px 10px; border-radius: 20px; font-size: 0.72rem; font-weight: 700; margin-bottom: 14px;"></div>
             <a href="https://maps.app.goo.gl/K3b4yoQHxTkgiiFn8" target="_blank" class="btn-maps" onclick="playClickSound()">🗺️ Buka di Google Maps</a>
@@ -723,7 +731,12 @@
         </div>
     </div>
 
-    <footer>&copy; 2026 Queen Laundry<br>Website created AshrafNr.</footer>
+    <footer>
+        &copy; 2026 Queen Laundry<br>Website created AshrafNr.
+        <p style="margin-top: 6px;">
+            <a href="admin.html" class="secret-admin" title="Admin Panel">⚙️</a>
+        </p>
+    </footer>
 
     <script>
         function playClickSound() {
@@ -777,7 +790,7 @@
         }
 
         const toastMessages = [
-            { t: "⚡ Layanan Kilat Ready", s: "Pakaian bersih kilat selesai dalam hitungan jam!" },
+            { t: "🚀 Layanan Kilat Ready", s: "Pakaian bersih kilat selesai dalam hitungan jam!" },
             { t: "🛵 Antar Jemput Tersedia", s: "Tinggal pesan, kurir kami siap jemput cucian Anda." },
             { t: "🌟 Diskon Maulid Nabi", s: "Nikmati potongan harga spesial minggu ini." }
         ];
@@ -879,7 +892,7 @@
             dataUlasan.unshift({ nama, pesan });
             localStorage.setItem('queen_reviews', JSON.stringify(dataUlasan));
             
-            alert("Terima kasih, ulasan Anda berhasil ditambahkan! ✨");
+            alert("Terima kasih, ulasan Anda berhasil ditambahkan! 🎉");
             location.reload();
         }
     </script>
