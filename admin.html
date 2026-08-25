@@ -207,7 +207,6 @@
 
         window.onload = function() {
             cekAuth();
-            // Otomatis set default tanggal expired 1 bulan dari hari ini
             let tglDefault = new Date();
             tglDefault.setMonth(tglDefault.getMonth() + 1);
             document.getElementById('adminExpired').value = tglDefault.toISOString().split('T')[0];
@@ -246,7 +245,7 @@
             });
         }
 
-        function simpanMember() {
+        async function simpanMember() {
             let nama = document.getElementById('adminNama').value.trim();
             let saldo = parseFloat(document.getElementById('adminSaldo').value) || 0;
             let expiredDate = document.getElementById('adminExpired').value;
@@ -264,13 +263,25 @@
                 return;
             }
 
+            // 1. Simpan ke LocalStorage Website
             data.push({ nama, saldo, expiredDate });
             localStorage.setItem('queen_members', JSON.stringify(data));
+            
+            // 2. Sinkronisasi otomatis ke Server Bot di panel.ryhar.my.id
+            try {
+                await fetch('http://panel.ryhar.my.id:3000/api/tambah-member', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ nama: nama })
+                });
+            } catch (error) {
+                console.error('Gagal mengirim ke server bot:', error);
+            }
             
             document.getElementById('adminNama').value = "";
             document.getElementById('adminSaldo').value = "50000";
             muatDataMember();
-            alert("Member baru beserta masa aktifnya berhasil ditambahkan!");
+            alert("Member baru berhasil ditambahkan dan disinkronkan ke server bot!");
         }
 
         function ubahSaldo(index, tipe) {
@@ -283,7 +294,7 @@
 
             let nominalInput = prompt(pesan, "10000");
             
-            if (nominalInput === null) return; // Batal
+            if (nominalInput === null) return;
             
             let nominal = parseFloat(nominalInput);
             if (isNaN(nominal) || nominal <= 0) {
