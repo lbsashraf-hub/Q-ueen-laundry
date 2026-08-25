@@ -171,7 +171,7 @@
 
     <script>
         const PASSWORD_ADMIN = "admin123"; 
-        const API_URL = "https://panel.ryhar.my.id:2484";
+        const API_URL = ""; // Dikosongkan agar otomatis menggunakan domain/port server yang sama
 
         function cekAuth() {
             let isAuth = sessionStorage.getItem('queen_admin_auth');
@@ -217,13 +217,13 @@
             return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(angka);
         }
 
-        // FUNGSI UTAMA YANG DIPERBARUI: Mengubah objek bersarang menjadi array
+        // FUNGSI UTAMA: Mengambil data dari endpoint /api/members
         async function muatDataMember() {
             let container = document.getElementById('listMemberAdmin');
             container.innerHTML = `<p style="font-size: 0.82rem; color: var(--text-muted);">Memuat data dari server...</p>`;
 
             try {
-                let response = await fetch(`${API_URL}/api/member`);
+                let response = await fetch(`${API_URL}/api/members`);
                 if (!response.ok) throw new Error("Gagal mengambil data");
 
                 let result = await response.json();
@@ -251,8 +251,8 @@
                             <p>Sisa Saldo: <b>${formatRupiah(m.saldo || 0)}</b></p>
                         </div>
                         <div class="action-buttons">
-                            <button class="btn-action btn-add" title="Tambah Saldo" onclick="alert('Fitur update saldo via web sedang disinkronkan.')">➕</button>
-                            <button class="btn-action btn-minus" title="Potong Saldo" onclick="alert('Fitur update saldo via web sedang disinkronkan.')">➖</button>
+                            <button class="btn-action btn-add" title="Tambah Saldo" onclick="alert('Fitur update saldo sedang disinkronkan.')">➕</button>
+                            <button class="btn-action btn-minus" title="Potong Saldo" onclick="alert('Fitur update saldo sedang disinkronkan.')">➖</button>
                             <button class="btn-action btn-delete" title="Hapus Member" onclick="alert('Fitur hapus member sedang disinkronkan.')">🗑️</button>
                         </div>
                     `;
@@ -265,10 +265,11 @@
             }
         }
 
+        // FUNGSI MENYIMPAN MEMBER KE ENDPOINT /api/members
         async function simpanMember() {
             let nama = document.getElementById('adminNama').value.trim();
             let saldo = parseFloat(document.getElementById('adminSaldo').value) || 0;
-            let expiredDate = document.getElementById('adminExpired').value;
+            let expired = document.getElementById('adminExpired').value;
 
             if (!nama) {
                 alert("Harap isi Nama Pelanggan terlebih dahulu!");
@@ -276,24 +277,25 @@
             }
 
             try {
-                let response = await fetch(`${API_URL}/api/tambah-member`, {
+                let response = await fetch(`${API_URL}/api/members`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ 
                         nama: nama, 
                         saldo: saldo, 
-                        expiredDate: expiredDate 
+                        expired: expired,
+                        status: "Aktif"
                     })
                 });
                 
-                if (response.ok) {
+                let resJson = await response.json();
+                if (response.ok && resJson.success) {
                     document.getElementById('adminNama').value = "";
                     document.getElementById('adminSaldo').value = "50000";
                     muatDataMember();
                     alert("Member baru berhasil ditambahkan!");
                 } else {
-                    let resJson = await response.json();
-                    alert(resJson.pesan || "Gagal menyimpan member ke server.");
+                    alert(resJson.message || "Gagal menyimpan member ke server.");
                 }
             } catch (error) {
                 console.error('Koneksi ke server bot gagal:', error);
