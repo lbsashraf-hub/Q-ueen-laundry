@@ -171,7 +171,6 @@
 
     <script>
         const PASSWORD_ADMIN = "admin123"; 
-        // DIUBAH: Menambahkan port 2484 sesuai alokasi Pterodactyl Anda
         const API_URL = "https://panel.ryhar.my.id:2484";
 
         function cekAuth() {
@@ -218,7 +217,7 @@
             return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(angka);
         }
 
-        // FUNGSI UTAMA: Mengambil data langsung dari server bot Pterodactyl
+        // FUNGSI UTAMA YANG DIPERBARUI: Mengubah objek bersarang menjadi array
         async function muatDataMember() {
             let container = document.getElementById('listMemberAdmin');
             container.innerHTML = `<p style="font-size: 0.82rem; color: var(--text-muted);">Memuat data dari server...</p>`;
@@ -247,9 +246,9 @@
                     item.className = 'member-item';
                     item.innerHTML = `
                         <div class="member-info">
-                            <h4>${m.nama}</h4>
+                            <h4>${m.nama || 'Tanpa Nama'}</h4>
                             <p>Exp: ${m.expired || m.expiredDate || '-'}</p>
-                            <p>Sisa Saldo: <b>${formatRupiah(m.saldo)}</b></p>
+                            <p>Sisa Saldo: <b>${formatRupiah(m.saldo || 0)}</b></p>
                         </div>
                         <div class="action-buttons">
                             <button class="btn-action btn-add" title="Tambah Saldo" onclick="alert('Fitur update saldo via web sedang disinkronkan.')">➕</button>
