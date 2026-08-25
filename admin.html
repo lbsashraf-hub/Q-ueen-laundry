@@ -48,7 +48,7 @@
 
         .member-item { background: var(--bg-body); border: 1px solid var(--border-color); padding: 14px; border-radius: 14px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; gap: 10px; }
         .member-info h4 { font-size: 0.9rem; font-weight: 700; color: var(--text-main); }
-        .member-info p { font-size: 0.75rem; color: var(--text-muted); }
+        .member-info p { font-size: 0.75rem; color: var(--text-muted); margin-top: 2px; }
         
         .action-buttons { display: flex; gap: 6px; align-items: center; }
         .btn-action { border: none; padding: 6px 10px; border-radius: 8px; font-size: 0.72rem; font-weight: 700; cursor: pointer; }
@@ -143,7 +143,7 @@
                 <span>👑 Panel Admin</span>
                 <button class="btn-logout" onclick="logoutAdmin()">🚪 Logout</button>
             </h2>
-            <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 16px;">Daftarkan member baru atau buat akun member dengan saldo awal.</p>
+            <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 16px;">Daftarkan member baru, tentukan saldo awal, dan masa aktif kedaluwarsanya.</p>
 
             <div class="calc-group">
                 <label>Nama Pelanggan:</label>
@@ -152,6 +152,10 @@
             <div class="calc-group">
                 <label>Saldo Awal Deposit (Rp):</label>
                 <input type="number" id="adminSaldo" class="calc-input" placeholder="Contoh: 50000" value="50000">
+            </div>
+            <div class="calc-group">
+                <label>Tanggal Kedaluwarsa (Expired):</label>
+                <input type="date" id="adminExpired" class="calc-input">
             </div>
             <button type="button" class="btn-submit" onclick="simpanMember()">💾 Tambah Member Baru</button>
         </div>
@@ -203,6 +207,10 @@
 
         window.onload = function() {
             cekAuth();
+            // Otomatis set default tanggal expired 1 bulan dari hari ini
+            let tglDefault = new Date();
+            tglDefault.setMonth(tglDefault.getMonth() + 1);
+            document.getElementById('adminExpired').value = tglDefault.toISOString().split('T')[0];
         };
 
         function formatRupiah(angka) {
@@ -225,6 +233,7 @@
                 item.innerHTML = `
                     <div class="member-info">
                         <h4>${m.nama}</h4>
+                        <p>Exp: ${m.expiredDate || '-'}</p>
                         <p>Sisa Saldo: <b>${formatRupiah(m.saldo)}</b></p>
                     </div>
                     <div class="action-buttons">
@@ -240,6 +249,7 @@
         function simpanMember() {
             let nama = document.getElementById('adminNama').value.trim();
             let saldo = parseFloat(document.getElementById('adminSaldo').value) || 0;
+            let expiredDate = document.getElementById('adminExpired').value;
 
             if (!nama) {
                 alert("Harap isi Nama Pelanggan terlebih dahulu!");
@@ -254,13 +264,13 @@
                 return;
             }
 
-            data.push({ nama, saldo });
+            data.push({ nama, saldo, expiredDate });
             localStorage.setItem('queen_members', JSON.stringify(data));
             
             document.getElementById('adminNama').value = "";
             document.getElementById('adminSaldo').value = "50000";
             muatDataMember();
-            alert("Member baru berhasil ditambahkan!");
+            alert("Member baru beserta masa aktifnya berhasil ditambahkan!");
         }
 
         function ubahSaldo(index, tipe) {
