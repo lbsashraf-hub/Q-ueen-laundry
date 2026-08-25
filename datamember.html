@@ -70,7 +70,7 @@
 
         <div class="section-box">
             <h2>🔍 Cek Sisa Saldo Member</h2>
-            <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 20px;">Masukkan nama pelanggan untuk mengecek sisa kuota deposit cucian Anda.</p>
+            <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 20px;">Masukkan nama pelanggan untuk mengecek sisa kuota deposit dan masa aktif member Anda.</p>
 
             <div class="calc-group">
                 <label>Nama Pelanggan:</label>
@@ -85,6 +85,10 @@
     </div>
 
     <script>
+        function formatRupiah(angka) {
+            return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(angka);
+        }
+
         function cekMemberByNama() {
             let inputNama = document.getElementById('cariNama').value.trim().toLowerCase();
             let container = document.getElementById('resultContainer');
@@ -97,7 +101,7 @@
             // Ambil data member dari localStorage
             let dataMember = JSON.parse(localStorage.getItem('queen_members')) || [];
             
-            // Filter data yang namanya mengandung kata kunci pencarian (bisa pencarian sebagian nama)
+            // Filter data yang namanya mengandung kata kunci pencarian
             let hasilPencarian = dataMember.filter(m => m.nama.toLowerCase().includes(inputNama));
 
             container.innerHTML = "";
@@ -109,6 +113,37 @@
                 container.appendChild(headerInfo);
 
                 hasilPencarian.forEach(m => {
+                    let hariIni = new Date();
+                    hariIni.setHours(0,0,0,0);
+
+                    // 1. Cek kondisi tanggal expired
+                    let isExpiredByDate = false;
+                    if (m.expiredDate) {
+                        let tglExpired = new Date(m.expiredDate);
+                        tglExpired.setHours(0,0,0,0);
+                        if (hariIni > tglExpired) {
+                            isExpiredByDate = true;
+                        }
+                    }
+
+                    // 2. Cek kondisi saldo habis
+                    let isSaldoHabis = (m.saldo <= 0);
+
+                    // Tentukan status akhir berdasarkan salah satu yang tercapai terlebih dahulu
+                    let statusPesan = "";
+                    let warnaStatus = "";
+
+                    if (isExpiredByDate) {
+                        statusPesan = `❌ Kedaluwarsa (Lewat Tanggal)`;
+                        warnaStatus = "#dc2626";
+                    } else if (isSaldoHabis) {
+                        statusPesan = `⚠️ Saldo / Kuota Habis (Rp 0)`;
+                        warnaStatus = "#d97706";
+                    } else {
+                        statusPesan = `✅ Member Aktif`;
+                        warnaStatus = "#16a34a";
+                    }
+
                     let card = document.createElement('div');
                     card.className = 'result-card';
                     card.innerHTML = `
@@ -118,11 +153,19 @@
                         </div>
                         <div class="result-row">
                             <span>No WhatsApp:</span>
-                            <span>${m.hp}</span>
+                            <span>${m.hp || '-'}</span>
+                        </div>
+                        <div class="result-row">
+                            <span>Status Keanggotaan:</span>
+                            <span style="color: ${warnaStatus};">${statusPesan}</span>
+                        </div>
+                        <div class="result-row">
+                            <span>Masa Aktif (Expired):</span>
+                            <span>${m.expiredDate || '-'}</span>
                         </div>
                         <div class="result-row" style="border-top: 1px dashed var(--border-color); padding-top: 6px; margin-top: 6px;">
-                            <span>Sisa Kuota Deposit:</span>
-                            <span style="color: #db2777; font-size: 0.95rem;">${m.saldo} Kg</span>
+                            <span>Sisa Saldo Deposit:</span>
+                            <span style="color: #db2777; font-size: 0.95rem;">${formatRupiah(m.saldo)}</span>
                         </div>
                     `;
                     container.appendChild(card);
