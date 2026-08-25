@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cek Sisa Member - Queen Laundry</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #d946ef;
+            --primary-gradient: linear-gradient(135deg, #f472b6 0%, #db2777 100%);
+            --bg-body: #fff5f8;
+            --card-bg: #ffffff;
+            --text-main: #3f3f46;
+            --text-muted: #71717a;
+            --border-color: #fbcfe8;
+            --radius-lg: 24px;
+            --radius-md: 16px;
+            --shadow-soft: 0 12px 35px -10px rgba(219, 39, 119, 0.08);
+        }
+
+        [data-theme="dark"] {
+            --bg-body: #181116;
+            --card-bg: #271c24;
+            --text-main: #fce7f3;
+            --text-muted: #d946ef;
+            --border-color: #581c87;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease; }
+        body { background: var(--bg-body); color: var(--text-main); min-height: 100vh; padding: 20px 16px; }
+
+        .container { max-width: 600px; margin: 0 auto; }
+        .header-nav { display: flex; gap: 8px; margin-bottom: 20px; }
+        .nav-btn { flex: 1; background: var(--card-bg); border: 1px solid var(--border-color); padding: 12px; border-radius: 14px; text-align: center; text-decoration: none; font-size: 0.82rem; font-weight: 700; color: #db2777; box-shadow: var(--shadow-soft); }
+        
+        .section-box { background: var(--card-bg); border-radius: var(--radius-lg); padding: 24px; margin-bottom: 20px; box-shadow: var(--shadow-soft); border: 1px solid var(--border-color); text-align: center; }
+        .section-box h2 { font-size: 1.25rem; font-weight: 800; margin-bottom: 8px; color: var(--text-main); display: flex; align-items: center; justify-content: center; gap: 8px; }
+        
+        .calc-group { margin-bottom: 16px; text-align: left; }
+        .calc-group label { font-size: 0.78rem; font-weight: 700; display: block; margin-bottom: 6px; color: var(--text-muted); }
+        .calc-input { width: 100%; padding: 14px; border-radius: 14px; border: 1px solid var(--border-color); font-size: 0.9rem; background: var(--bg-body); color: var(--text-main); outline: none; }
+        .calc-input:focus { border-color: #db2777; box-shadow: 0 0 0 4px rgba(219, 39, 119, 0.15); background: var(--card-bg); }
+
+        .btn-submit { display: block; background: var(--primary-gradient); color: white; text-align: center; padding: 14px; border-radius: 14px; text-decoration: none; font-weight: 700; font-size: 0.9rem; border: none; cursor: pointer; width: 100%; box-shadow: 0 8px 25px rgba(219, 39, 119, 0.25); }
+        
+        /* Area Hasil Pencarian */
+        #resultContainer { margin-top: 20px; }
+        .result-card {
+            padding: 16px;
+            border-radius: var(--radius-md);
+            background: var(--bg-body);
+            border: 1px solid var(--border-color);
+            margin-bottom: 10px;
+            text-align: left;
+        }
+        .result-title { font-size: 0.85rem; font-weight: 800; color: #db2777; margin-bottom: 10px; }
+        .result-row { display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 6px; }
+        .result-row span:last-child { font-weight: 700; color: var(--text-main); }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header-nav">
+            <a href="index.html" class="nav-btn">🏠 Beranda</a>
+            <a href="promo.html" class="nav-btn">🎉 Promo</a>
+            <a href="member.html" class="nav-btn">👑 Info Member</a>
+        </div>
+
+        <div class="section-box">
+            <h2>🔍 Cek Sisa Saldo Member</h2>
+            <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 20px;">Masukkan nama pelanggan untuk mengecek sisa kuota deposit cucian Anda.</p>
+
+            <div class="calc-group">
+                <label>Nama Pelanggan:</label>
+                <input type="text" id="cariNama" class="calc-input" placeholder="Contoh: Siska Amelia" onkeydown="if(event.key === 'Enter') cekMemberByNama()">
+            </div>
+            
+            <button type="button" class="btn-submit" onclick="cekMemberByNama()">🔍 Periksa Sisa Kuota</button>
+
+            <!-- Wadah Tampilan Hasil -->
+            <div id="resultContainer"></div>
+        </div>
+    </div>
+
+    <script>
+        function cekMemberByNama() {
+            let inputNama = document.getElementById('cariNama').value.trim().toLowerCase();
+            let container = document.getElementById('resultContainer');
+
+            if (!inputNama) {
+                alert("Harap masukkan nama pelanggan terlebih dahulu!");
+                return;
+            }
+
+            // Ambil data member dari localStorage
+            let dataMember = JSON.parse(localStorage.getItem('queen_members')) || [];
+            
+            // Filter data yang namanya mengandung kata kunci pencarian (bisa pencarian sebagian nama)
+            let hasilPencarian = dataMember.filter(m => m.nama.toLowerCase().includes(inputNama));
+
+            container.innerHTML = "";
+
+            if (hasilPencarian.length > 0) {
+                let headerInfo = document.createElement('div');
+                headerInfo.className = 'result-title';
+                headerInfo.innerText = `✨ Ditemukan ${hasilPencarian.length} data member:`;
+                container.appendChild(headerInfo);
+
+                hasilPencarian.forEach(m => {
+                    let card = document.createElement('div');
+                    card.className = 'result-card';
+                    card.innerHTML = `
+                        <div class="result-row">
+                            <span>Nama Pelanggan:</span>
+                            <span>${m.nama}</span>
+                        </div>
+                        <div class="result-row">
+                            <span>No WhatsApp:</span>
+                            <span>${m.hp}</span>
+                        </div>
+                        <div class="result-row" style="border-top: 1px dashed var(--border-color); padding-top: 6px; margin-top: 6px;">
+                            <span>Sisa Kuota Deposit:</span>
+                            <span style="color: #db2777; font-size: 0.95rem;">${m.saldo} Kg</span>
+                        </div>
+                    `;
+                    container.appendChild(card);
+                });
+            } else {
+                container.innerHTML = `
+                    <div class="result-card" style="text-align: center; color: #ef4444; font-weight: 700; font-size: 0.85rem;">
+                        ❌ Nama tidak ditemukan dalam daftar member aktif. Silakan periksa kembali ejaan nama Anda.
+                    </div>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>
