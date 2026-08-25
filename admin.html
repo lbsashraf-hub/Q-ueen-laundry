@@ -267,9 +267,9 @@
             data.push({ nama, saldo, expiredDate });
             localStorage.setItem('queen_members', JSON.stringify(data));
             
-            // 2. Sinkronisasi otomatis ke Server Bot melalui jalur relatif (/api/tambah-member)
+            // 2. Kirim data ke backend bot menggunakan URL lengkap dengan penanganan error aman
             try {
-                let response = await fetch('/api/tambah-member', {
+                let response = await fetch('https://panel.ryhar.my.id/api/tambah-member', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ 
@@ -278,16 +278,21 @@
                         expiredDate: expiredDate 
                     })
                 });
-                let result = await response.json();
-                console.log('Respon server bot:', result);
+                
+                if (response.ok) {
+                    let result = await response.json();
+                    console.log('Respon server bot:', result);
+                } else {
+                    console.warn('Server merespon dengan status error, namun data lokal tersimpan.');
+                }
             } catch (error) {
-                console.error('Gagal mengirim ke server bot:', error);
+                console.error('Koneksi ke server bot gagal atau diblokir CORS:', error);
             }
             
             document.getElementById('adminNama').value = "";
             document.getElementById('adminSaldo').value = "50000";
             muatDataMember();
-            alert("Member baru berhasil ditambahkan dan disinkronkan ke server bot!");
+            alert("Member baru berhasil ditambahkan!");
         }
 
         function ubahSaldo(index, tipe) {
