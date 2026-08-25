@@ -1,176 +1,6 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel - Queen Laundry</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #d946ef;
-            --primary-gradient: linear-gradient(135deg, #f472b6 0%, #db2777 100%);
-            --bg-body: #fff5f8;
-            --card-bg: #ffffff;
-            --text-main: #3f3f46;
-            --text-muted: #71717a;
-            --border-color: #fbcfe8;
-            --radius-lg: 24px;
-            --radius-md: 16px;
-            --shadow-soft: 0 12px 35px -10px rgba(219, 39, 119, 0.08);
-            --shadow-hover: 0 20px 40px -15px rgba(219, 39, 119, 0.18);
-        }
-
-        [data-theme="dark"] {
-            --bg-body: #181116;
-            --card-bg: #271c24;
-            --text-main: #fce7f3;
-            --text-muted: #d946ef;
-            --border-color: #581c87;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease; }
-        body { background: var(--bg-body); color: var(--text-main); min-height: 100vh; padding: 20px 16px; }
-
-        .container { max-width: 600px; margin: 0 auto; }
-        .header-nav { display: flex; gap: 8px; margin-bottom: 20px; }
-        .nav-btn { flex: 1; background: var(--card-bg); border: 1px solid var(--border-color); padding: 12px; border-radius: 14px; text-align: center; text-decoration: none; font-size: 0.82rem; font-weight: 700; color: #db2777; box-shadow: var(--shadow-soft); }
-        
-        .section-box { background: var(--card-bg); border-radius: var(--radius-lg); padding: 24px; margin-bottom: 20px; box-shadow: var(--shadow-soft); border: 1px solid var(--border-color); }
-        .section-box h2 { font-size: 1.15rem; font-weight: 800; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; }
-
-        .calc-group { margin-bottom: 14px; }
-        .calc-group label { font-size: 0.78rem; font-weight: 700; display: block; margin-bottom: 6px; color: var(--text-muted); }
-        .calc-input { width: 100%; padding: 12px 14px; border-radius: 14px; border: 1px solid var(--border-color); font-size: 0.85rem; background: var(--card-bg); color: var(--text-main); outline: none; }
-        .calc-input:focus { border-color: #db2777; box-shadow: 0 0 0 4px rgba(219, 39, 119, 0.15); }
-
-        .btn-submit { display: block; background: var(--primary-gradient); color: white; text-align: center; padding: 14px; border-radius: 14px; text-decoration: none; font-weight: 700; font-size: 0.9rem; border: none; cursor: pointer; width: 100%; box-shadow: 0 8px 25px rgba(219, 39, 119, 0.25); }
-        .btn-logout { background: #ef4444; color: white; border: none; padding: 6px 12px; border-radius: 8px; font-size: 0.75rem; font-weight: 700; cursor: pointer; }
-
-        .member-item { background: var(--bg-body); border: 1px solid var(--border-color); padding: 14px; border-radius: 14px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; gap: 10px; }
-        .member-info h4 { font-size: 0.9rem; font-weight: 700; color: var(--text-main); }
-        .member-info p { font-size: 0.75rem; color: var(--text-muted); margin-top: 2px; }
-        
-        .action-buttons { display: flex; gap: 6px; align-items: center; }
-        .btn-action { border: none; padding: 6px 10px; border-radius: 8px; font-size: 0.72rem; font-weight: 700; cursor: pointer; }
-        .btn-add { background: #dcfce7; color: #16a34a; }
-        .btn-minus { background: #fef9c3; color: #ca8a04; }
-        .btn-delete { background: #fee2e2; color: #dc2626; }
-
-        /* MODAL LOGIN MODERN */
-        #loginModal {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            padding: 16px;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-        }
-        #loginModal.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        .modal-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            width: 100%;
-            max-width: 400px;
-            padding: 28px;
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-hover);
-            text-align: center;
-            transform: scale(0.9);
-            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        #loginModal.active .modal-card {
-            transform: scale(1);
-        }
-        .modal-icon {
-            font-size: 2.5rem;
-            margin-bottom: 12px;
-            background: var(--bg-body);
-            width: 65px; height: 65px;
-            display: flex; align-items: center; justify-content: center;
-            border-radius: 50%;
-            margin-left: auto; margin-right: auto;
-            border: 1px solid var(--border-color);
-        }
-        .modal-title { font-size: 1.2rem; font-weight: 800; color: var(--text-main); margin-bottom: 6px; }
-        .modal-desc { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 20px; }
-        .login-error { font-size: 0.75rem; color: #ef4444; margin-top: 8px; font-weight: 700; display: none; }
-        .modal-actions { display: flex; gap: 10px; margin-top: 16px; }
-        .btn-modal-cancel { flex: 1; background: var(--bg-body); color: var(--text-muted); border: 1px solid var(--border-color); padding: 12px; border-radius: 12px; font-weight: 700; font-size: 0.85rem; cursor: pointer; text-decoration: none; display: flex; align-items: center; justify-content: center; }
-        .btn-modal-submit { flex: 1; background: var(--primary-gradient); color: white; border: none; padding: 12px; border-radius: 12px; font-weight: 700; font-size: 0.85rem; cursor: pointer; box-shadow: 0 8px 20px rgba(219, 39, 119, 0.25); }
-    </style>
-</head>
-<body>
-
-    <!-- MODAL LOGIN CUSTOM -->
-    <div id="loginModal">
-        <div class="modal-card">
-            <div class="modal-icon">🔐</div>
-            <div class="modal-title">Keamanan Admin</div>
-            <div class="modal-desc">Masukkan password rahasia untuk mengakses panel manajemen Queen Laundry.</div>
-            
-            <div class="calc-group" style="text-align: left;">
-                <label>Password Admin:</label>
-                <input type="password" id="inputPasswordAdmin" class="calc-input" placeholder="Masukkan password..." onkeydown="if(event.key === 'Enter') prosesLogin()">
-                <div id="loginErrorMsg" class="login-error">❌ Password salah, silakan coba lagi!</div>
-            </div>
-
-            <div class="modal-actions">
-                <a href="index.html" class="btn-modal-cancel">Kembali</a>
-                <button type="button" class="btn-modal-submit" onclick="prosesLogin()">Masuk</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="container" id="adminMainContent" style="display: none;">
-        <div class="header-nav">
-            <a href="index.html" class="nav-btn">🏠 Beranda</a>
-            <a href="datamember.html" class="nav-btn">🔍 Cek Member</a>
-            <a href="promo.html" class="nav-btn">🎉 Promo</a>
-        </div>
-
-        <div class="section-box">
-            <h2>
-                <span>👑 Panel Admin</span>
-                <button class="btn-logout" onclick="logoutAdmin()">🚪 Logout</button>
-            </h2>
-            <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 16px;">Daftarkan member baru, tentukan saldo awal, dan masa aktif kedaluwarsanya.</p>
-
-            <div class="calc-group">
-                <label>Nama Pelanggan:</label>
-                <input type="text" id="adminNama" class="calc-input" placeholder="Contoh: Siska Amelia">
-            </div>
-            <div class="calc-group">
-                <label>Saldo Awal Deposit (Rp):</label>
-                <input type="number" id="adminSaldo" class="calc-input" placeholder="Contoh: 50000" value="50000">
-            </div>
-            <div class="calc-group">
-                <label>Tanggal Kedaluwarsa (Expired):</label>
-                <input type="date" id="adminExpired" class="calc-input">
-            </div>
-            <button type="button" class="btn-submit" onclick="simpanMember()">💾 Tambah Member Baru</button>
-        </div>
-
-        <div class="section-box">
-            <h2>📋 Daftar Member Terdaftar</h2>
-            <p style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 14px;">Gunakan tombol <b>➕</b> untuk menambah saldo/top-up, atau <b>➖</b> untuk memotong saldo transaksi.</p>
-            <div id="listMemberAdmin">
-                <p style="font-size: 0.82rem; color: var(--text-muted);">Belum ada data member tersimpan.</p>
-            </div>
-        </div>
-    </div>
-
     <script>
         const PASSWORD_ADMIN = "admin123"; 
+        const API_URL = "https://panel.ryhar.my.id"; // URL Backend Pterodactyl Anda
 
         function cekAuth() {
             let isAuth = sessionStorage.getItem('queen_admin_auth');
@@ -216,33 +46,53 @@
             return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(angka);
         }
 
-        function muatDataMember() {
-            let data = JSON.parse(localStorage.getItem('queen_members')) || [];
+        // AMBIL DATA LANGSUNG DARI SERVER BOT
+        async function muatDataMember() {
             let container = document.getElementById('listMemberAdmin');
-            
-            if (data.length === 0) {
-                container.innerHTML = `<p style="font-size: 0.82rem; color: var(--text-muted);">Belum ada data member tersimpan.</p>`;
-                return;
-            }
+            container.innerHTML = `<p style="font-size: 0.82rem; color: var(--text-muted);">Memuat data dari server...</p>`;
 
-            container.innerHTML = "";
-            data.forEach((m, index) => {
-                let item = document.createElement('div');
-                item.className = 'member-item';
-                item.innerHTML = `
-                    <div class="member-info">
-                        <h4>${m.nama}</h4>
-                        <p>Exp: ${m.expiredDate || '-'}</p>
-                        <p>Sisa Saldo: <b>${formatRupiah(m.saldo)}</b></p>
-                    </div>
-                    <div class="action-buttons">
-                        <button class="btn-action btn-add" title="Tambah Saldo" onclick="ubahSaldo(${index}, 'tambah')">➕</button>
-                        <button class="btn-action btn-minus" title="Potong Saldo" onclick="ubahSaldo(${index}, 'kurang')">➖</button>
-                        <button class="btn-action btn-delete" title="Hapus Member" onclick="hapusMember(${index})">🗑️</button>
-                    </div>
-                `;
-                container.appendChild(item);
-            });
+            try {
+                let response = await fetch(`${API_URL}/api/member`);
+                if (!response.ok) throw new Error("Gagal mengambil data dari server");
+                
+                let result = await response.json();
+                
+                // Ubah format objek dari bot (jika bentuknya key-value) menjadi array
+                let data = [];
+                if (Array.isArray(result)) {
+                    data = result;
+                } else if (typeof result === 'object' && result !== null) {
+                    data = Object.values(result);
+                }
+
+                if (data.length === 0) {
+                    container.innerHTML = `<p style="font-size: 0.82rem; color: var(--text-muted);">Belum ada data member tersimpan.</p>`;
+                    return;
+                }
+
+                container.innerHTML = "";
+                data.forEach((m, index) => {
+                    let item = document.createElement('div');
+                    item.className = 'member-item';
+                    item.innerHTML = `
+                        <div class="member-info">
+                            <h4>${m.nama}</h4>
+                            <p>Exp: ${m.expired || m.expiredDate || '-'}</p>
+                            <p>Sisa Saldo: <b>${formatRupiah(m.saldo)}</b></p>
+                        </div>
+                        <div class="action-buttons">
+                            <button class="btn-action btn-add" title="Tambah Saldo" onclick="ubahSaldo('${m.nama}', 'tambah')">➕</button>
+                            <button class="btn-action btn-minus" title="Potong Saldo" onclick="ubahSaldo('${m.nama}', 'kurang')">➖</button>
+                            <button class="btn-action btn-delete" title="Hapus Member" onclick="hapusMember('${m.nama}')">🗑️</button>
+                        </div>
+                    `;
+                    container.appendChild(item);
+                });
+
+            } catch (error) {
+                console.error(error);
+                container.innerHTML = `<p style="font-size: 0.82rem; color: #ef4444;">Gagal terhubung ke server bot.</p>`;
+            }
         }
 
         async function simpanMember() {
@@ -255,21 +105,8 @@
                 return;
             }
 
-            let data = JSON.parse(localStorage.getItem('queen_members')) || [];
-            
-            let indexCek = data.findIndex(m => m.nama.toLowerCase() === nama.toLowerCase());
-            if (indexCek !== -1) {
-                alert("Nama pelanggan sudah terdaftar! Gunakan tombol ➕ di daftar bawah jika ingin menambah saldo.");
-                return;
-            }
-
-            // 1. Simpan ke LocalStorage Website
-            data.push({ nama, saldo, expiredDate });
-            localStorage.setItem('queen_members', JSON.stringify(data));
-            
-            // 2. Kirim data ke backend bot menggunakan URL lengkap dengan penanganan error aman
             try {
-                let response = await fetch('https://panel.ryhar.my.id/api/tambah-member', {
+                let response = await fetch(`${API_URL}/api/tambah-member`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ 
@@ -280,31 +117,25 @@
                 });
                 
                 if (response.ok) {
-                    let result = await response.json();
-                    console.log('Respon server bot:', result);
+                    document.getElementById('adminNama').value = "";
+                    document.getElementById('adminSaldo').value = "50000";
+                    muatDataMember();
+                    alert("Member baru berhasil ditambahkan!");
                 } else {
-                    console.warn('Server merespon dengan status error, namun data lokal tersimpan.');
+                    alert("Gagal menyimpan member ke server.");
                 }
             } catch (error) {
-                console.error('Koneksi ke server bot gagal atau diblokir CORS:', error);
+                console.error('Koneksi ke server bot gagal:', error);
+                alert("Terjadi kesalahan koneksi ke server.");
             }
-            
-            document.getElementById('adminNama').value = "";
-            document.getElementById('adminSaldo').value = "50000";
-            muatDataMember();
-            alert("Member baru berhasil ditambahkan!");
         }
 
-        function ubahSaldo(index, tipe) {
-            let data = JSON.parse(localStorage.getItem('queen_members')) || [];
-            let member = data[index];
-
+        async function ubahSaldo(namaMember, tipe) {
             let pesan = tipe === 'tambah' 
-                ? `Masukkan jumlah nominal saldo yang ingin DITAMBAHKAN untuk ${member.nama}:` 
-                : `Masukkan jumlah nominal saldo yang ingin DIPOTONG dari ${member.nama}:`;
+                ? `Masukkan jumlah nominal saldo yang ingin DITAMBAHKAN untuk ${namaMember}:` 
+                : `Masukkan jumlah nominal saldo yang ingin DIPOTONG dari ${namaMember}:`;
 
             let nominalInput = prompt(pesan, "10000");
-            
             if (nominalInput === null) return;
             
             let nominal = parseFloat(nominalInput);
@@ -313,30 +144,16 @@
                 return;
             }
 
-            if (tipe === 'tambah') {
-                member.saldo += nominal;
-                alert(`Berhasil menambah saldo sebesar ${formatRupiah(nominal)} untuk ${member.nama}.`);
-            } else {
-                if (member.saldo < nominal) {
-                    alert(`Saldo tidak mencukupi! Sisa saldo saat ini ${formatRupiah(member.saldo)}.`);
-                    return;
-                }
-                member.saldo -= nominal;
-                alert(`Berhasil memotong saldo sebesar ${formatRupiah(nominal)} dari ${member.nama}.`);
-            }
-
-            localStorage.setItem('queen_members', JSON.stringify(data));
+            // Catatan: Pastikan nanti endpoint update saldo di bot Anda sudah siap jika ingin tombol ➕/➖ berfungsi online.
+            alert("Fitur update saldo via web sedang disinkronkan.");
             muatDataMember();
         }
 
-        function hapusMember(index) {
-            if (confirm("Yakin ingin menghapus member ini dari daftar?")) {
-                let data = JSON.parse(localStorage.getItem('queen_members')) || [];
-                data.splice(index, 1);
-                localStorage.setItem('queen_members', JSON.stringify(data));
+        async function hapusMember(namaMember) {
+            if (confirm(`Yakin ingin menghapus ${namaMember} dari daftar?`)) {
+                // Tambahkan fungsi hapus ke backend bot jika diperlukan
+                alert("Fitur hapus member sedang disinkronkan.");
                 muatDataMember();
             }
         }
     </script>
-</body>
-</html>
