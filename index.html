@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Queen Laundry - Premium Care Service</title>
-    <!-- Ikon/Favicon Tab Browser Menggunakan queen-icon.png -->
+    <!-- Ikon/Favicon Tab Browser -->
     <link rel="icon" type="image/x-icon" href="queen-icon.png">
     <link rel="shortcut icon" type="image/x-icon" href="queen-icon.png">
     
@@ -50,7 +50,7 @@
             color: var(--text-main);
             line-height: 1.6;
             min-height: 100vh;
-            padding-bottom: 60px;
+            padding-bottom: 90px;
         }
 
         header {
@@ -178,7 +178,7 @@
         .section-box {
             background: var(--card-bg);
             border-radius: var(--radius-lg);
-            padding: 28px;
+            padding: 24px;
             margin-bottom: 24px;
             box-shadow: var(--shadow-soft);
             border: 1px solid var(--border-color);
@@ -198,7 +198,7 @@
             color: var(--text-main);
             font-size: 1.25rem;
             font-weight: 800;
-            margin-bottom: 18px;
+            margin-bottom: 16px;
             display: flex;
             align-items: center;
             gap: 10px;
@@ -206,44 +206,44 @@
 
         #toastBox {
             position: fixed;
-            bottom: 25px;
+            bottom: 20px;
             left: 50%;
             transform: translateX(-50%) translateY(100px);
             background: var(--card-bg);
             border: 1px solid var(--border-color);
-            padding: 14px 22px;
+            padding: 12px 18px;
             border-radius: 16px;
             box-shadow: var(--shadow-hover);
             display: flex;
             align-items: center;
-            gap: 14px;
-            z-index: 9999;
+            gap: 12px;
+            z-index: 998;
             transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             max-width: 90%;
-            width: 400px;
+            width: 380px;
         }
 
         #toastBox.active { transform: translateX(-50%) translateY(0); }
-        .toast-icon { font-size: 1.3rem; }
-        .toast-text { font-size: 0.82rem; font-weight: 700; color: var(--text-main); }
-        .toast-sub { font-size: 0.73rem; color: var(--text-muted); }
+        .toast-icon { font-size: 1.2rem; }
+        .toast-text { font-size: 0.8rem; font-weight: 700; color: var(--text-main); }
+        .toast-sub { font-size: 0.7rem; color: var(--text-muted); }
 
         #backToTop {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
+            bottom: 25px;
+            right: 20px;
             background: var(--primary-gradient);
             color: white;
-            width: 48px;
-            height: 48px;
+            width: 42px;
+            height: 42px;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 1.2rem;
+            font-size: 1rem;
             border: none;
             cursor: pointer;
-            box-shadow: 0 8px 20px rgba(219, 39, 119, 0.3);
+            box-shadow: 0 6px 18px rgba(219, 39, 119, 0.3);
             opacity: 0;
             visibility: hidden;
             transition: all 0.3s ease;
@@ -307,32 +307,37 @@
             background: var(--bg-body);
             border: 1px solid var(--border-color);
             border-radius: var(--radius-md);
-            padding: 20px;
-            margin-top: 18px;
+            padding: 16px;
+            margin-top: 16px;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         .formula-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 12px;
             margin-top: 10px;
+            width: 100%;
         }
 
         .formula-item {
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 12px;
             background: var(--card-bg);
-            padding: 14px;
+            padding: 12px;
             border-radius: 14px;
             border: 1px solid var(--border-color);
+            width: 100%;
+            box-sizing: border-box;
         }
 
         .formula-icon {
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             background: var(--bg-body);
-            width: 46px;
-            height: 46px;
+            width: 42px;
+            height: 42px;
             border-radius: 12px;
             display: flex;
             align-items: center;
@@ -343,8 +348,8 @@
 
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 14px;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 12px;
             margin-top: 14px;
         }
 
@@ -398,7 +403,6 @@
             border-color: #db2777; box-shadow: 0 0 0 4px var(--accent-glow);
         }
 
-        /* Satuan Grid untuk PC agar lebih rapi berbentuk kolom */
         .satuan-container-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -509,18 +513,6 @@
             animation: pulseGlow 2.5s infinite;
         }
 
-        /* Daftar Harga Grid Responsive di PC */
-        .price-list-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 16px;
-        }
-
-        .price-card-group { background: var(--bg-body); border: 1px solid var(--border-color); border-radius: 16px; padding: 18px; }
-        .price-card-title { font-size: 0.88rem; font-weight: 800; color: #db2777; background: var(--card-bg); padding: 6px 12px; border-radius: 8px; display: inline-block; margin-bottom: 12px; border: 1px solid var(--border-color); }
-        .price-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-size: 0.85rem; border-bottom: 1px dashed var(--border-color); padding-bottom: 8px; font-weight: 500; }
-        .price-item span:last-child { font-weight: 700; color: #db2777; background: var(--card-bg); padding: 4px 10px; border-radius: 8px; font-size: 0.8rem; border: 1px solid var(--border-color); }
-
         .testimonial-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -546,6 +538,52 @@
         .btn-maps { display: flex; justify-content: center; align-items: center; gap: 8px; background: #271c24; color: #fdf2f8; text-align: center; padding: 14px; border-radius: 14px; text-decoration: none; font-weight: 700; font-size: 0.9rem; margin-top: 12px; border: 1px solid #581c87; }
         .btn-wa-main { display: flex; justify-content: center; align-items: center; gap: 8px; background: var(--primary-gradient); color: white; text-align: center; padding: 14px; border-radius: 16px; text-decoration: none; font-weight: 700; font-size: 0.92rem; margin-top: 14px; box-shadow: 0 8px 25px rgba(219, 39, 119, 0.25); }
 
+        /* === ANIMASI KHUSUS KOTAK PRICE LIST === */
+        @keyframes floatingBox {
+            0% { transform: translateY(0px); box-shadow: 0 15px 35px -10px rgba(244, 114, 182, 0.2); }
+            50% { transform: translateY(-6px); box-shadow: 0 22px 45px -10px rgba(219, 39, 119, 0.35); }
+            100% { transform: translateY(0px); box-shadow: 0 15px 35px -10px rgba(244, 114, 182, 0.2); }
+        }
+
+        @keyframes bounceIcon {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-6px) scale(1.08); }
+        }
+
+        .pricelist-animated-box {
+            background: linear-gradient(135deg, #ffffff 0%, #fff0f7 100%);
+            border: 2.5px dashed #f472b6;
+            border-radius: 28px;
+            padding: 30px 22px;
+            text-align: center;
+            margin-bottom: 24px;
+            position: relative;
+            overflow: hidden;
+            animation: floatingBox 4s ease-in-out infinite;
+            transition: border-color 0.3s ease;
+        }
+
+        .pricelist-animated-box:hover {
+            border-color: #db2777;
+        }
+
+        .pricelist-animated-icon {
+            font-size: 2.6rem;
+            margin-bottom: 12px;
+            background: #fdf2f8;
+            width: 75px;
+            height: 75px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-left: auto;
+            margin-right: auto;
+            border: 2px solid #fbcfe8;
+            box-shadow: 0 8px 20px rgba(219, 39, 119, 0.1);
+            animation: bounceIcon 2.5s ease-in-out infinite;
+        }
+
         footer { text-align: center; margin-top: 50px; color: var(--text-muted); font-size: 0.78rem; font-weight: 600; }
     </style>
 </head>
@@ -561,7 +599,7 @@
     </div>
 
     <!-- Back to Top Button -->
-    <button id="backToTop" onclick="scrollToTop(); playClickSound();">⬆️</button>
+    <button id="backToTop" onclick="scrollToTop(); playClickSound();" title="Kembali ke atas">⬆️</button>
 
     <header>
         <div class="header-container">
@@ -585,7 +623,7 @@
                 <li><a href="#galeri" onclick="toggleMenu(); playClickSound()">🖼️ Galeri & Suasana Laundry</a></li>
                 <li><a href="member.html" onclick="playClickSound()">⭐ Keuntungan & Gabung Member</a></li>
                 <li><a href="garansi.html" onclick="playClickSound()">🛡️ Ketentuan Garansi</a></li>
-                <li><a href="#pricelist" onclick="toggleMenu(); playClickSound()">📋 Daftar Harga Lengkap</a></li>
+                <li><a href="pricelist.html" onclick="playClickSound()">📋 Daftar Harga Lengkap</a></li>
                 <li><a href="#testimoni" onclick="toggleMenu(); playClickSound()">💬 Testimoni & Ulasan</a></li>
                 <li><a href="#lokasi" onclick="toggleMenu(); playClickSound()">📍 Lokasi & Kontak</a></li>
             </ul>
@@ -666,17 +704,17 @@
                     <div class="calc-group">
                         <label>Pilih Jenis Layanan:</label>
                         <select id="pilihLayananKiloan" class="calc-select" onchange="hitungTotal(); playClickSound()">
-                            <option value="6500" data-estimasi="Estimasi Selesai: 3 - 4 Hari">Standar - Cuci Setrika (Rp 6.500/kg)</option>
-                            <option value="4500" data-estimasi="Estimasi Selesai: 3 - 4 Hari">Standar - Cuci Kering (Rp 4.500/kg)</option>
-                            <option value="4500" data-estimasi="Estimasi Selesai: 3 - 4 Hari">Standar - Setrika (Rp 4.500/kg)</option>
-                            <option value="4500" data-estimasi="Estimasi Selesai: 3 - 4 Hari">Standar - Dryer Only (Rp 4.500/kg)</option>
-                            <option value="13000" data-estimasi="Estimasi Selesai: 1 Hari (24 Jam)">Express - Cuci Setrika (Rp 13.000/kg)</option>
-                            <option value="10000" data-estimasi="Estimasi Selesai: 1 Hari (24 Jam)">Express - Cuci Kering (Rp 10.000/kg)</option>
-                            <option value="8000" data-estimasi="Estimasi Selesai: 1 Hari (24 Jam)">Express - Setrika Only (Rp 8.000/kg)</option>
-                            <option value="3500" data-estimasi="Estimasi Selesai: 1 Hari (24 Jam)">Express - Dryer Only (Rp 3.500/kg)</option>
-                            <option value="20000" data-estimasi="Estimasi Selesai: Kilat 8 Jam">Kilat - Cuci Setrika (Rp 20.000/kg)</option>
-                            <option value="15000" data-estimasi="Estimasi Selesai: Kilat 8 Jam">Kilat - Cuci Kering (Rp 15.000/kg)</option>
-                            <option value="7000" data-estimasi="Estimasi Selesai: Kilat 8 Jam">Kilat - Dryer Only (Rp 7.000/kg)</option>
+                            <option value="6500" data-days="3" data-label="3 Hari">Standar - Cuci Setrika (Rp 6.500/kg)</option>
+                            <option value="4500" data-days="3" data-label="3 Hari">Standar - Cuci Kering (Rp 4.500/kg)</option>
+                            <option value="4500" data-days="3" data-label="3 Hari">Standar - Setrika (Rp 4.500/kg)</option>
+                            <option value="4500" data-days="3" data-label="3 Hari">Standar - Dryer Only (Rp 4.500/kg)</option>
+                            <option value="13000" data-days="1" data-label="1 Hari (24 Jam)">Express - Cuci Setrika (Rp 13.000/kg)</option>
+                            <option value="10000" data-days="1" data-label="1 Hari (24 Jam)">Express - Cuci Kering (Rp 10.000/kg)</option>
+                            <option value="8000" data-days="1" data-label="1 Hari (24 Jam)">Express - Setrika Only (Rp 8.000/kg)</option>
+                            <option value="3500" data-days="1" data-label="1 Hari (24 Jam)">Express - Dryer Only (Rp 3.500/kg)</option>
+                            <option value="20000" data-days="0" data-label="Kilat 8 Jam (Hari Ini)">Kilat - Cuci Setrika (Rp 20.000/kg)</option>
+                            <option value="15000" data-days="0" data-label="Kilat 8 Jam (Hari Ini)">Kilat - Cuci Kering (Rp 15.000/kg)</option>
+                            <option value="7000" data-days="0" data-label="Kilat 8 Jam (Hari Ini)">Kilat - Dryer Only (Rp 7.000/kg)</option>
                         </select>
                     </div>
                     <div class="calc-group" style="margin-bottom: 0;">
@@ -712,13 +750,19 @@
                         <span class="badge-bebas">Bebas Pilih</span>
                     </div>
                     <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 12px;">Atur jumlah item satuan yang ingin dicuci:</div>
+                    
+                    <div style="background: linear-gradient(135deg, #fdf2f8 0%, #fae8ff 100%); border: 1.5px solid #f472b6; padding: 12px 16px; border-radius: 14px; margin-bottom: 16px; font-size: 0.82rem; color: #db2777; font-weight: 700; display: flex; align-items: center; gap: 10px; box-shadow: 0 4px 12px rgba(219, 39, 119, 0.1);">
+                        <span style="font-size: 1.2rem;">💡</span>
+                        <div>Ingin layanan <b>Express</b> untuk barang satuan? Silakan <a href="https://wa.me/6285770246502?text=Halo%20Queen%20Laundry,%20saya%20ingin%20tanya%20layanan%20express%20untuk%20barang%20satuan" target="_blank" style="color: #be185d; text-decoration: underline;" onclick="playClickSound()">hubungi admin terlebih dahulu</a> ya!</div>
+                    </div>
+
                     <div id="listBarangSatuan" class="satuan-container-grid"></div>
                 </div>
 
                 <div class="calc-result calc-result-box">
                     <span style="font-size: 0.85rem; font-weight: 700; color: var(--text-muted);">Estimasi Total Keseluruhan</span>
                     <div id="hasilTotal" class="calc-total">Rp 0</div>
-                    <div id="hasilEstimasi" class="calc-estimation">Estimasi Selesai: 3 - 4 Hari</div>
+                    <div id="hasilEstimasi" class="calc-estimation">Estimasi Selesai: -</div>
                     <a id="waOrderLink" href="https://wa.me/6285770246502?text=Halo%20Queen%20Laundry" target="_blank" class="btn-order-wa" onclick="playClickSound()">
                         💬 Order Layanan Ini via WhatsApp
                     </a>
@@ -731,73 +775,37 @@
                 <h3 style="font-size: 1.05rem; font-weight: 800; color: #db2777; margin-bottom: 4px;">✨ Join Member Lebih Hemat!</h3>
                 <p style="font-size: 0.84rem; color: var(--text-muted);">Daftar member sekarang seharga <b>Rp 110.000 / 20 Kg</b> untuk keuntungan maksimal.</p>
             </div>
-            <a href="member.html" style="background: var(--primary-gradient); color: white; padding: 12px 24px; border-radius: 12px; text-decoration: none; font-weight: 700; font-size: 0.88rem; white-space: nowrap;" onclick="playClickSound()">⭐ Gabung Member</a>
+            <div style="width: 100%; display: flex; justify-content: center; margin-top: 4px;">
+                <a href="member.html" style="background: var(--primary-gradient); color: white; padding: 12px 32px; border-radius: 12px; text-decoration: none; font-weight: 700; font-size: 0.88rem; text-align: center; box-shadow: 0 8px 20px rgba(219, 39, 119, 0.25);" onclick="playClickSound()">⭐ Gabung Member</a>
+            </div>
         </div>
 
-        <div id="pricelist" class="section-box">
-            <h2>📋 Daftar Harga Lengkap</h2>
-            <div style="margin-bottom: 18px; max-width: 400px;">
-                <input type="text" id="searchInput" class="search-input" placeholder="🔍 Cari jenis layanan..." onkeyup="cariBarang()">
+        <!-- Kotak Daftar Harga dengan Animasi Gerak Melayang & Membal -->
+        <div id="pricelist" class="pricelist-animated-box">
+            
+            <!-- Hiasan Gelembung Gemas di Sudut -->
+            <div style="position: absolute; top: -15px; left: -15px; width: 50px; height: 50px; background: rgba(244, 114, 182, 0.1); border-radius: 50%;"></div>
+            <div style="position: absolute; bottom: -20px; right: -20px; width: 70px; height: 70px; background: rgba(244, 114, 182, 0.1); border-radius: 50%;"></div>
+
+            <!-- Ikon Papan Harga Animasi -->
+            <div class="pricelist-animated-icon">
+                📋
             </div>
-            <div id="priceListContainer" class="price-list-grid">
-                <div class="price-card-group">
-                    <div class="price-card-title">STANDAR [ 3 - 4 Hari ]</div>
-                    <div class="price-item"><span>CUCI Setrika</span><span>Rp 6.500 / Kg</span></div>
-                    <div class="price-item"><span>Cuci kering</span><span>Rp 4.500 / Kg</span></div>
-                    <div class="price-item"><span>Setrika</span><span>Rp 4.500 / Kg</span></div>
-                    <div class="price-item"><span>Drayer Only</span><span>Rp 4.500 / Kg</span></div>
-                    <div class="price-item"><span>Join Member</span><span>Rp 110.000 / 20Kg</span></div>
-                </div>
 
-                <div class="price-card-group">
-                    <div class="price-card-title">EXPRES [ 1 Hari ]</div>
-                    <div class="price-item"><span>Cuci Setrika</span><span>Rp 13.000 / Kg</span></div>
-                    <div class="price-item"><span>Cuci Kering</span><span>Rp 10.000 / Kg</span></div>
-                    <div class="price-item"><span>Setrika Only</span><span>Rp 8.000 / Kg</span></div>
-                    <div class="price-item"><span>Drayer Only</span><span>Rp 3.500 / Kg</span></div>
-                </div>
+            <!-- Judul -->
+            <h2 style="font-size: 1.35rem; font-weight: 800; color: #db2777; margin-bottom: 10px; letter-spacing: -0.3px; line-height: 1.4; display: block;">
+                DAFTAR HARGA / PRICE LIST
+            </h2>
 
-                <div class="price-card-group">
-                    <div class="price-card-title">KILAT [ 8 JAM ]</div>
-                    <div class="price-item"><span>Cuci Setrika</span><span>Rp 20.000 / Kg</span></div>
-                    <div class="price-item"><span>Cuci Kering</span><span>Rp 15.000 / Kg</span></div>
-                    <div class="price-item"><span>Drayer Only</span><span>Rp 7.000 / Kg</span></div>
-                </div>
+            <!-- Deskripsi -->
+            <p style="font-size: 0.85rem; color: #71717a; max-width: 420px; margin: 0 auto 22px auto; line-height: 1.5; font-weight: 500;">
+                Cek lengkap tarif cuci kiloan, satuan, hingga Surpet termurah dan terjangkau di Queen Laundry! Dijamin hemat tanpa ribet. 🌸
+            </p>
 
-                <div class="price-card-group" style="grid-column: 1 / -1;">
-                    <div class="price-card-title">HARGA SATUAN</div>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 8px 16px;">
-                        <div class="price-item"><span>Bedcover Single</span><span>Rp 20.000</span></div>
-                        <div class="price-item"><span>Bedcover Double</span><span>Rp 25.000</span></div>
-                        <div class="price-item"><span>Bedcover Jumbo</span><span>Rp 30.000</span></div>
-                        <div class="price-item"><span>Boneka Kecil</span><span>Rp 15.000</span></div>
-                        <div class="price-item"><span>Boneka Sedang</span><span>Rp 20.000</span></div>
-                        <div class="price-item"><span>Boneka Besar</span><span>Rp 25.000</span></div>
-                        <div class="price-item"><span>Celana Chino</span><span>Rp 12.000</span></div>
-                        <div class="price-item"><span>Handuk</span><span>Rp 5.000</span></div>
-                        <div class="price-item"><span>Jaket Biasa</span><span>Rp 20.000</span></div>
-                        <div class="price-item"><span>Jaket Tebal</span><span>Rp 25.000</span></div>
-                        <div class="price-item"><span>Jaket Kulit</span><span>Rp 35.000</span></div>
-                        <div class="price-item"><span>Sajadah Tipis</span><span>Rp 5.000</span></div>
-                        <div class="price-item"><span>Sajadah Tebal</span><span>Rp 8.000</span></div>
-                        <div class="price-item"><span>Sajadah Super Tebal</span><span>Rp 11.000</span></div>
-                        <div class="price-item"><span>Seprai</span><span>Rp 5.000</span></div>
-                        <div class="price-item"><span>Seprai 1 set</span><span>Rp 7.500</span></div>
-                        <div class="price-item"><span>Selimut Tipis Kecil</span><span>Rp 5.000</span></div>
-                        <div class="price-item"><span>Selimut Tipis Besar</span><span>Rp 10.000</span></div>
-                        <div class="price-item"><span>Pakaian Putih</span><span>Rp 1.500</span></div>
-                        <div class="price-item"><span>Peci Putih</span><span>Rp 3.500</span></div>
-                        <div class="price-item"><span>Mukena 1 set</span><span>Rp 2.500</span></div>
-                        <div class="price-item"><span>Sepatu</span><span>Rp 25.000</span></div>
-                        <div class="price-item"><span>Sandal Crocs</span><span>Rp 25.000</span></div>
-                        <div class="price-item"><span>Karpet kecil</span><span>Rp 25.000</span></div>
-                        <div class="price-item"><span>Kantong Tidur</span><span>Rp 27.000</span></div>
-                        <div class="price-item"><span>Karpet Sedang</span><span>Rp 30.000</span></div>
-                        <div class="price-item"><span>Karpet Besar</span><span>Rp 35.000</span></div>
-                        <div class="price-item"><span>Jas</span><span>Rp 35.000</span></div>
-                    </div>
-                </div>
-            </div>
+            <!-- Tombol Kapsul yang Manis & Empuk -->
+            <a href="pricelist.html" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: linear-gradient(135deg, #f472b6 0%, #db2777 100%); color: white; text-decoration: none; font-size: 0.88rem; font-weight: 700; padding: 12px 24px; border-radius: 50px; box-shadow: 0 8px 20px rgba(219, 39, 119, 0.35); transition: transform 0.2s ease, box-shadow 0.2s ease;" onclick="playClickSound()">
+                ✨ Buka Halaman Daftar Harga
+            </a>
         </div>
 
         <div id="testimoni" class="section-box">
@@ -866,6 +874,21 @@
             { nama: "Jas", harga: 35000 }
         ];
 
+        function hitungEstimasiSelesai(durasiHari) {
+            const hariArray = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+            const bulanArray = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+            
+            let sekarang = new Date();
+            sekarang.setDate(sekarang.getDate() + durasiHari);
+            
+            let namaHari = hariArray[sekarang.getDay()];
+            let tanggal = sekarang.getDate();
+            let bulan = bulanArray[sekarang.getMonth()];
+            let tahun = sekarang.getFullYear();
+            
+            return `${namaHari}, ${tanggal} ${bulan} ${tahun}`;
+        }
+
         function renderSatuanList() {
             let container = document.getElementById('listBarangSatuan');
             container.innerHTML = '';
@@ -931,9 +954,41 @@
         function salinAlamat() {
             playClickSound();
             let teksAlamat = "Kp. Jl. Cihaur, Sukarapih, Kec. Sukarame, Tasikmalaya";
-            navigator.clipboard.writeText(teksAlamat).then(() => {
-                showToast("📋 Alamat Disalin!", "Berhasil menyalin alamat ke clipboard.");
-            });
+            
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(teksAlamat).then(() => {
+                    showToast("📋 Alamat Disalin!", "Berhasil menyalin alamat ke clipboard.");
+                }).catch(() => {
+                    fallbackSalinAlamat(teksAlamat);
+                });
+            } else {
+                fallbackSalinAlamat(teksAlamat);
+            }
+        }
+
+        function fallbackSalinAlamat(teks) {
+            let textArea = document.createElement("textarea");
+            textArea.value = teks;
+            textArea.style.position = "fixed";  // Hindari scroll ke bawah di browser tertentu
+            textArea.style.top = "0";
+            textArea.style.left = "0";
+            textArea.style.opacity = "0";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            
+            try {
+                let berhasil = document.execCommand('copy');
+                if (berhasil) {
+                    showToast("📋 Alamat Disalin!", "Berhasil menyalin alamat ke clipboard.");
+                } else {
+                    alert("Gagal menyalin alamat.");
+                }
+            } catch (err) {
+                alert("Browser Anda tidak Mendukung Fitur Salin Otomatis.");
+            }
+            
+            document.body.removeChild(textArea);
         }
 
         function showToast(title, sub, icon = "✨") {
@@ -963,7 +1018,11 @@
             let selectKiloan = document.getElementById('pilihLayananKiloan');
             let kiloan = parseFloat(selectKiloan.value) || 0;
             let selectedOption = selectKiloan.options[selectKiloan.selectedIndex];
-            let estimasiText = selectedOption.getAttribute('data-estimasi') || "Estimasi Selesai: 3 - 4 Hari";
+            
+            let durasiHari = parseInt(selectedOption.getAttribute('data-days')) || 3;
+            let labelDurasi = selectedOption.getAttribute('data-label') || "3 Hari";
+            let tanggalSelesai = hitungEstimasiSelesai(durasiHari);
+            let estimasiText = `Estimasi Selesai: ${labelDurasi} (${tanggalSelesai})`;
             
             let berat = parseFloat(document.getElementById('beratKg').value) || 0;
             if (berat < 0) berat = 0;
@@ -984,19 +1043,11 @@
             document.getElementById('hasilTotal').innerText = "Rp " + total.toLocaleString('id-ID');
             document.getElementById('hasilEstimasi').innerText = estimasiText;
             
-            let textWa = `Halo Queen Laundry, saya mau order dengan estimasi total Rp ${total.toLocaleString('id-ID')}`;
+            let textWa = `Halo Queen Laundry, saya mau order dengan estimasi total Rp ${total.toLocaleString('id-ID')} (${estimasiText})`;
             if(detailPesananSatuan.length > 0) {
-                textWa += ` (${detailPesananSatuan.join(', ')})`;
+                textWa += ` [Item Satuan: ${detailPesananSatuan.join(', ')}]`;
             }
             document.getElementById('waOrderLink').href = `https://wa.me/6285770246502?text=${encodeURIComponent(textWa)}`;
-        }
-
-        function cariBarang() {
-            let input = document.getElementById('searchInput').value.toLowerCase();
-            document.querySelectorAll('.price-item').forEach(item => {
-                let nama = item.querySelector('span').textContent.toLowerCase();
-                item.style.display = nama.includes(input) ? "flex" : "none";
-            });
         }
 
         function cekStatusToko() {
@@ -1040,6 +1091,7 @@
             document.getElementById('themeToggleBtn').innerText = savedTheme === 'dark' ? '☀️' : '🌙';
 
             renderSatuanList();
+            hitungTotal();
             cekStatusToko();
             window.dispatchEvent(new Event('scroll'));
             
