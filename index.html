@@ -538,7 +538,6 @@
         .btn-maps { display: flex; justify-content: center; align-items: center; gap: 8px; background: #271c24; color: #fdf2f8; text-align: center; padding: 14px; border-radius: 14px; text-decoration: none; font-weight: 700; font-size: 0.9rem; margin-top: 12px; border: 1px solid #581c87; }
         .btn-wa-main { display: flex; justify-content: center; align-items: center; gap: 8px; background: var(--primary-gradient); color: white; text-align: center; padding: 14px; border-radius: 16px; text-decoration: none; font-weight: 700; font-size: 0.92rem; margin-top: 14px; box-shadow: 0 8px 25px rgba(219, 39, 119, 0.25); }
 
-        /* === ANIMASI KHUSUS KOTAK PRICE LIST === */
         @keyframes floatingBox {
             0% { transform: translateY(0px); box-shadow: 0 15px 35px -10px rgba(244, 114, 182, 0.2); }
             50% { transform: translateY(-6px); box-shadow: 0 22px 45px -10px rgba(219, 39, 119, 0.35); }
@@ -782,27 +781,19 @@
 
         <!-- Kotak Daftar Harga dengan Animasi Gerak Melayang & Membal -->
         <div id="pricelist" class="pricelist-animated-box">
-            
-            <!-- Hiasan Gelembung Gemas di Sudut -->
             <div style="position: absolute; top: -15px; left: -15px; width: 50px; height: 50px; background: rgba(244, 114, 182, 0.1); border-radius: 50%;"></div>
             <div style="position: absolute; bottom: -20px; right: -20px; width: 70px; height: 70px; background: rgba(244, 114, 182, 0.1); border-radius: 50%;"></div>
 
-            <!-- Ikon Papan Harga Animasi -->
-            <div class="pricelist-animated-icon">
-                📋
-            </div>
+            <div class="pricelist-animated-icon">📋</div>
 
-            <!-- Judul -->
             <h2 style="font-size: 1.35rem; font-weight: 800; color: #db2777; margin-bottom: 10px; letter-spacing: -0.3px; line-height: 1.4; display: block;">
                 DAFTAR HARGA / PRICE LIST
             </h2>
 
-            <!-- Deskripsi -->
             <p style="font-size: 0.85rem; color: #71717a; max-width: 420px; margin: 0 auto 22px auto; line-height: 1.5; font-weight: 500;">
                 Cek lengkap tarif cuci kiloan, satuan, hingga Surpet termurah dan terjangkau di Queen Laundry! Dijamin hemat tanpa ribet. 🌸
             </p>
 
-            <!-- Tombol Kapsul yang Manis & Empuk -->
             <a href="pricelist.html" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: linear-gradient(135deg, #f472b6 0%, #db2777 100%); color: white; text-decoration: none; font-size: 0.88rem; font-weight: 700; padding: 12px 24px; border-radius: 50px; box-shadow: 0 8px 20px rgba(219, 39, 119, 0.35); transition: transform 0.2s ease, box-shadow 0.2s ease;" onclick="playClickSound()">
                 ✨ Buka Halaman Daftar Harga
             </a>
@@ -969,7 +960,7 @@
         function fallbackSalinAlamat(teks) {
             let textArea = document.createElement("textarea");
             textArea.value = teks;
-            textArea.style.position = "fixed";  // Hindari scroll ke bawah di browser tertentu
+            textArea.style.position = "fixed";
             textArea.style.top = "0";
             textArea.style.left = "0";
             textArea.style.opacity = "0";
