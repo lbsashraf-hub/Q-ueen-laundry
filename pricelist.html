@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Harga Lengkap - Queen Laundry</title>
+    <!-- Ikon/Favicon Tab Browser -->
+    <link rel="icon" type="image/x-icon" href="queen-icon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="queen-icon.png">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #d946ef;
+            --primary-gradient: linear-gradient(135deg, #f472b6 0%, #db2777 100%);
+            --gold: #d97706;
+            --gold-gradient: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
+            --accent-glow: rgba(219, 39, 119, 0.15);
+            --bg-body: #fff5f8;
+            --card-bg: #ffffff;
+            --text-main: #3f3f46;
+            --text-muted: #71717a;
+            --border-color: #fbcfe8;
+            --radius-lg: 24px;
+            --radius-md: 16px;
+            --shadow-soft: 0 12px 35px -10px rgba(219, 39, 119, 0.08);
+            --shadow-hover: 0 20px 40px -15px rgba(219, 39, 119, 0.18);
+        }
+
+        [data-theme="dark"] {
+            --bg-body: #181116;
+            --card-bg: #271c24;
+            --text-main: #fce7f3;
+            --text-muted: #d946ef;
+            --border-color: #581c87;
+            --shadow-soft: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            scroll-behavior: smooth;
+            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+        }
+
+        body {
+            background: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding-bottom: 90px;
+        }
+
+        header {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 0.8rem 1.5rem;
+        }
+
+        .header-container {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-info h1 {
+            font-size: 1.3rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .brand-info p {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .icon-btn, .back-home-btn {
+            background: var(--bg-body);
+            border: 1px solid var(--border-color);
+            height: 42px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-main);
+            text-decoration: none;
+            padding: 0 14px;
+            transition: transform 0.2s ease;
+        }
+
+        .icon-btn { width: 42px; padding: 0; }
+        .icon-btn:hover, .back-home-btn:hover { transform: scale(1.05); }
+
+        .container {
+            max-width: 900px;
+            margin: 25px auto 0 auto;
+            padding: 0 20px;
+        }
+
+        .page-hero {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 30px 24px;
+            text-align: center;
+            margin-bottom: 24px;
+            box-shadow: var(--shadow-soft);
+            border: 1px solid var(--border-color);
+        }
+
+        .page-hero h2 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+
+        .page-hero p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            max-width: 550px;
+            margin: 0 auto 20px auto;
+        }
+
+        .search-box-wrapper {
+            position: relative;
+            max-width: 450px;
+            margin: 0 auto;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 16px 12px 42px;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-body);
+            color: var(--text-main);
+            font-size: 0.9rem;
+            outline: none;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .search-input:focus {
+            border-color: #db2777;
+            box-shadow: 0 0 0 4px var(--accent-glow);
+        }
+
+        .search-icon-abs {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1rem;
+        }
+
+        .section-box {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: var(--shadow-soft);
+            border: 1px solid var(--border-color);
+        }
+
+        .section-title {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        .price-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 14px;
+        }
+
+        .price-card {
+            background: var(--bg-body);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.2s ease;
+        }
+
+        .price-card:hover {
+            border-color: #db2777;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(219, 39, 119, 0.08);
+        }
+
+        .price-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        .item-name {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .item-badge {
+            font-size: 0.65rem;
+            font-weight: 700;
+            background: var(--primary-gradient);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 20px;
+            white-space: nowrap;
+        }
+
+        .item-desc {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+
+        .item-price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+            padding-top: 10px;
+            border-top: 1px dashed var(--border-color);
+        }
+
+        .item-price {
+            font-size: 0.95rem;
+            font-weight: 800;
+            color: #db2777;
+        }
+
+        .btn-order-item {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: #db2777;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 6px 12px;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .btn-order-item:hover {
+            background: #db2777;
+            color: white;
+            border-color: #db2777;
+        }
+
+        /* Desain Baru Banner Express Satuan yang Rapih & Elegan */
+        .express-notice-card {
+            background: linear-gradient(135deg, #fdf4f8 0%, #fae8ff 100%);
+            border: 1px dashed #f472b6;
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        [data-theme="dark"] .express-notice-card {
+            background: linear-gradient(135deg, #381f33 0%, #2e1035 100%);
+            border-color: #db2777;
+        }
+
+        .express-notice-content h4 {
+            font-size: 0.9rem;
+            font-weight: 800;
+            color: #db2777;
+            margin-bottom: 4px;
+        }
+
+        .express-notice-content p {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .btn-express-wa {
+            background: #25d366;
+            color: white;
+            font-size: 0.78rem;
+            font-weight: 700;
+            padding: 10px 16px;
+            border-radius: 12px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.2);
+            transition: transform 0.2s ease;
+        }
+
+        .btn-express-wa:hover {
+            transform: scale(1.02);
+        }
+
+        #noResultFound {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            display: none;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            color: var(--text-muted);
+            font-size: 0.78rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <div class="brand-info">
+                <h1>👑 Queen Laundry</h1>
+                <p>Daftar Harga Transparan</p>
+            </div>
+            <div class="header-actions">
+                <button class="icon-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Ubah Tema">🌙</button>
+                <a href="index.html" class="back-home-btn" onclick="playClickSound()">⬅️ Beranda</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        
+        <div class="page-hero">
+            <h2>📋 Pricelist Queen Laundry</h2>
+            <p>Pilihan layanan lengkap dengan harga terbaik dan transparan untuk kenyamanan pakaian kesayangan Anda.</p>
+            <div class="search-box-wrapper">
+                <span class="search-icon-abs">🔍</span>
+                <input type="text" id="searchInput" class="search-input" placeholder="Cari layanan (contoh: Bedcover, Kiloan, Surpet)..." oninput="filterPricelist()">
+            </div>
+        </div>
+
+        <div id="noResultFound">
+            <div style="font-size: 2rem; margin-bottom: 8px;">🤔</div>
+            Maaf, layanan yang Anda cari tidak ditemukan. Coba kata kunci lain atau hubungi admin kami!
+        </div>
+
+        <!-- 1. Layanan Kiloan -->
+        <div class="section-box pricelist-category" id="secKiloan">
+            <div class="section-title">⚖️ Layanan Kiloan & Reguler</div>
+            <div class="price-grid">
+                <div class="price-card" data-name="standar cuci setrika kiloan">
+                    <div>
+                        <div class="price-card-header">
+                            <span class="item-name">Standar - Cuci Setrika</span>
+                            <span class="item-badge">3 Hari</span>
+                        </div>
+                        <div class="item-desc">Pencucian bersih menyeluruh lengkap dengan lipatan rapi dan setrika profesional.</div>
+                    </div>
+                    <div class="item-price-row">
+                        <span class="item-price">Rp 6.500 / kg</span>
+                        <a href="https://wa.me/6285770246502?text=Halo%20Queen%20Laundry,%20saya%20mau%20pesan%20layanan%20Standar%20Cuci%20Setrika" target="_blank" class="btn-order-item" onclick="playClickSound()">Pesan</a>
+                    </div>
+                </div>
+
+                <div class="price-card" data-name="standar cuci kering kiloan">
+                    <div>
+                        <div class="price-card-header">
+                            <span class="item-name">Standar - Cuci Kering</span>
+                            <span class="item-badge">3 Hari</span>
+                        </div>
+                        <div class="item-desc">Cocok untuk pakaian kasual harian yang hanya membutuhkan proses cuci bersih.</div>
+                    </div>
+                    <div class="item-price-row">
+                        <span class="item-price">Rp 4.500 / kg</span>
+                        <a href="https://wa.me/6285770246502?text=Halo%20Queen%20Laundry,%20saya%20mau%20pesan%20layanan%20Standar%20Cuci%20Kering" target="_blank" class="btn-order-item" onclick="playClickSound()">Pesan</a>
+                    </div>
+                </div>
+
+                <div class="price-card" data-name="standar setrika saja kiloan">
+                    <div>
+                        <div class="price-card-header">
+                            <span class="item-name">Standar - Setrika Saja</span>
+                            <span class="item-badge">3 Hari</span>
+                        </div>
+                        <div class="item-desc">Pakaian Anda yang sudah bersih disetrika halus dan wangi tahan lama.</div>
+                    </div>
+                    <div class="item-price-row">
+                        <span class="item-price">Rp 4.500 / kg</span>
+                        <a href="https://wa.me/6285770246502?text=Halo%20Queen%20Laundry,%20saya%20mau%20pesan%20layanan%20Standar%20Setrika" target="_blank" class="btn-order-item" onclick="playClickSound()">Pesan</a>
+                    </div>
+                </div>
+
+                <div class="price-card" data-name="standar dryer only pengering kiloan">
+                    <div>
+                        <div class="price-card-header">
+                            <span class="item-name">Standar - Dryer Only</span>
+                            <span class="item-badge">3 Hari</span>
+                        </div>
+                        <div class="item-desc">Layanan pengeringan kilat menggunakan mesin pengering modern berstandar tinggi.</div>
+                    </div>
+                    <div class="item-price-row">
+                        <span class="item-price">Rp 4.500 / kg</span>
+                        <a href="https://wa.me/6285770246502?text=Halo%20Queen%20Laundry,%20saya%20mau%20pesan%20layanan%20Dryer%20Only" target="_blank" class="btn-order-item" onclick="playClickSound()">Pesan</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. Layanan Express & Kilat -->
+        <div class="section-box pricelist-category" id="secExpress">
+            <div class="section-title">🚀 Layanan Express & Kilat</div>
+            <div class="price-grid">
+                <div class="price-card" data-name="express cuci setrika 1 hari">
+                    <div>
+                        <div class="price-card-header">
+                            <span class="item-name">Express - Cuci Setrika</span>
+                            <span class="item-badge" style="background: var(--gold-gradient); color: #181116;">1 Hari</span>
+                        </div>
+                        <div class="item-desc">Solusi cepat pakaian bersih dan rapi selesai dalam 24 jam.</div>
+                    </div>
+                    <div class="item-price-row">
+                        <span class="item-price">Rp 13.000 / kg</span>
+                        <a href="https://wa.me/6285770246502?text=Halo%20Queen%20Laundry,%20saya%20mau%20pesan%20Express%20Cuci%20Setrika" target="_blank" class="btn-order-item" onclick="playClickSound()">Pesan</a>
+                    </div>
+                </div>
+
+                <div class="price-card" data-name="express cuci kering 1 hari">
+                    <div>
+                        <div class="price-card-header">
+                            <span class="item-name">Express - Cuci Kering</span>
+                            <span class="item-badge" style="background: var(--gold-gradient); color: #181116;">1 Hari</span>
+                        </div>
+                        <div class="item-desc">Proses pencucian dan pengeringan kilat 24 jam.</div>
+                    </div>
+                    <div class="item-price-row">
+                        <span class="item-price">Rp 10.000 / kg</span>
+                        <a href="https://wa.me/6285770246502?text=Halo%20Queen%20Laundry,%20saya%20mau%20pesan%20Express%20Cuci%20Kering" target="_blank" class="btn-order-item" onclick="playClickSound()">Pesan</a>
+                    </div>
+                </div>
+
+                <div class="price-card" data-name="kilat 8 jam cuci setrika">
+                    <div>
+                        <div class="price-card-header">
+                            <span class="item-name">Kilat - Cuci Setrika 8 Jam</span>
+                            <span class="item-badge" style="background: #ef4444;">Super Kilat</span>
+                        </div>
+                        <div class="item-desc">Sangat mendesak? Selesai dalam hitungan jam di hari yang sama!</div>
+                    </div>
+                    <div class="item-price-row">
+                        <span class="item-price">Rp 20.000 / kg</span>
+                        <a href="https://wa.me/6285770246502?text=Halo%20Queen%20Laundry,%20saya%20mau%20pesan%20Kilat%208%20Jam%20Cuci%20Setrika" target="_blank" class="btn-order-item" onclick="playClickSound()">Pesan</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Barang Satuan & Bedcover -->
+        <div class="section-box pricelist-category" id="secSatuan">
+            <div class="section-title">👔 Layanan Barang Satuan & Perlengkapan</div>
+            
+            <!-- Banner Informasi Express Satuan (Desain Rapi & Proporsional) -->
+            <div class="express-notice-card" data-name="express satuan kilat">
+                <div class="express-notice-content">
+                    <h4>⚡ Butuh Layanan Express Satuan?</h4>
+                    <p>Untuk pengerjaan express/kilat barang satuan, silakan hubungi admin kami terlebih dahulu.</p>
+                </div>
+                <a href="https://wa.me/6285770246502?text=Halo%20Queen%20Laundry,%20saya%20mau%20tanya%20untuk%20harga%20dan%20layanan%20express%20satuan" target="_blank" class="btn-express-wa" onclick="playClickSound()">💬 Hubungi Admin via WhatsApp</a>
+            </div>
+
+            <div class="price-grid" id="satuanGrid">
+                <!-- Dimasukkan otomatis via Javascript -->
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        &copy; 2026 Queen Laundry<br>Website created AshrafNr.
+    </footer>
+
+    <script>
+        const dataSatuan = [
+            { nama: "Bedcover Single", harga: 20000, desc: "Pencucian khusus selimut bedcover ukuran single agar higienis." },
+            { nama: "Bedcover Double", harga: 25000, desc: "Perawatan maksimal untuk bedcover ukuran sedang/double." },
+            { nama: "Bedcover Jumbo", harga: 30000, desc: "Pencucian bersih menyeluruh untuk ukuran king/jumbo." },
+            { nama: "Boneka Kecil", harga: 15000, desc: "Aman untuk bulu boneka dan bebas dari tungau debu." },
+            { nama: "Boneka Sedang", harga: 20000, desc: "Pencucian lembut menjaga bentuk dan kelembutan boneka." },
+            { nama: "Boneka Besar", harga: 25000, desc: "Perawatan deep clean khusus boneka ukuran besar." },
+            { nama: "Celana Chino", harga: 12000, desc: "Pewarnaan dan serat celana tetap terjaga awet." },
+            { nama: "Handuk", harga: 5000, desc: "Dibersihkan dengan anti-bakteri agar tetap lembut menyerap air." },
+            { nama: "Jaket Biasa", harga: 20000, desc: "Perawatan jaket harian agar wangi dan nyaman dipakai." },
+            { nama: "Jaket Tebal", harga: 25000, desc: "Pencucian khusus jaket tebal/hoodie agar kering merata." },
+            { nama: "Jaket Kulit", harga: 35000, desc: "Pembersihan khusus bahan kulit sintetis/asli secara hati-hati." },
+            { nama: "Sajadah Tipis", harga: 5000, desc: "Kebersihan terjaga untuk kenyamanan ibadah shalat." },
+            { nama: "Sajadah Tebal", harga: 8000, desc: "Pencucian higienis untuk sajadah tebal berbulu." },
+            { nama: "Sajadah Super Tebal", harga: 11000, desc: "Perawatan ekstra bersih untuk sajadah ukuran ekstra tebal." },
+            { nama: "Seprai", harga: 5000, desc: "Seprai bersih harum membuat tidur lebih nyenyak." },
+            { nama: "Seprai 1 Set", harga: 7500, desc: "Termasuk sarung bantal dan guling lengkap." },
+            { nama: "Selimut Tipis Kecil", harga: 5000, desc: "Pencucian kilat selimut tipis harian." },
+            { nama: "Selimut Tipis Besar", harga: 10000, desc: "Selimut besar bersih wangi menyeluruh." },
+            { nama: "Pakaian Putih", harga: 2500, desc: "Dengan pengerjaan Manual dan menggunakan sabun khusus." },
+            { nama: "Peci Putih", harga: 3500, desc: "Peci bersih dan rapi kembali siap pakai." },
+            { nama: "Mukena 1 Set", harga: 2500, desc: "Wangi segar dan higienis untuk perlengkapan ibadah." },
+            { nama: "Sepatu", harga: 25000, desc: "Deep cleaning sol dan upper sepatu secara detail." },
+            { nama: "Sandal Crocs", harga: 25000, desc: "Pencucian bersih dan maksimal menggunakam sikat dan sabun khusus." },
+            { nama: "Surpet Kecil", harga: 25000, desc: "Pembersihan menyeluruh surpet ukuran kecil." },
+            { nama: "Kantong Tidur (Sleeping Bag)", harga: 27000, desc: "Pembersihan menyeluruh perlengkapan outdoor." },
+            { nama: "Surpet Sedang", harga: 30000, desc: "Menghilangkan debu dalam serat surpet sedang." },
+            { nama: "Surpet Besar", harga: 35000, desc: "Perawatan maksimal surpet ruang tamu Anda." },
+            { nama: "Jas", harga: 35000, desc: "Dry cleaning profesional khusus jas formal." }
+        ];
+
+        function renderSatuanGrid() {
+            let grid = document.getElementById('satuanGrid');
+            grid.innerHTML = '';
+            dataSatuan.forEach(item => {
+                let card = document.createElement('div');
+                card.className = 'price-card';
+                card.setAttribute('data-name', item.nama.toLowerCase() + " " + item.desc.toLowerCase());
+                card.innerHTML = `
+                    <div>
+                        <div class="price-card-header">
+                            <span class="item-name">${item.nama}</span>
+                            <span class="item-badge">Satuan</span>
+                        </div>
+                        <div class="item-desc">${item.desc}</div>
+                    </div>
+                    <div class="item-price-row">
+                        <span class="item-price">Rp ${item.harga.toLocaleString('id-ID')}</span>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterPricelist() {
+            let keyword = document.getElementById('searchInput').value.toLowerCase().trim();
+            let allCards = document.querySelectorAll('.price-card, .express-notice-card');
+            let totalVisible = 0;
+
+            allCards.forEach(card => {
+                let nameAttr = card.getAttribute('data-name') || "";
+                if (nameAttr.includes(keyword) || keyword === "") {
+                    card.style.display = "flex";
+                    totalVisible++;
+                } else {
+                    card.style.display = "none";
+                }
+            });
+
+            document.querySelectorAll('.pricelist-category').forEach(cat => {
+                let visibleInCat = cat.querySelectorAll('.price-card[style*="display: flex"], .express-notice-card[style*="display: flex"]').length;
+                if (visibleInCat > 0) {
+                    cat.style.display = "block";
+                } else {
+                    cat.style.display = "none";
+                }
+            });
+
+            let noResult = document.getElementById('noResultFound');
+            if (totalVisible === 0) {
+                noResult.style.display = "block";
+            } else {
+                noResult.style.display = "none";
+            }
+        }
+
+        function playClickSound() {
+            try {
+                let audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                let osc = audioCtx.createOscillator();
+                let gain = audioCtx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(600, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(800, audioCtx.currentTime + 0.05);
+                gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.05);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.05);
+            } catch (e) {}
+        }
+
+        function toggleTheme() {
+            playClickSound();
+            let currentTheme = document.documentElement.getAttribute('data-theme');
+            let newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('queen_theme', newTheme);
+            document.getElementById('themeToggleBtn').innerText = newTheme === 'dark' ? '☀️' : '🌙';
+        }
+
+        window.onload = function() {
+            let savedTheme = localStorage.getItem('queen_theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            document.getElementById('themeToggleBtn').innerText = savedTheme === 'dark' ? '☀️' : '🌙';
+            renderSatuanGrid();
+        };
+    </script>
+</body>
+</html>
