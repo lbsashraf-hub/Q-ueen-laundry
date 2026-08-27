@@ -9,6 +9,10 @@
     <link rel="shortcut icon" type="image/x-icon" href="queen-icon.webp">
     
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Pustaka Supabase Client via CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
     <style>
         :root {
             --primary: #d946ef;
@@ -136,7 +140,7 @@
         }
 
         .dropdown-menu.active {
-            max-height: 800px;
+            max-height: 900px;
             padding: 15px;
             margin-top: 12px;
         }
@@ -204,6 +208,128 @@
             gap: 10px;
         }
 
+        /* STYLING MODAL PASSWORD KUSTOM YANG ELEGAN */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-box {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            width: 100%;
+            max-width: 400px;
+            border-radius: 24px;
+            padding: 28px;
+            box-shadow: 0 25px 50px -12px rgba(219, 39, 119, 0.25);
+            transform: scale(0.9) translateY(20px);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            text-align: center;
+        }
+
+        .modal-overlay.active .modal-box {
+            transform: scale(1) translateY(0);
+        }
+
+        .modal-icon {
+            font-size: 2.8rem;
+            margin-bottom: 12px;
+            background: var(--bg-body);
+            width: 70px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-left: auto;
+            margin-right: auto;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 8px 20px rgba(219, 39, 119, 0.1);
+        }
+
+        .modal-title {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 6px;
+        }
+
+        .modal-desc {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .modal-input {
+            width: 100%;
+            padding: 14px 16px;
+            border-radius: 14px;
+            border: 1px solid var(--border-color);
+            font-size: 0.95rem;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--bg-body);
+            color: var(--text-main);
+            outline: none;
+            text-align: center;
+            letter-spacing: 2px;
+            margin-bottom: 16px;
+            transition: all 0.2s ease;
+        }
+
+        .modal-input:focus {
+            border-color: #db2777;
+            box-shadow: 0 0 0 4px var(--accent-glow);
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .modal-btn-submit, .modal-btn-cancel {
+            flex: 1;
+            padding: 12px;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 0.88rem;
+            cursor: pointer;
+            border: none;
+            transition: transform 0.1s ease;
+        }
+
+        .modal-btn-submit {
+            background: var(--primary-gradient);
+            color: white;
+            box-shadow: 0 8px 20px rgba(219, 39, 119, 0.3);
+        }
+
+        .modal-btn-cancel {
+            background: var(--bg-body);
+            color: var(--text-muted);
+            border: 1px solid var(--border-color);
+        }
+
+        .modal-btn-submit:active, .modal-btn-cancel:active {
+            transform: scale(0.96);
+        }
+
         #toastBox {
             position: fixed;
             bottom: 20px;
@@ -247,7 +373,7 @@
             opacity: 0;
             visibility: hidden;
             transition: all 0.3s ease;
-            z-index: 999;
+            z-index: 997;
         }
 
         #backToTop.show { opacity: 1; visibility: visible; }
@@ -588,6 +714,20 @@
 </head>
 <body>
 
+    <!-- KOTAK MODAL PASSWORD KUSTOM YANG ELEGAN -->
+    <div id="adminModal" class="modal-overlay">
+        <div class="modal-box">
+            <div class="modal-icon">🔐</div>
+            <div class="modal-title">Panel Admin Rahasia</div>
+            <div class="modal-desc">Masukkan password akses khusus untuk masuk ke halaman manajemen admin Queen Laundry.</div>
+            <input type="password" id="inputAdminPassword" class="modal-input" placeholder="••••••••" onkeydown="if(event.key === 'Enter'){ prosesLoginAdmin(); }">
+            <div class="modal-buttons">
+                <button type="button" class="modal-btn-cancel" onclick="tutupModalAdmin()">Batal</button>
+                <button type="button" class="modal-btn-submit" onclick="prosesLoginAdmin()">Masuk 🚀</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Toast Floating Notification -->
     <div id="toastBox">
         <div class="toast-icon" id="toastIcon">✨</div>
@@ -607,6 +747,8 @@
                 <p>Modern & Professional Care</p>
             </div>
             <div class="header-actions">
+                <!-- TOMBOL RAHASIA ADMIN DI HEADER -->
+                <button class="icon-btn" onclick="aksesAdmin();" title="Panel Admin Rahasia">🔐</button>
                 <button class="icon-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Ubah Tema">🌙</button>
                 <button class="hamburger-btn" onclick="toggleMenu()" aria-label="Menu">
                     <span></span><span></span><span></span>
@@ -619,12 +761,15 @@
                 <li><a href="promo.html" onclick="playClickSound()">🎉 Klaim Promo Maulid Nabi</a></li>
                 <li><a href="sabun.html" onclick="playClickSound()">🧼 Sabun Laundry Premium (5L)</a></li>
                 <li><a href="#kalkulator" onclick="toggleMenu(); playClickSound()">🧮 Kalkulator & Estimasi Ongkir</a></li>
+                <li><a href="#cek-saldo" onclick="toggleMenu(); playClickSound()">💳 Cek Saldo Member Mandiri</a></li>
                 <li><a href="#galeri" onclick="toggleMenu(); playClickSound()">🖼️ Galeri & Suasana Laundry</a></li>
                 <li><a href="member.html" onclick="playClickSound()">⭐ Keuntungan & Gabung Member</a></li>
                 <li><a href="garansi.html" onclick="playClickSound()">🛡️ Ketentuan Garansi</a></li>
                 <li><a href="pricelist.html" onclick="playClickSound()">📋 Daftar Harga Lengkap</a></li>
                 <li><a href="#testimoni" onclick="toggleMenu(); playClickSound()">💬 Testimoni & Ulasan</a></li>
                 <li><a href="#lokasi" onclick="toggleMenu(); playClickSound()">📍 Lokasi & Kontak</a></li>
+                <!-- LINK MENU ADMIN -->
+                <li><a href="#" onclick="aksesAdmin(); return false;" style="background: linear-gradient(135deg, #fdf2f8 0%, #fae8ff 100%); border-color: #f472b6; color: #db2777;">🔐 Masuk Panel Admin Rahasia</a></li>
             </ul>
         </div>
     </header>
@@ -665,6 +810,26 @@
                             <div style="font-size: 0.78rem; color: var(--text-muted);">Memberikan keharuman mewah tahan lama.</div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FITUR CEK SALDO MEMBER DARI SUPABASE -->
+        <div id="cek-saldo" class="section-box">
+            <h2>💳 Cek Saldo Member Mandiri</h2>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 16px;">Masukkan nama lengkap Anda yang terdaftar sebagai member untuk melihat sisa saldo dan masa aktif.</p>
+            
+            <div class="calc-section-card">
+                <div class="calc-group">
+                    <label>Nama Lengkap Member:</label>
+                    <div style="display: flex; gap: 10px;">
+                        <input type="text" id="inputNamaMember" class="search-input" placeholder="Contoh: Ashyam" onkeydown="if(event.key === 'Enter'){ cekSaldoMember(); playClickSound(); }">
+                        <button type="button" onclick="cekSaldoMember(); playClickSound()" style="background: var(--primary-gradient); color: white; border: none; padding: 0 20px; border-radius: 14px; font-weight: 700; font-size: 0.88rem; cursor: pointer; white-space: nowrap;">Cek Saldo</button>
+                    </div>
+                </div>
+                
+                <div id="hasilCekSaldo" style="margin-top: 16px; display: none; background: var(--card-bg); border: 1px solid var(--border-color); padding: 16px; border-radius: 14px;">
+                    <!-- Hasil akan dirender via JS -->
                 </div>
             </div>
         </div>
@@ -817,10 +982,20 @@
 
         <div id="lokasi" class="section-box">
             <h2>📍 Lokasi & Kontak</h2>
+            
+            <!-- Kotak Alamat dengan Tombol Salin Khusus -->
             <div class="address-box" onclick="salinAlamat()" title="Klik untuk menyalin alamat">
-                <p style="font-size: 0.88rem; color: var(--text-main); margin-bottom: 2px;"><b>Alamat:</b> Kp. Jl. Cihaur, Sukarapih, Kec. Sukarame, Tasikmalaya</p>
-                <span style="font-size: 0.72rem; color: #db2777; font-weight: 700;">📌 Ketuk untuk menyalin alamat</span>
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 10px;">
+                    <div>
+                        <p style="font-size: 0.88rem; color: var(--text-main); margin-bottom: 2px;"><b>Alamat:</b> <span id="teksAlamatLengkap">Kp. Jl. Cihaur, Sukarapih, Kec. Sukarame, Tasikmalaya</span></p>
+                        <span id="labelStatusSalin" style="font-size: 0.72rem; color: #db2777; font-weight: 700;">📌 Ketuk area ini atau tombol untuk menyalin alamat</span>
+                    </div>
+                    <button type="button" onclick="event.stopPropagation(); salinAlamat();" style="background: var(--primary-gradient); color: white; border: none; padding: 6px 12px; border-radius: 10px; font-size: 0.75rem; font-weight: 700; cursor: pointer; white-space: nowrap; box-shadow: 0 4px 12px rgba(219, 39, 119, 0.2);">
+                        📋 Salin
+                    </button>
+                </div>
             </div>
+
             <div id="statusToko" style="display: inline-block; padding: 5px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; margin-bottom: 16px;"></div>
             <div style="display: flex; gap: 10px; flex-wrap: wrap;">
                 <a href="https://maps.app.goo.gl/K3b4yoQHxTkgiiFn8" target="_blank" class="btn-maps" style="flex: 1; margin-top: 0;" onclick="playClickSound()">🗺️ Buka di Google Maps</a>
@@ -834,6 +1009,55 @@
     </footer>
 
     <script>
+        // Konfigurasi Supabase untuk Beranda (index.html)
+        const SUPABASE_URL = 'https://uxutxeclfcvcvdiydmpw.supabase.co';
+        const SUPABASE_ANON_KEY = 'sb_publishable_UMV1G-z6vj5x0sRKlvZfVA_ap4qZFkA';
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        // Fungsi Membuka Modal Proteksi Password Admin Kustom
+        function aksesAdmin() {
+            playClickSound();
+            
+            // Cek apakah sudah pernah login dengan benar sebelumnya di sesi tab ini
+            let sudahLogin = sessionStorage.getItem('queen_admin_auth');
+            if (sudahLogin === 'true') {
+                window.location.href = 'admin.html';
+                return;
+            }
+
+            // Tampilkan modal kustom
+            let modal = document.getElementById('adminModal');
+            let passwordInput = document.getElementById('inputAdminPassword');
+            modal.classList.add('active');
+            passwordInput.value = '';
+            setTimeout(() => passwordInput.focus(), 100);
+        }
+
+        // Fungsi Menutup Modal Password
+        function tutupModalAdmin() {
+            playClickSound();
+            document.getElementById('adminModal').classList.remove('active');
+        }
+
+        // Fungsi Memproses Password yang Diketik di Modal
+        function prosesLoginAdmin() {
+            playClickSound();
+            let passwordSandi = "queen123"; // Ganti dengan password yang diinginkan
+            let inputUser = document.getElementById('inputAdminPassword').value;
+
+            if (inputUser === passwordSandi) {
+                sessionStorage.setItem('queen_admin_auth', 'true');
+                window.location.href = 'admin.html';
+            } else {
+                showToast("❌ Password Salah!", "Kata sandi panel admin keliru.", "⚠️");
+                let inputEl = document.getElementById('inputAdminPassword');
+                inputEl.style.borderColor = "#ef4444";
+                setTimeout(() => {
+                    inputEl.style.borderColor = "";
+                }, 1000);
+            }
+        }
+
         const dataSatuan = [
             { nama: "Bedcover Single", harga: 20000 },
             { nama: "Bedcover Double", harga: 25000 },
@@ -864,6 +1088,80 @@
             { nama: "Karpet Besar", harga: 35000 },
             { nama: "Jas", harga: 35000 }
         ];
+
+        // Fungsi Cek Saldo Langsung dari Supabase
+        async function cekSaldoMember() {
+            let keyword = document.getElementById('inputNamaMember').value.trim().toLowerCase();
+            let hasilBox = document.getElementById('hasilCekSaldo');
+            
+            if (!keyword) {
+                hasilBox.style.display = 'block';
+                hasilBox.innerHTML = `<div style="color: #b91c1c; font-size: 0.85rem; font-weight: 700;">⚠️ Silakan masukkan nama lengkap member terlebih dahulu.</div>`;
+                return;
+            }
+
+            hasilBox.style.display = 'block';
+            hasilBox.innerHTML = `<div style="font-size: 0.85rem; color: var(--text-muted); text-align: center;">Mencari data member di database...</div>`;
+
+            let { data, error } = await supabaseClient
+                .from('kouta_member')
+                .select('*')
+                .ilike('name', `%${keyword}%`);
+
+            if (error) {
+                hasilBox.innerHTML = `<div style="color: #b91c1c; font-size: 0.85rem; font-weight: 700;">Gagal memuat data: ${error.message}</div>`;
+                return;
+            }
+
+            if (!data || data.length === 0) {
+                hasilBox.innerHTML = `
+                    <div style="font-size: 0.88rem; font-weight: 800; color: #b91c1c; margin-bottom: 4px;">❌ Member Tidak Ditemukan</div>
+                    <div style="font-size: 0.82rem; color: var(--text-muted);">Nama "${keyword}" tidak terdaftar dalam database member aktif. Pastikan ejaan nama sudah benar.</div>
+                `;
+                return;
+            }
+
+            let memberDitemukan = data[0];
+
+            let formatRupiah = new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                maximumFractionDigits: 0
+            }).format(memberDitemukan.saldo);
+
+            let tanggalJoinFormatted = '-';
+            if (memberDitemukan.created_at) {
+                let dateObj = new Date(memberDitemukan.created_at);
+                tanggalJoinFormatted = dateObj.toLocaleDateString('id-ID', {
+                    day: 'numeric',
+                    month: 'long',
+                    year: 'numeric'
+                });
+            }
+
+            let statusBadge = '';
+            let statusNotif = '';
+
+            if (memberDitemukan.saldo <= 0) {
+                statusBadge = `<div style="font-size: 0.78rem; font-weight: 700; color: #b91c1c; background: #fef2f2; padding: 6px 10px; border-radius: 8px; display: inline-block;">❌ Saldo Habis / Expired</div>`;
+                statusNotif = '⚠️ Saldo kuota member Anda sudah habis. Silakan lakukan top up atau perpanjang member!';
+            } else if (memberDitemukan.saldo <= 20000) {
+                statusBadge = `<div style="font-size: 0.78rem; font-weight: 700; color: #d97706; background: #fef3c7; padding: 6px 10px; border-radius: 8px; display: inline-block;">⚠️ Saldo Menipis</div>`;
+                statusNotif = '💡 Saldo mulai menipis, yuk segera top up!';
+            } else {
+                statusBadge = `<div style="font-size: 0.78rem; font-weight: 700; color: #059669; background: #ecfdf5; padding: 6px 10px; border-radius: 8px; display: inline-block;">✨ Aktif</div>`;
+                statusNotif = '✨ Saldo Anda masih banyak dan siap digunakan!';
+            }
+            
+            hasilBox.innerHTML = `
+                <div style="font-size: 0.9rem; font-weight: 800; color: #db2777; margin-bottom: 6px;">🎉 Data Member Ditemukan!</div>
+                <div style="font-size: 0.85rem; color: var(--text-main); margin-bottom: 4px;"><b>Nama:</b> ${memberDitemukan.name}</div>
+                <div style="font-size: 0.85rem; color: var(--text-main); margin-bottom: 4px;"><b>Sisa Saldo:</b> <span style="color: #db2777; font-weight: 800;">${formatRupiah}</span></div>
+                <div style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 8px;"><b>Tanggal Bergabung:</b> ${tanggalJoinFormatted}</div>
+                <div style="margin-bottom: 6px;"><b>Status:</b> ${statusBadge}</div>
+                <div style="font-size: 0.78rem; color: var(--text-muted);">${statusNotif}</div>
+            `;
+        }
 
         function hitungEstimasiSelesai(durasiHari) {
             const hariArray = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
@@ -944,11 +1242,20 @@
 
         function salinAlamat() {
             playClickSound();
-            let teksAlamat = "Kp. Jl. Cihaur, Sukarapih, Kec. Sukarame, Tasikmalaya";
+            let teksAlamat = document.getElementById('teksAlamatLengkap').innerText;
+            let labelStatus = document.getElementById('labelStatusSalin');
             
             if (navigator.clipboard && navigator.clipboard.writeText) {
                 navigator.clipboard.writeText(teksAlamat).then(() => {
                     showToast("📋 Alamat Disalin!", "Berhasil menyalin alamat ke clipboard.");
+                    if(labelStatus) {
+                        labelStatus.innerText = "✨ Alamat Berhasil Disalin ke Clipboard!";
+                        labelStatus.style.color = "#059669";
+                        setTimeout(() => {
+                            labelStatus.innerText = "📌 Ketuk area ini atau tombol untuk menyalin alamat";
+                            labelStatus.style.color = "#db2777";
+                        }, 3000);
+                    }
                 }).catch(() => {
                     fallbackSalinAlamat(teksAlamat);
                 });
@@ -968,10 +1275,19 @@
             textArea.focus();
             textArea.select();
             
+            let labelStatus = document.getElementById('labelStatusSalin');
             try {
                 let berhasil = document.execCommand('copy');
                 if (berhasil) {
                     showToast("📋 Alamat Disalin!", "Berhasil menyalin alamat ke clipboard.");
+                    if(labelStatus) {
+                        labelStatus.innerText = "✨ Alamat Berhasil Disalin ke Clipboard!";
+                        labelStatus.style.color = "#059669";
+                        setTimeout(() => {
+                            labelStatus.innerText = "📌 Ketuk area ini atau tombol untuk menyalin alamat";
+                            labelStatus.style.color = "#db2777";
+                        }, 3000);
+                    }
                 } else {
                     alert("Gagal menyalin alamat.");
                 }
