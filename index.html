@@ -208,128 +208,6 @@
             gap: 10px;
         }
 
-        /* STYLING MODAL PASSWORD KUSTOM YANG ELEGAN */
-        .modal-overlay {
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            padding: 20px;
-        }
-
-        .modal-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .modal-box {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            width: 100%;
-            max-width: 400px;
-            border-radius: 24px;
-            padding: 28px;
-            box-shadow: 0 25px 50px -12px rgba(219, 39, 119, 0.25);
-            transform: scale(0.9) translateY(20px);
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            text-align: center;
-        }
-
-        .modal-overlay.active .modal-box {
-            transform: scale(1) translateY(0);
-        }
-
-        .modal-icon {
-            font-size: 2.8rem;
-            margin-bottom: 12px;
-            background: var(--bg-body);
-            width: 70px;
-            height: 70px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            margin-left: auto;
-            margin-right: auto;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 8px 20px rgba(219, 39, 119, 0.1);
-        }
-
-        .modal-title {
-            font-size: 1.2rem;
-            font-weight: 800;
-            color: var(--text-main);
-            margin-bottom: 6px;
-        }
-
-        .modal-desc {
-            font-size: 0.82rem;
-            color: var(--text-muted);
-            margin-bottom: 20px;
-            line-height: 1.5;
-        }
-
-        .modal-input {
-            width: 100%;
-            padding: 14px 16px;
-            border-radius: 14px;
-            border: 1px solid var(--border-color);
-            font-size: 0.95rem;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background: var(--bg-body);
-            color: var(--text-main);
-            outline: none;
-            text-align: center;
-            letter-spacing: 2px;
-            margin-bottom: 16px;
-            transition: all 0.2s ease;
-        }
-
-        .modal-input:focus {
-            border-color: #db2777;
-            box-shadow: 0 0 0 4px var(--accent-glow);
-        }
-
-        .modal-buttons {
-            display: flex;
-            gap: 10px;
-        }
-
-        .modal-btn-submit, .modal-btn-cancel {
-            flex: 1;
-            padding: 12px;
-            border-radius: 14px;
-            font-weight: 700;
-            font-size: 0.88rem;
-            cursor: pointer;
-            border: none;
-            transition: transform 0.1s ease;
-        }
-
-        .modal-btn-submit {
-            background: var(--primary-gradient);
-            color: white;
-            box-shadow: 0 8px 20px rgba(219, 39, 119, 0.3);
-        }
-
-        .modal-btn-cancel {
-            background: var(--bg-body);
-            color: var(--text-muted);
-            border: 1px solid var(--border-color);
-        }
-
-        .modal-btn-submit:active, .modal-btn-cancel:active {
-            transform: scale(0.96);
-        }
-
         #toastBox {
             position: fixed;
             bottom: 20px;
@@ -714,20 +592,6 @@
 </head>
 <body>
 
-    <!-- KOTAK MODAL PASSWORD KUSTOM YANG ELEGAN -->
-    <div id="adminModal" class="modal-overlay">
-        <div class="modal-box">
-            <div class="modal-icon">🔐</div>
-            <div class="modal-title">Panel Admin Rahasia</div>
-            <div class="modal-desc">Masukkan password akses khusus untuk masuk ke halaman manajemen admin Queen Laundry.</div>
-            <input type="password" id="inputAdminPassword" class="modal-input" placeholder="••••••••" onkeydown="if(event.key === 'Enter'){ prosesLoginAdmin(); }">
-            <div class="modal-buttons">
-                <button type="button" class="modal-btn-cancel" onclick="tutupModalAdmin()">Batal</button>
-                <button type="button" class="modal-btn-submit" onclick="prosesLoginAdmin()">Masuk 🚀</button>
-            </div>
-        </div>
-    </div>
-
     <!-- Toast Floating Notification -->
     <div id="toastBox">
         <div class="toast-icon" id="toastIcon">✨</div>
@@ -747,8 +611,6 @@
                 <p>Modern & Professional Care</p>
             </div>
             <div class="header-actions">
-                <!-- TOMBOL RAHASIA ADMIN DI HEADER -->
-                <button class="icon-btn" onclick="aksesAdmin();" title="Panel Admin Rahasia">🔐</button>
                 <button class="icon-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Ubah Tema">🌙</button>
                 <button class="hamburger-btn" onclick="toggleMenu()" aria-label="Menu">
                     <span></span><span></span><span></span>
@@ -768,8 +630,6 @@
                 <li><a href="pricelist.html" onclick="playClickSound()">📋 Daftar Harga Lengkap</a></li>
                 <li><a href="#testimoni" onclick="toggleMenu(); playClickSound()">💬 Testimoni & Ulasan</a></li>
                 <li><a href="#lokasi" onclick="toggleMenu(); playClickSound()">📍 Lokasi & Kontak</a></li>
-                <!-- LINK MENU ADMIN -->
-                <li><a href="#" onclick="aksesAdmin(); return false;" style="background: linear-gradient(135deg, #fdf2f8 0%, #fae8ff 100%); border-color: #f472b6; color: #db2777;">🔐 Masuk Panel Admin Rahasia</a></li>
             </ul>
         </div>
     </header>
@@ -1013,50 +873,6 @@
         const SUPABASE_URL = 'https://uxutxeclfcvcvdiydmpw.supabase.co';
         const SUPABASE_ANON_KEY = 'sb_publishable_UMV1G-z6vj5x0sRKlvZfVA_ap4qZFkA';
         const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-        // Fungsi Membuka Modal Proteksi Password Admin Kustom
-        function aksesAdmin() {
-            playClickSound();
-            
-            // Cek apakah sudah pernah login dengan benar sebelumnya di sesi tab ini
-            let sudahLogin = sessionStorage.getItem('queen_admin_auth');
-            if (sudahLogin === 'true') {
-                window.location.href = 'admin.html';
-                return;
-            }
-
-            // Tampilkan modal kustom
-            let modal = document.getElementById('adminModal');
-            let passwordInput = document.getElementById('inputAdminPassword');
-            modal.classList.add('active');
-            passwordInput.value = '';
-            setTimeout(() => passwordInput.focus(), 100);
-        }
-
-        // Fungsi Menutup Modal Password
-        function tutupModalAdmin() {
-            playClickSound();
-            document.getElementById('adminModal').classList.remove('active');
-        }
-
-        // Fungsi Memproses Password yang Diketik di Modal
-        function prosesLoginAdmin() {
-            playClickSound();
-            let passwordSandi = "queen123"; // Ganti dengan password yang diinginkan
-            let inputUser = document.getElementById('inputAdminPassword').value;
-
-            if (inputUser === passwordSandi) {
-                sessionStorage.setItem('queen_admin_auth', 'true');
-                window.location.href = 'admin.html';
-            } else {
-                showToast("❌ Password Salah!", "Kata sandi panel admin keliru.", "⚠️");
-                let inputEl = document.getElementById('inputAdminPassword');
-                inputEl.style.borderColor = "#ef4444";
-                setTimeout(() => {
-                    inputEl.style.borderColor = "";
-                }, 1000);
-            }
-        }
 
         const dataSatuan = [
             { nama: "Bedcover Single", harga: 20000 },
