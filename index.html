@@ -683,7 +683,7 @@
                 <div class="calc-group">
                     <label>Nama Lengkap Member:</label>
                     <div style="display: flex; gap: 10px;">
-                        <input type="text" id="inputNamaMember" class="search-input" placeholder="Contoh: Ashyam" onkeydown="if(event.key === 'Enter'){ cekSaldoMember(); playClickSound(); }">
+                        <input type="text" id="inputNamaMember" class="search-input" placeholder="Contoh: Ardan" onkeydown="if(event.key === 'Enter'){ cekSaldoMember(); playClickSound(); }">
                         <button type="button" onclick="cekSaldoMember(); playClickSound()" style="background: var(--primary-gradient); color: white; border: none; padding: 0 20px; border-radius: 14px; font-weight: 700; font-size: 0.88rem; cursor: pointer; white-space: nowrap;">Cek Saldo</button>
                     </div>
                 </div>
@@ -945,10 +945,10 @@
                 maximumFractionDigits: 0
             }).format(memberDitemukan.saldo);
 
-            let tanggalJoinFormatted = '-';
-            if (memberDitemukan.created_at) {
-                let dateObj = new Date(memberDitemukan.created_at);
-                tanggalJoinFormatted = dateObj.toLocaleDateString('id-ID', {
+            let expiredFormatted = '-';
+            if (memberDitemukan.expired_date) {
+                let dateObj = new Date(memberDitemukan.expired_date);
+                expiredFormatted = dateObj.toLocaleDateString('id-ID', {
                     day: 'numeric',
                     month: 'long',
                     year: 'numeric'
@@ -958,9 +958,13 @@
             let statusBadge = '';
             let statusNotif = '';
 
-            if (memberDitemukan.saldo <= 0) {
-                statusBadge = `<div style="font-size: 0.78rem; font-weight: 700; color: #b91c1c; background: #fef2f2; padding: 6px 10px; border-radius: 8px; display: inline-block;">❌ Saldo Habis / Expired</div>`;
-                statusNotif = '⚠️ Saldo kuota member Anda sudah habis. Silakan lakukan top up atau perpanjang member!';
+            let today = new Date();
+            today.setHours(0, 0, 0, 0);
+            let isExpired = memberDitemukan.expired_date ? new Date(memberDitemukan.expired_date) < today : false;
+
+            if (memberDitemukan.saldo <= 0 || isExpired) {
+                statusBadge = `<div style="font-size: 0.78rem; font-weight: 700; color: #b91c1c; background: #fef2f2; padding: 6px 10px; border-radius: 8px; display: inline-block;">❌ Expired / Saldo Habis</div>`;
+                statusNotif = '⚠️ Masa aktif atau kuota member Anda telah habis. Silakan perpanjang!';
             } else if (memberDitemukan.saldo <= 20000) {
                 statusBadge = `<div style="font-size: 0.78rem; font-weight: 700; color: #d97706; background: #fef3c7; padding: 6px 10px; border-radius: 8px; display: inline-block;">⚠️ Saldo Menipis</div>`;
                 statusNotif = '💡 Saldo mulai menipis, yuk segera top up!';
@@ -973,7 +977,7 @@
                 <div style="font-size: 0.9rem; font-weight: 800; color: #db2777; margin-bottom: 6px;">🎉 Data Member Ditemukan!</div>
                 <div style="font-size: 0.85rem; color: var(--text-main); margin-bottom: 4px;"><b>Nama:</b> ${memberDitemukan.name}</div>
                 <div style="font-size: 0.85rem; color: var(--text-main); margin-bottom: 4px;"><b>Sisa Saldo:</b> <span style="color: #db2777; font-weight: 800;">${formatRupiah}</span></div>
-                <div style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 8px;"><b>Tanggal Bergabung:</b> ${tanggalJoinFormatted}</div>
+                <div style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 8px;"><b>Masa Aktif (Expired):</b> ${expiredFormatted}</div>
                 <div style="margin-bottom: 6px;"><b>Status:</b> ${statusBadge}</div>
                 <div style="font-size: 0.78rem; color: var(--text-muted);">${statusNotif}</div>
             `;
