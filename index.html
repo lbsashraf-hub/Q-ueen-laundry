@@ -587,7 +587,6 @@
             animation: bounceIcon 2.5s ease-in-out infinite;
         }
 
-        /* Tombol Admin Roda Gigi di Paling Bawah */
         .admin-gear-footer {
             display: inline-flex;
             align-items: center;
@@ -866,7 +865,6 @@
         <div id="lokasi" class="section-box">
             <h2>📍 Lokasi & Kontak</h2>
             
-            <!-- Kotak Alamat dengan Tombol Salin Khusus -->
             <div class="address-box" onclick="salinAlamat()" title="Klik untuk menyalin alamat">
                 <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 10px;">
                     <div>
@@ -889,12 +887,10 @@
 
     <footer>
         &copy; 2026 Queen Laundry<br>Website created AshrafNr.<br>
-        <!-- Tombol Roda Gigi Menuju admin.html -->
         <a href="admin.html" class="admin-gear-footer" onclick="playClickSound()" title="Halaman Admin">⚙️</a>
     </footer>
 
     <script>
-        // Konfigurasi Supabase yang Aman
         const SUPABASE_URL = 'https://uxutxeclfcvcvdiydmpw.supabase.co';
         const SUPABASE_ANON_KEY = 'sb_publishable_UMV1G-z6vj5x0sRKlvZfVA_ap4qZFkA';
         
@@ -938,7 +934,6 @@
             { nama: "Jas", harga: 35000 }
         ];
 
-        // Fungsi Cek Saldo Langsung dari Supabase dengan Proteksi Error
         async function cekSaldoMember() {
             let keyword = document.getElementById('inputNamaMember').value.trim().toLowerCase();
             let hasilBox = document.getElementById('hasilCekSaldo');
