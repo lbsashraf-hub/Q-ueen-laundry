@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Queen Laundry - Premium Caree Service</title>
+    <title>Queen Laundry - Premium Care Service</title>
     <!-- Ikon/Favicon Tab Browser -->
     <link rel="icon" type="image/x-icon" href="queen-icon.webp">
     <link rel="shortcut icon" type="image/x-icon" href="queen-icon.webp">
@@ -587,6 +587,29 @@
             animation: bounceIcon 2.5s ease-in-out infinite;
         }
 
+        /* Tombol Admin Roda Gigi di Paling Bawah */
+        .admin-gear-footer {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 1rem;
+            margin-top: 10px;
+            box-shadow: var(--shadow-soft);
+            transition: all 0.3s ease;
+        }
+        .admin-gear-footer:hover {
+            transform: rotate(90deg) scale(1.1);
+            color: #db2777;
+            border-color: #db2777;
+        }
+
         footer { text-align: center; margin-top: 50px; color: var(--text-muted); font-size: 0.78rem; font-weight: 600; }
     </style>
 </head>
@@ -713,9 +736,9 @@
         <div id="galeri" class="section-box">
             <h2>🖼️ Galeri & Suasana</h2>
             <div class="gallery-grid">
-                <div class="gallery-item"><img src="foto.png" alt="Logo Queen Laundry"><div class="gallery-caption">Mesin Modern</div></div>
-                <div class="gallery-item"><img src="foto2.png" alt="Logo Queen Laundry"><div class="gallery-caption">Lipatan Presisi</div></div>
-                <div class="gallery-item"><img src="foto3.png" alt="Logo Queen Laundry"><div class="gallery-caption">Wangi Mewah</div></div>
+                <div class="gallery-item"><img src="foto.png" alt="Logo Queen Laundry" onerror="this.src='https://via.placeholder.com/300?text=Queen+Laundry'"><div class="gallery-caption">Mesin Modern</div></div>
+                <div class="gallery-item"><img src="foto2.png" alt="Logo Queen Laundry" onerror="this.src='https://via.placeholder.com/300?text=Queen+Laundry'"><div class="gallery-caption">Lipatan Presisi</div></div>
+                <div class="gallery-item"><img src="foto3.png" alt="Logo Queen Laundry" onerror="this.src='https://via.placeholder.com/300?text=Queen+Laundry'"><div class="gallery-caption">Wangi Mewah</div></div>
             </div>
         </div>
 
@@ -865,14 +888,24 @@
     </div>
 
     <footer>
-        &copy; 2026 Queen Laundry<br>Website created AshrafNr.
+        &copy; 2026 Queen Laundry<br>Website created AshrafNr.<br>
+        <!-- Tombol Roda Gigi Menuju admin.html -->
+        <a href="admin.html" class="admin-gear-footer" onclick="playClickSound()" title="Halaman Admin">⚙️</a>
     </footer>
 
     <script>
-        // Konfigurasi Supabase untuk Beranda (index.html)
+        // Konfigurasi Supabase yang Aman
         const SUPABASE_URL = 'https://uxutxeclfcvcvdiydmpw.supabase.co';
         const SUPABASE_ANON_KEY = 'sb_publishable_UMV1G-z6vj5x0sRKlvZfVA_ap4qZFkA';
-        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        
+        let supabaseClient = null;
+        try {
+            if (window.supabase && typeof window.supabase.createClient === 'function') {
+                supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+            }
+        } catch (e) {
+            console.error("Gagal menginisialisasi Supabase:", e);
+        }
 
         const dataSatuan = [
             { nama: "Bedcover Single", harga: 20000 },
@@ -905,7 +938,7 @@
             { nama: "Jas", harga: 35000 }
         ];
 
-        // Fungsi Cek Saldo Langsung dari Supabase
+        // Fungsi Cek Saldo Langsung dari Supabase dengan Proteksi Error
         async function cekSaldoMember() {
             let keyword = document.getElementById('inputNamaMember').value.trim().toLowerCase();
             let hasilBox = document.getElementById('hasilCekSaldo');
@@ -916,71 +949,83 @@
                 return;
             }
 
+            if (!supabaseClient) {
+                hasilBox.style.display = 'block';
+                hasilBox.innerHTML = `<div style="color: #b91c1c; font-size: 0.85rem; font-weight: 700;">⚠️ Koneksi database belum siap. Silakan muat ulang halaman.</div>`;
+                return;
+            }
+
             hasilBox.style.display = 'block';
             hasilBox.innerHTML = `<div style="font-size: 0.85rem; color: var(--text-muted); text-align: center;">Mencari data member di database...</div>`;
 
-            let { data, error } = await supabaseClient
-                .from('kouta_member')
-                .select('*')
-                .ilike('name', `%${keyword}%`);
+            try {
+                let { data, error } = await supabaseClient
+                    .from('kouta_member')
+                    .select('*')
+                    .ilike('name', `%${keyword}%`);
 
-            if (error) {
-                hasilBox.innerHTML = `<div style="color: #b91c1c; font-size: 0.85rem; font-weight: 700;">Gagal memuat data: ${error.message}</div>`;
-                return;
-            }
+                if (error) {
+                    hasilBox.innerHTML = `<div style="color: #b91c1c; font-size: 0.85rem; font-weight: 700;">Gagal memuat data: ${error.message}</div>`;
+                    return;
+                }
 
-            if (!data || data.length === 0) {
+                if (!data || data.length === 0) {
+                    hasilBox.innerHTML = `
+                        <div style="font-size: 0.88rem; font-weight: 800; color: #b91c1c; margin-bottom: 4px;">❌ Member Tidak Ditemukan</div>
+                        <div style="font-size: 0.82rem; color: var(--text-muted);">Nama "${keyword}" tidak terdaftar dalam database member aktif. Pastikan ejaan nama sudah benar.</div>
+                    `;
+                    return;
+                }
+
+                let memberDitemukan = data[0];
+
+                let formatRupiah = new Intl.NumberFormat('id-ID', {
+                    style: 'currency',
+                    currency: 'IDR',
+                    maximumFractionDigits: 0
+                }).format(memberDitemukan.saldo || 0);
+
+                let expiredFormatted = '-';
+                if (memberDitemukan.expired_date) {
+                    let dateObj = new Date(memberDitemukan.expired_date);
+                    if (!isNaN(dateObj)) {
+                        expiredFormatted = dateObj.toLocaleDateString('id-ID', {
+                            day: 'numeric',
+                            month: 'long',
+                            year: 'numeric'
+                        });
+                    }
+                }
+
+                let statusBadge = '';
+                let statusNotif = '';
+
+                let today = new Date();
+                today.setHours(0, 0, 0, 0);
+                let isExpired = memberDitemukan.expired_date ? new Date(memberDitemukan.expired_date) < today : false;
+
+                if ((memberDitemukan.saldo || 0) <= 0 || isExpired) {
+                    statusBadge = `<div style="font-size: 0.78rem; font-weight: 700; color: #b91c1c; background: #fef2f2; padding: 6px 10px; border-radius: 8px; display: inline-block;">❌ Expired / Saldo Habis</div>`;
+                    statusNotif = '⚠️ Masa aktif atau kuota member Anda telah habis. Silakan perpanjang!';
+                } else if ((memberDitemukan.saldo || 0) <= 20000) {
+                    statusBadge = `<div style="font-size: 0.78rem; font-weight: 700; color: #d97706; background: #fef3c7; padding: 6px 10px; border-radius: 8px; display: inline-block;">⚠️ Saldo Menipis</div>`;
+                    statusNotif = '💡 Saldo mulai menipis, yuk segera top up!';
+                } else {
+                    statusBadge = `<div style="font-size: 0.78rem; font-weight: 700; color: #059669; background: #ecfdf5; padding: 6px 10px; border-radius: 8px; display: inline-block;">✨ Aktif</div>`;
+                    statusNotif = '✨ Saldo Anda masih banyak dan siap digunakan!';
+                }
+                
                 hasilBox.innerHTML = `
-                    <div style="font-size: 0.88rem; font-weight: 800; color: #b91c1c; margin-bottom: 4px;">❌ Member Tidak Ditemukan</div>
-                    <div style="font-size: 0.82rem; color: var(--text-muted);">Nama "${keyword}" tidak terdaftar dalam database member aktif. Pastikan ejaan nama sudah benar.</div>
+                    <div style="font-size: 0.9rem; font-weight: 800; color: #db2777; margin-bottom: 6px;">🎉 Data Member Ditemukan!</div>
+                    <div style="font-size: 0.85rem; color: var(--text-main); margin-bottom: 4px;"><b>Nama:</b> ${memberDitemukan.name || '-'}</div>
+                    <div style="font-size: 0.85rem; color: var(--text-main); margin-bottom: 4px;"><b>Sisa Saldo:</b> <span style="color: #db2777; font-weight: 800;">${formatRupiah}</span></div>
+                    <div style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 8px;"><b>Masa Aktif (Expired):</b> ${expiredFormatted}</div>
+                    <div style="margin-bottom: 6px;"><b>Status:</b> ${statusBadge}</div>
+                    <div style="font-size: 0.78rem; color: var(--text-muted);">${statusNotif}</div>
                 `;
-                return;
+            } catch (err) {
+                hasilBox.innerHTML = `<div style="color: #b91c1c; font-size: 0.85rem; font-weight: 700;">Terjadi kesalahan sistem saat mengambil data.</div>`;
             }
-
-            let memberDitemukan = data[0];
-
-            let formatRupiah = new Intl.NumberFormat('id-ID', {
-                style: 'currency',
-                currency: 'IDR',
-                maximumFractionDigits: 0
-            }).format(memberDitemukan.saldo);
-
-            let expiredFormatted = '-';
-            if (memberDitemukan.expired_date) {
-                let dateObj = new Date(memberDitemukan.expired_date);
-                expiredFormatted = dateObj.toLocaleDateString('id-ID', {
-                    day: 'numeric',
-                    month: 'long',
-                    year: 'numeric'
-                });
-            }
-
-            let statusBadge = '';
-            let statusNotif = '';
-
-            let today = new Date();
-            today.setHours(0, 0, 0, 0);
-            let isExpired = memberDitemukan.expired_date ? new Date(memberDitemukan.expired_date) < today : false;
-
-            if (memberDitemukan.saldo <= 0 || isExpired) {
-                statusBadge = `<div style="font-size: 0.78rem; font-weight: 700; color: #b91c1c; background: #fef2f2; padding: 6px 10px; border-radius: 8px; display: inline-block;">❌ Expired / Saldo Habis</div>`;
-                statusNotif = '⚠️ Masa aktif atau kuota member Anda telah habis. Silakan perpanjang!';
-            } else if (memberDitemukan.saldo <= 20000) {
-                statusBadge = `<div style="font-size: 0.78rem; font-weight: 700; color: #d97706; background: #fef3c7; padding: 6px 10px; border-radius: 8px; display: inline-block;">⚠️ Saldo Menipis</div>`;
-                statusNotif = '💡 Saldo mulai menipis, yuk segera top up!';
-            } else {
-                statusBadge = `<div style="font-size: 0.78rem; font-weight: 700; color: #059669; background: #ecfdf5; padding: 6px 10px; border-radius: 8px; display: inline-block;">✨ Aktif</div>`;
-                statusNotif = '✨ Saldo Anda masih banyak dan siap digunakan!';
-            }
-            
-            hasilBox.innerHTML = `
-                <div style="font-size: 0.9rem; font-weight: 800; color: #db2777; margin-bottom: 6px;">🎉 Data Member Ditemukan!</div>
-                <div style="font-size: 0.85rem; color: var(--text-main); margin-bottom: 4px;"><b>Nama:</b> ${memberDitemukan.name}</div>
-                <div style="font-size: 0.85rem; color: var(--text-main); margin-bottom: 4px;"><b>Sisa Saldo:</b> <span style="color: #db2777; font-weight: 800;">${formatRupiah}</span></div>
-                <div style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 8px;"><b>Masa Aktif (Expired):</b> ${expiredFormatted}</div>
-                <div style="margin-bottom: 6px;"><b>Status:</b> ${statusBadge}</div>
-                <div style="font-size: 0.78rem; color: var(--text-muted);">${statusNotif}</div>
-            `;
         }
 
         function hitungEstimasiSelesai(durasiHari) {
@@ -1000,6 +1045,7 @@
 
         function renderSatuanList() {
             let container = document.getElementById('listBarangSatuan');
+            if (!container) return;
             container.innerHTML = '';
             dataSatuan.forEach((item, index) => {
                 let card = document.createElement('div');
@@ -1022,6 +1068,7 @@
         function ubahJumlahSatuan(index, delta) {
             playClickSound();
             let qtyEl = document.getElementById(`satuan-qty-${index}`);
+            if (!qtyEl) return;
             let currentQty = parseInt(qtyEl.innerText) || 0;
             let newQty = currentQty + delta;
             if (newQty < 0) newQty = 0;
@@ -1048,7 +1095,8 @@
 
         function toggleMenu() {
             playClickSound();
-            document.getElementById('dropdownMenu').classList.toggle('active');
+            let menu = document.getElementById('dropdownMenu');
+            if (menu) menu.classList.toggle('active');
         }
 
         function toggleTheme() {
@@ -1057,12 +1105,15 @@
             let newTheme = currentTheme === 'dark' ? 'light' : 'dark';
             document.documentElement.setAttribute('data-theme', newTheme);
             localStorage.setItem('queen_theme', newTheme);
-            document.getElementById('themeToggleBtn').innerText = newTheme === 'dark' ? '☀️' : '🌙';
+            let themeBtn = document.getElementById('themeToggleBtn');
+            if (themeBtn) themeBtn.innerText = newTheme === 'dark' ? '☀️' : '🌙';
         }
 
         function salinAlamat() {
             playClickSound();
-            let teksAlamat = document.getElementById('teksAlamatLengkap').innerText;
+            let teksAlamatEl = document.getElementById('teksAlamatLengkap');
+            if (!teksAlamatEl) return;
+            let teksAlamat = teksAlamatEl.innerText;
             let labelStatus = document.getElementById('labelStatusSalin');
             
             if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -1120,9 +1171,15 @@
 
         function showToast(title, sub, icon = "✨") {
             let box = document.getElementById('toastBox');
-            document.getElementById('toastTitle').innerText = title;
-            document.getElementById('toastSub').innerText = sub;
-            document.getElementById('toastIcon').innerText = icon;
+            if (!box) return;
+            let tTitle = document.getElementById('toastTitle');
+            let tSub = document.getElementById('toastSub');
+            let tIcon = document.getElementById('toastIcon');
+            
+            if (tTitle) tTitle.innerText = title;
+            if (tSub) tSub.innerText = sub;
+            if (tIcon) tIcon.innerText = icon;
+            
             box.classList.add('active');
             setTimeout(() => {
                 box.classList.remove('active');
@@ -1143,6 +1200,7 @@
 
         function hitungTotal() {
             let selectKiloan = document.getElementById('pilihLayananKiloan');
+            if (!selectKiloan) return;
             let kiloan = parseFloat(selectKiloan.value) || 0;
             let selectedOption = selectKiloan.options[selectKiloan.selectedIndex];
             
@@ -1151,30 +1209,39 @@
             let tanggalSelesai = hitungEstimasiSelesai(durasiHari);
             let estimasiText = `Estimasi Selesai: ${labelDurasi} (${tanggalSelesai})`;
             
-            let berat = parseFloat(document.getElementById('beratKg').value) || 0;
+            let beratInput = document.getElementById('beratKg');
+            let berat = beratInput ? (parseFloat(beratInput.value) || 0) : 0;
             if (berat < 0) berat = 0;
             
             let totalSatuan = 0;
             let detailPesananSatuan = [];
             dataSatuan.forEach((item, index) => {
-                let qty = parseInt(document.getElementById(`satuan-qty-${index}`).innerText) || 0;
+                let qtyEl = document.getElementById(`satuan-qty-${index}`);
+                let qty = qtyEl ? (parseInt(qtyEl.innerText) || 0) : 0;
                 if (qty > 0) {
                     totalSatuan += item.harga * qty;
                     detailPesananSatuan.push(`${qty}x ${item.nama}`);
                 }
             });
 
-            let ongkir = parseFloat(document.getElementById('pilihOngkir').value) || 0;
+            let ongkirSelect = document.getElementById('pilihOngkir');
+            let ongkir = ongkirSelect ? (parseFloat(ongkirSelect.value) || 0) : 0;
             let total = Math.round((((kiloan * berat) + totalSatuan + ongkir) / 500)) * 500;
             
-            document.getElementById('hasilTotal').innerText = "Rp " + total.toLocaleString('id-ID');
-            document.getElementById('hasilEstimasi').innerText = estimasiText;
+            let hasilTotalEl = document.getElementById('hasilTotal');
+            let hasilEstEl = document.getElementById('hasilEstimasi');
+            let waLinkEl = document.getElementById('waOrderLink');
+
+            if (hasilTotalEl) hasilTotalEl.innerText = "Rp " + total.toLocaleString('id-ID');
+            if (hasilEstEl) hasilEstEl.innerText = estimasiText;
             
             let textWa = `Halo Queen Laundry, saya mau order dengan estimasi total Rp ${total.toLocaleString('id-ID')} (${estimasiText})`;
             if(detailPesananSatuan.length > 0) {
                 textWa += ` [Item Satuan: ${detailPesananSatuan.join(', ')}]`;
             }
-            document.getElementById('waOrderLink').href = `https://wa.me/6285770246502?text=${encodeURIComponent(textWa)}`;
+            if (waLinkEl) {
+                waLinkEl.href = `https://wa.me/6285770246502?text=${encodeURIComponent(textWa)}`;
+            }
         }
 
         function cekStatusToko() {
@@ -1195,10 +1262,12 @@
 
         window.addEventListener('scroll', function() {
             let btnTop = document.getElementById('backToTop');
-            if (window.scrollY > 300) {
-                btnTop.classList.add('show');
-            } else {
-                btnTop.classList.remove('show');
+            if (btnTop) {
+                if (window.scrollY > 300) {
+                    btnTop.classList.add('show');
+                } else {
+                    btnTop.classList.remove('show');
+                }
             }
 
             document.querySelectorAll('.section-box').forEach(box => {
@@ -1215,7 +1284,8 @@
         window.onload = function() {
             let savedTheme = localStorage.getItem('queen_theme') || 'light';
             document.documentElement.setAttribute('data-theme', savedTheme);
-            document.getElementById('themeToggleBtn').innerText = savedTheme === 'dark' ? '☀️' : '🌙';
+            let themeBtn = document.getElementById('themeToggleBtn');
+            if (themeBtn) themeBtn.innerText = savedTheme === 'dark' ? '☀️' : '🌙';
 
             renderSatuanList();
             hitungTotal();
@@ -1224,17 +1294,23 @@
             
             let dataUlasan = JSON.parse(localStorage.getItem('queen_reviews')) || [];
             let listContainer = document.getElementById('listTestimoni');
-            dataUlasan.forEach(data => {
-                let card = document.createElement('div');
-                card.className = 'testimonial-card';
-                card.innerHTML = `<p>"${data.pesan}"</p><div class="testimonial-author"><span>${data.nama}</span><div class="stars">⭐⭐⭐⭐⭐</div></div>`;
-                listContainer.appendChild(card);
-            });
+            if (listContainer) {
+                dataUlasan.forEach(data => {
+                    let card = document.createElement('div');
+                    card.className = 'testimonial-card';
+                    card.innerHTML = `<p>"${data.pesan}"</p><div class="testimonial-author"><span>${data.nama}</span><div class="stars">⭐⭐⭐⭐⭐</div></div>`;
+                    listContainer.appendChild(card);
+                });
+            }
         };
 
         function tambahTestimoni() {
-            let nama = document.getElementById('inputNama').value.trim();
-            let pesan = document.getElementById('inputPesan').value.trim();
+            let namaInput = document.getElementById('inputNama');
+            let pesanInput = document.getElementById('inputPesan');
+            if (!namaInput || !pesanInput) return;
+            
+            let nama = namaInput.value.trim();
+            let pesan = pesanInput.value.trim();
             if (!nama || !pesan) { alert("Harap isi nama dan pesan ulasan terlebih dahulu!"); return; }
             
             let dataUlasan = JSON.parse(localStorage.getItem('queen_reviews')) || [];
