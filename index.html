@@ -270,7 +270,6 @@
             box-shadow: var(--shadow-soft);
         }
 
-        /* BANNER PROMO MEMBER SUPER MENARIK (DI PALING ATAS) */
         .member-banner-hero {
             background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 50%, #fae8ff 100%);
             border: 2.5px solid #f472b6;
@@ -498,7 +497,7 @@
 
         .delivery-widget-box {
             background: linear-gradient(135deg, #fff0f6 0%, #ffe4e6 100%);
-            border: 2px dashed #f472b6;
+            border: 2.5px dashed #f472b6;
             border-radius: 18px;
             padding: 18px 16px;
             text-align: center;
@@ -694,6 +693,7 @@
 
         <div id="dropdownMenu" class="dropdown-menu">
             <ul class="menu-list">
+                <li><a href="#cek-status" onclick="toggleMenu(); playClickSound()">🔍 Cek Status Cucian</a></li>
                 <li><a href="sabun.html" onclick="playClickSound()">🧼 Sabun Laundry Premium (5L)</a></li>
                 <li><a href="#kalkulator" onclick="toggleMenu(); playClickSound()">🧮 Kalkulator & Estimasi Ongkir</a></li>
                 <li><a href="#cek-saldo" onclick="toggleMenu(); playClickSound()">💳 Cek Saldo Member Mandiri</a></li>
@@ -709,7 +709,7 @@
 
     <div class="container">
 
-        <!-- TEKS BERJALAN (MARQUEE) DI ATAS TENTANG KAMI -->
+        <!-- TEKS BERJALAN (MARQUEE) -->
         <div class="marquee-container">
             <marquee behavior="scroll" direction="left" scrollamount="5">
                 ✨ Selamat Datang di Queen Laundry! Nikmati layanan cuci bersih, wangi, dan rapi. &nbsp;&bull;&nbsp; 🚀 Proses Kilat & Layanan Antar Jemput Tersedia! &nbsp;&bull;&nbsp; 💬 Hubungi Admin via WhatsApp untuk Info & Pemesanan! ✨
@@ -742,7 +742,7 @@
             </div>
         </div>
 
-        <!-- BANNER PROMO MEMBER SUPER MENARIK -->
+        <!-- BANNER PROMO MEMBER -->
         <div class="member-banner-hero">
             <div style="position: absolute; top: -15px; left: -15px; width: 60px; height: 60px; background: rgba(244, 114, 182, 0.15); border-radius: 50%;"></div>
             <div style="position: absolute; bottom: -20px; right: -20px; width: 80px; height: 80px; background: rgba(244, 114, 182, 0.15); border-radius: 50%;"></div>
@@ -768,7 +768,27 @@
             </div>
         </div>
 
-        <!-- FITUR CEK SALDO MEMBER DARI SUPABASE -->
+        <!-- FITUR CEK STATUS CUCIAN & ESTIMASI SELESAI -->
+        <div id="cek-status" class="section-box">
+            <h2>🔍 Cek Status Cucian & Estimasi Selesai</h2>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 16px;">Masukkan nama lengkap pelanggan untuk melacak status pengerjaan serta estimasi selesai cucian Anda.</p>
+            
+            <div class="calc-section-card">
+                <div class="calc-group">
+                    <label>Nama Pelanggan:</label>
+                    <div style="display: flex; gap: 10px;">
+                        <input type="text" id="inputCariStatus" class="search-input" placeholder="Contoh: Ashraf" onkeydown="if(event.key === 'Enter'){ cekStatusCucian(); playClickSound(); }">
+                        <button type="button" onclick="cekStatusCucian(); playClickSound()" style="background: var(--primary-gradient); color: white; border: none; padding: 0 20px; border-radius: 14px; font-weight: 700; font-size: 0.88rem; cursor: pointer; white-space: nowrap;">Cek Status</button>
+                    </div>
+                </div>
+                
+                <div id="hasilCekStatus" style="margin-top: 16px; display: none; background: var(--card-bg); border: 1px solid var(--border-color); padding: 16px; border-radius: 14px;">
+                    <!-- Hasil pelacakan status & estimasi dirender via JS -->
+                </div>
+            </div>
+        </div>
+
+        <!-- FITUR CEK SALDO MEMBER -->
         <div id="cek-saldo" class="section-box">
             <h2>💳 Cek Saldo Member Mandiri</h2>
             <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 16px;">Masukkan nama lengkap Anda yang terdaftar sebagai member untuk melihat sisa saldo dan masa aktif.</p>
@@ -783,7 +803,7 @@
                 </div>
                 
                 <div id="hasilCekSaldo" style="margin-top: 16px; display: none; background: var(--card-bg); border: 1px solid var(--border-color); padding: 16px; border-radius: 14px;">
-                    <!-- Hasil akan dirender via JS -->
+                    <!-- Hasil dirender via JS -->
                 </div>
             </div>
         </div>
@@ -998,6 +1018,79 @@
             { nama: "Karpet Besar", harga: 35000 },
             { nama: "Jas", harga: 35000 }
         ];
+
+        async function cekStatusCucian() {
+            let keyword = document.getElementById('inputCariStatus').value.trim();
+            let hasilBox = document.getElementById('hasilCekStatus');
+            
+            if (!keyword) {
+                hasilBox.style.display = 'block';
+                hasilBox.innerHTML = `<div style="color: #b91c1c; font-size: 0.85rem; font-weight: 700;">⚠️ Silakan masukkan nama pelanggan terlebih dahulu.</div>`;
+                return;
+            }
+
+            if (!supabaseClient) {
+                hasilBox.style.display = 'block';
+                hasilBox.innerHTML = `<div style="color: #b91c1c; font-size: 0.85rem; font-weight: 700;">⚠️ Koneksi database belum siap. Silakan muat ulang halaman.</div>`;
+                return;
+            }
+
+            hasilBox.style.display = 'block';
+            hasilBox.innerHTML = `<div style="font-size: 0.85rem; color: var(--text-muted); text-align: center;">Mencari status cucian & estimasi selesai di database...</div>`;
+
+            try {
+                let { data, error } = await supabaseClient
+                    .from('cucian')
+                    .select('*')
+                    .ilike('nama_pelanggan', `%${keyword}%`);
+
+                if (error) {
+                    hasilBox.innerHTML = `<div style="color: #b91c1c; font-size: 0.85rem; font-weight: 700;">Gagal memuat data: ${error.message}.</div>`;
+                    return;
+                }
+
+                if (!data || data.length === 0) {
+                    hasilBox.innerHTML = `
+                        <div style="font-size: 0.88rem; font-weight: 800; color: #b91c1c; margin-bottom: 4px;">❌ Data Cucian Tidak Ditemukan</div>
+                        <div style="font-size: 0.82rem; color: var(--text-muted);">Tidak ada cucian dengan nama "${keyword}". Silakan periksa kembali nama Anda.</div>
+                    `;
+                    return;
+                }
+
+                let htmlContent = `<div style="font-size: 0.9rem; font-weight: 800; color: #db2777; margin-bottom: 10px;">📦 Ditemukan ${data.length} Data Cucian:</div>`;
+                
+                data.forEach(item => {
+                    let statusWarna = "#0284c7"; 
+                    let statusBg = "#e0f2fe";
+                    let statusText = item.status || "Sedang Diproses";
+
+                    let lowerStatus = statusText.toLowerCase();
+                    if (lowerStatus.includes('selesai') || lowerStatus.includes('diambil')) {
+                        statusWarna = "#059669"; 
+                        statusBg = "#ecfdf5";
+                    } else if (lowerStatus.includes('cuci') || lowerStatus.includes('setrika')) {
+                        statusWarna = "#d97706"; 
+                        statusBg = "#fef3c7";
+                    }
+
+                    htmlContent += `
+                        <div style="background: var(--bg-body); border: 1px solid var(--border-color); padding: 12px; border-radius: 12px; margin-bottom: 10px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                                <span style="font-size: 0.82rem; font-weight: 700; color: var(--text-muted);">ID: ${item.id || '-'}</span>
+                                <span style="font-size: 0.75rem; font-weight: 800; color: ${statusWarna}; background: ${statusBg}; padding: 4px 8px; border-radius: 8px;">${statusText}</span>
+                            </div>
+                            <div style="font-size: 0.85rem; color: var(--text-main); margin-bottom: 2px;"><b>Nama:</b> ${item.nama_pelanggan || '-'}</div>
+                            <div style="font-size: 0.82rem; color: var(--text-muted);"><b>Estimasi Selesai:</b> <span style="color: #db2777; font-weight: 700;">${item.estimasi_selesai || '-'}</span></div>
+                        </div>
+                    `;
+                });
+
+                hasilBox.innerHTML = htmlContent;
+
+            } catch (err) {
+                hasilBox.innerHTML = `<div style="color: #b91c1c; font-size: 0.85rem; font-weight: 700;">Terjadi kesalahan sistem saat mengambil data status cucian.</div>`;
+            }
+        }
 
         async function cekSaldoMember() {
             let keyword = document.getElementById('inputNamaMember').value.trim().toLowerCase();
