@@ -389,6 +389,47 @@
             <div id="statusPesan" style="margin-top: 8px; font-size: 0.8rem; font-weight: 700;"></div>
         </div>
 
+        <!-- Form Input & Kelola Status Cucian (DENGAN ESTIMASI) -->
+        <div class="card">
+            <h2>📦 Kelola Status Cucian Pelanggan</h2>
+            
+            <div style="background: var(--bg-body); padding: 12px; border-radius: 12px; margin-bottom: 15px; border: 1px solid var(--border-color);">
+                <div style="font-weight: 700; margin-bottom: 8px; font-size: 0.85rem;">➕ Tambah Order Cucian Baru</div>
+                <div class="form-group">
+                    <label>Nama Pelanggan:</label>
+                    <input type="text" id="inputNamaCucian" class="form-input" placeholder="Contoh: Budi Santoso">
+                </div>
+                <div class="form-group">
+                    <label>No HP (Opsional):</label>
+                    <input type="text" id="inputHpCucian" class="form-input" placeholder="Contoh: 08123456789">
+                </div>
+                <!-- Input Estimasi Selesai Baru -->
+                <div class="form-group">
+                    <label>Estimasi Selesai:</label>
+                    <input type="text" id="inputEstimasiCucian" class="form-input" placeholder="Contoh: 3 Sept 2026, 17:00">
+                </div>
+                <button type="button" class="btn-submit" onclick="tambahDataCucian()">Simpan & Buat ID Order</button>
+                <div id="statusCucianMsg" style="margin-top: 6px; font-size: 0.78rem; font-weight: 700;"></div>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                <span style="font-size: 0.78rem; color: var(--text-muted);">Daftar cucian aktif dan perubahan status.</span>
+                <button type="button" onclick="muatDataCucian()" style="background:var(--bg-body); border:1px solid var(--border-color); padding:6px 12px; border-radius:10px; font-size:0.75rem; font-weight:700; cursor:pointer;">🔄 Refresh Cucian</button>
+            </div>
+
+            <div class="member-table-container">
+                <div class="member-row header-row" style="grid-template-columns: 1.2fr 1fr 1.2fr 1.8fr;">
+                    <div>Nama & ID</div>
+                    <div>No HP</div>
+                    <div>Status Saat Ini</div>
+                    <div>Ubah Status & Estimasi</div>
+                </div>
+                <div id="listCucianBody">
+                    <div style="text-align: center; padding: 20px; color: var(--text-muted); font-size: 0.82rem;">Memuat data cucian...</div>
+                </div>
+            </div>
+        </div>
+
         <!-- Tabel Daftar Data Member & Kelola Saldo -->
         <div class="card">
             <h2>📋 Daftar Data Member & Kelola Saldo</h2>
@@ -427,6 +468,7 @@
             document.documentElement.setAttribute('data-theme', savedTheme);
 
             muatDataMember();
+            muatDataCucian();
         };
 
         function ubahPilihanPaket() {
@@ -488,7 +530,6 @@
                 return;
             }
 
-            // Logika Tanggal: Jika diisi manual pakai manual, jika kosong pakai hitungan durasi bulan
             let expiredDateStr = '';
             if (manualDateInput) {
                 expiredDateStr = manualDateInput;
@@ -659,6 +700,147 @@
                 alert("Gagal menghapus member: " + error.message);
             } else {
                 muatDataMember();
+            }
+        }
+
+        // --- FITUR KELOLA STATUS CUCIAN ---
+        async function tambahDataCucian() {
+            let nama = document.getElementById('inputNamaCucian').value.trim();
+            let hp = document.getElementById('inputHpCucian').value.trim();
+            let estimasi = document.getElementById('inputEstimasiCucian').value.trim();
+            let msgEl = document.getElementById('statusCucianMsg');
+
+            if (!nama) {
+                msgEl.style.color = '#ef4444';
+                msgEl.innerText = '⚠️ Nama pelanggan wajib diisi!';
+                return;
+            }
+
+            msgEl.style.color = 'var(--text-muted)';
+            msgEl.innerText = 'Menyimpan ke database...';
+
+            let payload = {
+                nama_pelanggan: nama,
+                no_hp: hp !== '' ? hp : null,
+                status: 'Diterima',
+                estimasi: estimasi !== '' ? estimasi : null
+            };
+
+            let { data, error } = await supabaseClient
+                .from('cucian')
+                .insert([payload])
+                .select();
+
+            if (error) {
+                msgEl.style.color = '#ef4444';
+                msgEl.innerText = 'Gagal menyimpan: ' + error.message;
+            } else {
+                let idBaru = data[0].id;
+                msgEl.style.color = '#10b981';
+                msgEl.innerHTML = `✨ Berhasil! ID Order: <b style="color:#db2777; user-select:all;">${idBaru}</b>`;
+                
+                document.getElementById('inputNamaCucian').value = '';
+                document.getElementById('inputHpCucian').value = '';
+                document.getElementById('inputEstimasiCucian').value = '';
+                muatDataCucian();
+            }
+        }
+
+        async function muatDataCucian() {
+            let container = document.getElementById('listCucianBody');
+            container.innerHTML = `<div style="text-align: center; padding: 20px; color: var(--text-muted); font-size: 0.82rem;">Memuat data cucian...</div>`;
+
+            let { data, error } = await supabaseClient
+                .from('cucian')
+                .select('*')
+                .order('created_at', { ascending: false });
+
+            if (error) {
+                container.innerHTML = `<div style="text-align: center; padding: 20px; color: #ef4444; font-size: 0.82rem;">Gagal memuat: ${error.message}</div>`;
+                return;
+            }
+
+            if (!data || data.length === 0) {
+                container.innerHTML = `<div style="text-align: center; padding: 20px; color: var(--text-muted); font-size: 0.82rem;">Belum ada data cucian.</div>`;
+                return;
+            }
+
+            container.innerHTML = '';
+            data.forEach((c) => {
+                let row = document.createElement('div');
+                row.className = 'member-row data-row';
+                row.style.gridTemplateColumns = '1.2fr 1fr 1.2fr 1.8fr';
+
+                let shortId = c.id.substring(0, 8) + '...';
+                let noHpText = c.no_hp ? c.no_hp : '-';
+                let estimasiVal = c.estimasi ? c.estimasi : '';
+
+                row.innerHTML = `
+                    <div>
+                        <div style="font-weight: 800;">${c.nama_pelanggan}</div>
+                        <div style="font-size: 0.7rem; color: var(--text-muted);" title="${c.id}">ID: ${shortId}</div>
+                    </div>
+                    <div style="font-size: 0.78rem;">${noHpText}</div>
+                    <div>
+                        <span style="background: #fdf2f8; color: #db2777; border: 1px solid var(--border-color); padding: 3px 8px; border-radius: 6px; font-size: 0.72rem; font-weight: 700;">
+                            ${c.status}
+                        </span>
+                    </div>
+                    <div>
+                        <div style="display: flex; flex-direction: column; gap: 4px;">
+                            <input type="text" id="input-estimasi-${c.id}" class="form-input" style="padding: 5px; font-size: 0.72rem;" value="${estimasiVal}" placeholder="Estimasi selesai...">
+                            <div style="display: flex; gap: 4px; align-items: center;">
+                                <select id="select-status-${c.id}" class="form-select" style="padding: 5px; font-size: 0.72rem; border-radius: 8px;">
+                                    <option value="Diterima" ${c.status === 'Diterima' ? 'selected' : ''}>Diterima</option>
+                                    <option value="Proses Cuci" ${c.status === 'Proses Cuci' ? 'selected' : ''}>Proses Cuci</option>
+                                    <option value="Setrika & Packing" ${c.status === 'Setrika & Packing' ? 'selected' : ''}>Setrika & Packing</option>
+                                    <option value="Selesai / Siap Diambil" ${c.status === 'Selesai / Siap Diambil' ? 'selected' : ''}>Selesai</option>
+                                </select>
+                                <button type="button" class="btn-mini btn-plus" onclick="updateStatusCucian('${c.id}')" title="Simpan Perubahan">💾</button>
+                                <button type="button" class="btn-mini btn-delete" onclick="hapusCucian('${c.id}', '${c.nama_pelanggan}')" title="Hapus Data">🗑️</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(row);
+            });
+        }
+
+        async function updateStatusCucian(idCucian) {
+            let selectEl = document.getElementById(`select-status-${idCucian}`);
+            let statusBaru = selectEl.value;
+            let inputEstimasiEl = document.getElementById(`input-estimasi-${idCucian}`);
+            let estimasiBaru = inputEstimasiEl.value.trim();
+
+            let { error } = await supabaseClient
+                .from('cucian')
+                .update({ 
+                    status: statusBaru,
+                    estimasi: estimasiBaru !== '' ? estimasiBaru : null 
+                })
+                .eq('id', idCucian);
+
+            if (error) {
+                alert("Gagal memperbarui data: " + error.message);
+            } else {
+                muatDataCucian();
+            }
+        }
+
+        async function hapusCucian(idCucian, namaPelanggan) {
+            if (!confirm(`Hapus data cucian atas nama "${namaPelanggan}"?`)) {
+                return;
+            }
+
+            let { error } = await supabaseClient
+                .from('cucian')
+                .delete()
+                .eq('id', idCucian);
+
+            if (error) {
+                alert("Gagal menghapus data: " + error.message);
+            } else {
+                muatDataCucian();
             }
         }
     </script>
