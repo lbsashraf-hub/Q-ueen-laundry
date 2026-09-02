@@ -6,10 +6,7 @@
     <title>Queen Laundry - Admin Control Panel</title>
     <link rel="icon" type="image/x-icon" href="queen-icon.webp">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- Pustaka Supabase Client via CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
     <style>
         :root {
             --primary: #d946ef;
@@ -23,7 +20,6 @@
             --radius-md: 16px;
             --shadow-soft: 0 12px 35px -10px rgba(219, 39, 119, 0.08);
         }
-
         [data-theme="dark"] {
             --bg-body: #181116;
             --card-bg: #271c24;
@@ -32,277 +28,42 @@
             --border-color: #581c87;
             --shadow-soft: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
         }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-        }
-
-        body {
-            background: var(--bg-body);
-            color: var(--text-main);
-            line-height: 1.5;
-            min-height: 100vh;
-            padding-bottom: 40px;
-        }
-
-        #loginOverlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(8px);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            padding: 20px;
-        }
-
-        .login-card {
-            background: var(--card-bg);
-            padding: 30px;
-            border-radius: var(--radius-lg);
-            width: 100%;
-            max-width: 400px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-            border: 1px solid var(--border-color);
-            text-align: center;
-        }
-
-        .login-card h2 {
-            font-size: 1.3rem;
-            font-weight: 800;
-            margin-bottom: 8px;
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .login-card p {
-            font-size: 0.82rem;
-            color: var(--text-muted);
-            margin-bottom: 20px;
-        }
-
-        header {
-            background: var(--card-bg);
-            border-bottom: 1px solid var(--border-color);
-            padding: 1rem 1.2rem;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .header-container {
-            max-width: 900px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .brand-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .brand-wrapper h1 {
-            font-size: 1.25rem;
-            font-weight: 800;
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .btn-back-header {
-            font-size: 0.78rem;
-            font-weight: 700;
-            color: #db2777;
-            text-decoration: none;
-            background: #fdf2f8;
-            padding: 6px 12px;
-            border-radius: 10px;
-            border: 1px solid var(--border-color);
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 20px auto;
-            padding: 0 15px;
-        }
-
-        .card {
-            background: var(--card-bg);
-            border-radius: var(--radius-lg);
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: var(--shadow-soft);
-            border: 1px solid var(--border-color);
-        }
-
-        .card h2 {
-            font-size: 1.05rem;
-            font-weight: 800;
-            margin-bottom: 14px;
-            color: var(--text-main);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .form-group {
-            margin-bottom: 12px;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 0.78rem;
-            font-weight: 700;
-            margin-bottom: 4px;
-            color: var(--text-muted);
-        }
-
-        .form-input, .form-select {
-            width: 100%;
-            padding: 11px 14px;
-            border-radius: 14px;
-            border: 1px solid var(--border-color);
-            font-size: 0.85rem;
-            background: var(--bg-body);
-            color: var(--text-main);
-            outline: none;
-        }
-
-        .form-input:focus, .form-select:focus {
-            border-color: #db2777;
-            box-shadow: 0 0 0 4px rgba(219, 39, 119, 0.15);
-        }
-
-        .btn-submit {
-            background: var(--primary-gradient);
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 16px;
-            font-weight: 800;
-            font-size: 0.85rem;
-            cursor: pointer;
-            width: 100%;
-            box-shadow: 0 8px 20px rgba(219, 39, 119, 0.25);
-            margin-top: 6px;
-            transition: transform 0.2s ease;
-        }
-        .btn-submit:active { transform: scale(0.98); }
-
-        .member-table-container {
-            width: 100%;
-            overflow-x: auto;
-        }
-
-        .member-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr 0.8fr 1.6fr;
-            gap: 8px;
-            align-items: center;
-            padding: 12px 0;
-            border-bottom: 1px solid var(--border-color);
-            font-size: 0.82rem;
-        }
-
-        .member-row.header-row {
-            font-weight: 800;
-            color: var(--text-muted);
-            background: var(--bg-body);
-            padding: 10px 12px;
-            border-radius: 12px;
-            margin-bottom: 6px;
-        }
-
-        .member-row.data-row {
-            padding: 12px;
-            border-radius: 14px;
-            transition: background 0.2s;
-        }
-        .member-row.data-row:hover {
-            background: var(--bg-body);
-        }
-
-        .badge-active {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            background: #d1fae5;
-            color: #065f46;
-            padding: 4px 10px;
-            border-radius: 8px;
-            font-size: 0.72rem;
-            font-weight: 700;
-            margin-top: 4px;
-            width: fit-content;
-        }
-
-        .badge-expired-status {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            background: #fee2e2;
-            color: #991b1b;
-            padding: 4px 10px;
-            border-radius: 8px;
-            font-size: 0.72rem;
-            font-weight: 700;
-            margin-top: 4px;
-            width: fit-content;
-        }
-
-        .input-inline-group {
-            display: flex;
-            gap: 4px;
-            align-items: center;
-        }
-
-        .input-inline {
-            width: 65px;
-            padding: 6px 8px;
-            border-radius: 10px;
-            border: 1px solid var(--border-color);
-            font-size: 0.78rem;
-            background: var(--card-bg);
-            color: var(--text-main);
-            outline: none;
-        }
-
-        .btn-mini {
-            padding: 6px 8px;
-            border-radius: 10px;
-            border: none;
-            font-size: 0.72rem;
-            font-weight: 700;
-            cursor: pointer;
-            color: white;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background: var(--bg-body); color: var(--text-main); line-height: 1.5; min-height: 100vh; padding-bottom: 40px; }
+        #loginOverlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(8px); display: flex; justify-content: center; align-items: center; z-index: 9999; padding: 20px; }
+        .login-card { background: var(--card-bg); padding: 30px; border-radius: var(--radius-lg); width: 100%; max-width: 400px; box-shadow: 0 20px 40px rgba(0,0,0,0.2); border: 1px solid var(--border-color); text-align: center; }
+        .login-card h2 { font-size: 1.3rem; font-weight: 800; margin-bottom: 8px; background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .login-card p { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 20px; }
+        header { background: var(--card-bg); border-bottom: 1px solid var(--border-color); padding: 1rem 1.2rem; position: sticky; top: 0; z-index: 100; }
+        .header-container { max-width: 900px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .brand-wrapper { display: flex; align-items: center; gap: 10px; }
+        .brand-wrapper h1 { font-size: 1.25rem; font-weight: 800; background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .btn-back-header { font-size: 0.78rem; font-weight: 700; color: #db2777; text-decoration: none; background: #fdf2f8; padding: 6px 12px; border-radius: 10px; border: 1px solid var(--border-color); }
+        .container { max-width: 900px; margin: 20px auto; padding: 0 15px; }
+        .card { background: var(--card-bg); border-radius: var(--radius-lg); padding: 20px; margin-bottom: 20px; box-shadow: var(--shadow-soft); border: 1px solid var(--border-color); }
+        .card h2 { font-size: 1.05rem; font-weight: 800; margin-bottom: 14px; color: var(--text-main); display: flex; align-items: center; gap: 8px; }
+        .form-group { margin-bottom: 12px; }
+        .form-group label { display: block; font-size: 0.78rem; font-weight: 700; margin-bottom: 4px; color: var(--text-muted); }
+        .form-input, .form-select { width: 100%; padding: 11px 14px; border-radius: 14px; border: 1px solid var(--border-color); font-size: 0.85rem; background: var(--bg-body); color: var(--text-main); outline: none; }
+        .form-input:focus, .form-select:focus { border-color: #db2777; box-shadow: 0 0 0 4px rgba(219, 39, 119, 0.15); }
+        .btn-submit { background: var(--primary-gradient); color: white; border: none; padding: 12px 20px; border-radius: 16px; font-weight: 800; font-size: 0.85rem; cursor: pointer; width: 100%; box-shadow: 0 8px 20px rgba(219, 39, 119, 0.25); margin-top: 6px; }
+        .member-table-container { width: 100%; overflow-x: auto; }
+        .member-row { display: grid; grid-template-columns: 1fr 1fr 0.8fr 1.6fr; gap: 8px; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--border-color); font-size: 0.82rem; }
+        .member-row.header-row { font-weight: 800; color: var(--text-muted); background: var(--bg-body); padding: 10px 12px; border-radius: 12px; margin-bottom: 6px; }
+        .member-row.data-row { padding: 12px; border-radius: 14px; }
+        .member-row.data-row:hover { background: var(--bg-body); }
+        .badge-active { display: inline-flex; align-items: center; gap: 4px; background: #d1fae5; color: #065f46; padding: 4px 10px; border-radius: 8px; font-size: 0.72rem; font-weight: 700; margin-top: 4px; width: fit-content; }
+        .badge-expired-status { display: inline-flex; align-items: center; gap: 4px; background: #fee2e2; color: #991b1b; padding: 4px 10px; border-radius: 8px; font-size: 0.72rem; font-weight: 700; margin-top: 4px; width: fit-content; }
+        .input-inline-group { display: flex; gap: 4px; align-items: center; }
+        .input-inline { width: 65px; padding: 6px 8px; border-radius: 10px; border: 1px solid var(--border-color); font-size: 0.78rem; background: var(--card-bg); color: var(--text-main); outline: none; }
+        .btn-mini { padding: 6px 8px; border-radius: 10px; border: none; font-size: 0.72rem; font-weight: 700; cursor: pointer; color: white; }
         .btn-plus { background: #10b981; }
         .btn-minus { background: #f59e0b; }
         .btn-delete { background: #ef4444; }
-
         @media (max-width: 640px) {
-            .member-row {
-                grid-template-columns: 1fr 1fr;
-                gap: 10px;
-            }
+            .member-row { grid-template-columns: 1fr 1fr; gap: 10px; }
             .member-row.header-row { display: none; }
-            .member-row.data-row {
-                background: var(--bg-body);
-                margin-bottom: 10px;
-                border-radius: 14px;
-                border: 1px solid var(--border-color);
-            }
+            .member-row.data-row { background: var(--bg-body); margin-bottom: 10px; border-radius: 14px; border: 1px solid var(--border-color); }
         }
     </style>
 </head>
@@ -313,14 +74,11 @@
             <span style="font-size: 2.2rem;">🔐</span>
             <h2>Admin Queen Laundry</h2>
             <p>Masukkan password untuk mengakses control panel.</p>
-            
             <div class="form-group" style="text-align: left;">
                 <input type="password" id="inputPasswordAdmin" class="form-input" placeholder="Password admin..." onkeypress="cekEnterLogin(event)">
             </div>
-            
             <button type="button" class="btn-submit" onclick="prosesLogin()">Masuk Panel</button>
             <div id="loginErrorMsg" style="margin-top: 10px; font-size: 0.78rem; color: #ef4444; font-weight: 700; display: none;"></div>
-            
             <div style="margin-top: 15px;">
                 <a href="index.html" style="font-size: 0.78rem; color: #db2777; text-decoration: none; font-weight: 700;">← Kembali ke Beranda</a>
             </div>
@@ -345,15 +103,13 @@
     </div>
 
     <div class="container">
-        <!-- Form Pendaftaran Member Baru -->
+        <!-- Pendaftaran Member Baru -->
         <div class="card">
             <h2>✨ Pendaftaran Member Baru</h2>
             <div class="form-group">
                 <label>Nama Lengkap Member:</label>
                 <input type="text" id="inputNamaBaru" class="form-input" placeholder="Contoh: Siti Rahma">
             </div>
-
-            <!-- Pilihan Paket Member -->
             <div class="form-group">
                 <label>Pilih Paket Member:</label>
                 <select id="selectPaketBaru" class="form-select" onchange="ubahPilihanPaket()">
@@ -362,37 +118,29 @@
                     <option value="150000" data-namapaket="Paket 25 Kg (Rp 150.000)">Paket 25 Kg - Rp 150.000</option>
                 </select>
             </div>
-
-            <!-- Pilihan Durasi Masa Aktif Otomatis -->
             <div class="form-group">
                 <label>Masa Aktif (Durasi Bulan):</label>
                 <select id="selectDurasi" class="form-select" onchange="ubahPilihanPaket()">
                     <option value="1" selected>1 Bulan (Standar)</option>
-                    <option value="2">2 Bulan (Langsung 2 Bulan)</option>
+                    <option value="2">2 Bulan</option>
                     <option value="3">3 Bulan</option>
                 </select>
             </div>
-
-            <!-- Tambahan: Input Tanggal Kadaluarsa Manual (Opsional) -->
             <div class="form-group">
                 <label>Atur Tanggal Kadaluarsa (Opsional / Manual):</label>
                 <input type="date" id="inputManualExpired" class="form-input">
-                <span style="font-size: 0.72rem; color: var(--text-muted); display: block; margin-top: 3px;">*Jika dikosongkan, tanggal akan terhitung otomatis dari durasi bulan di atas.</span>
             </div>
-
             <div class="form-group">
                 <label>Saldo Awal (Rp):</label>
-                <input type="number" id="inputSaldoBaru" class="form-input" placeholder="Contoh: 110000" value="110000">
+                <input type="number" id="inputSaldoBaru" class="form-input" value="110000">
             </div>
-
             <button type="button" class="btn-submit" onclick="tambahkanMemberBaru()">✨ Daftarkan Member ke Supabase</button>
             <div id="statusPesan" style="margin-top: 8px; font-size: 0.8rem; font-weight: 700;"></div>
         </div>
 
-        <!-- Form Input & Kelola Status Cucian (DENGAN ESTIMASI) -->
+        <!-- Kelola Status Cucian -->
         <div class="card">
             <h2>📦 Kelola Status Cucian Pelanggan</h2>
-            
             <div style="background: var(--bg-body); padding: 12px; border-radius: 12px; margin-bottom: 15px; border: 1px solid var(--border-color);">
                 <div style="font-weight: 700; margin-bottom: 8px; font-size: 0.85rem;">➕ Tambah Order Cucian Baru</div>
                 <div class="form-group">
@@ -403,7 +151,6 @@
                     <label>No HP (Opsional):</label>
                     <input type="text" id="inputHpCucian" class="form-input" placeholder="Contoh: 08123456789">
                 </div>
-                <!-- Input Estimasi Selesai Baru -->
                 <div class="form-group">
                     <label>Estimasi Selesai:</label>
                     <input type="text" id="inputEstimasiCucian" class="form-input" placeholder="Contoh: 3 Sept 2026, 17:00">
@@ -430,23 +177,22 @@
             </div>
         </div>
 
-        <!-- Tabel Daftar Data Member & Kelola Saldo -->
+        <!-- Daftar Data Member -->
         <div class="card">
             <h2>📋 Daftar Data Member & Kelola Saldo</h2>
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-                <span style="font-size: 0.78rem; color: var(--text-muted);">Kelola saldo atau hapus data member langsung dari tabel.</span>
+                <span style="font-size: 0.78rem; color: var(--text-muted);">Kelola saldo atau hapus data member.</span>
                 <button type="button" onclick="muatDataMember()" style="background:var(--bg-body); border:1px solid var(--border-color); padding:6px 12px; border-radius:10px; font-size:0.75rem; font-weight:700; cursor:pointer;">🔄 Refresh</button>
             </div>
-
             <div class="member-table-container">
                 <div class="member-row header-row">
                     <div>Nama Member</div>
                     <div>Paket & Status</div>
                     <div>Sisa Saldo</div>
-                    <div>Aksi (Ubah / Hapus)</div>
+                    <div>Aksi</div>
                 </div>
                 <div id="listMemberBody">
-                    <div style="text-align: center; padding: 20px; color: var(--text-muted); font-size: 0.82rem;">Memuat data dari Supabase...</div>
+                    <div style="text-align: center; padding: 20px; color: var(--text-muted); font-size: 0.82rem;">Memuat data...</div>
                 </div>
             </div>
         </div>
@@ -463,10 +209,8 @@
             if (isAuthorized === 'true') {
                 document.getElementById('loginOverlay').style.display = 'none';
             }
-
             let savedTheme = localStorage.getItem('queen_theme') || 'light';
             document.documentElement.setAttribute('data-theme', savedTheme);
-
             muatDataMember();
             muatDataCucian();
         };
@@ -474,18 +218,14 @@
         function ubahPilihanPaket() {
             let selectPaket = document.getElementById('selectPaketBaru');
             let hargaDasar = parseFloat(selectPaket.value) || 0;
-            
             let selectDurasi = document.getElementById('selectDurasi');
             let durasiBulan = parseInt(selectDurasi.value) || 1;
-            
-            let saldoInput = document.getElementById('inputSaldoBaru');
-            saldoInput.value = hargaDasar * durasiBulan;
+            document.getElementById('inputSaldoBaru').value = hargaDasar * durasiBulan;
         }
 
         function prosesLogin() {
             let inputSandi = document.getElementById('inputPasswordAdmin').value;
             let errorMsg = document.getElementById('loginErrorMsg');
-
             if (inputSandi === PASSWORD_RAHASIA) {
                 sessionStorage.setItem('isAdminLoggedIn', 'true');
                 document.getElementById('loginOverlay').style.display = 'none';
@@ -497,9 +237,7 @@
         }
 
         function cekEnterLogin(event) {
-            if (event.key === 'Enter') {
-                prosesLogin();
-            }
+            if (event.key === 'Enter') { prosesLogin(); }
         }
 
         function keluarAdmin() {
@@ -519,136 +257,58 @@
             let saldo = parseFloat(document.getElementById('inputSaldoBaru').value);
             let selectEl = document.getElementById('selectPaketBaru');
             let namaPaketTerpilih = selectEl.options[selectEl.selectedIndex].getAttribute('data-namapaket');
-            
             let durasiBulan = parseInt(document.getElementById('selectDurasi').value) || 1;
             let manualDateInput = document.getElementById('inputManualExpired').value;
             let statusEl = document.getElementById('statusPesan');
 
             if (!nama || isNaN(saldo)) {
                 statusEl.style.color = '#ef4444';
-                statusEl.innerText = '⚠️ Harap masukkan nama dan saldo awal dengan benar!';
+                statusEl.innerText = '⚠️ Harap masukkan nama dan saldo!';
                 return;
             }
 
-            let expiredDateStr = '';
-            if (manualDateInput) {
-                expiredDateStr = manualDateInput;
-            } else {
-                let expiredDateObj = new Date();
-                expiredDateObj.setMonth(expiredDateObj.getMonth() + durasiBulan);
-                expiredDateStr = expiredDateObj.toISOString().split('T')[0];
-            }
+            let expiredDateStr = manualDateInput ? manualDateInput : new Date(new Date().setMonth(new Date().getMonth() + durasiBulan)).toISOString().split('T')[0];
 
-            statusEl.style.color = 'var(--text-muted)';
-            statusEl.innerText = 'Menyimpan ke Supabase...';
-
-            let { data: existing } = await supabaseClient
-                .from('kouta_member')
-                .select('*')
-                .ilike('name', nama);
-
-            let payload = { 
-                name: nama, 
-                saldo: saldo, 
-                expired_date: expiredDateStr, 
-                paket: namaPaketTerpilih + ` (${durasiBulan} Bulan)` 
-            };
-            let res;
-
-            if (existing && existing.length > 0) {
-                res = await supabaseClient
-                    .from('kouta_member')
-                    .update(payload)
-                    .eq('id', existing[0].id);
-            } else {
-                res = await supabaseClient
-                    .from('kouta_member')
-                    .insert([payload]);
-            }
+            let { data: existing } = await supabaseClient.from('kouta_member').select('*').ilike('name', nama);
+            let payload = { name: nama, saldo: saldo, expired_date: expiredDateStr, paket: namaPaketTerpilih + ` (${durasiBulan} Bulan)` };
+            let res = existing && existing.length > 0 ? await supabaseClient.from('kouta_member').update(payload).eq('id', existing[0].id) : await supabaseClient.from('kouta_member').insert([payload]);
 
             if (res.error) {
                 statusEl.style.color = '#ef4444';
                 statusEl.innerText = 'Gagal: ' + res.error.message;
             } else {
                 statusEl.style.color = '#10b981';
-                statusEl.innerText = '✨ Berhasil mendaftarkan member baru!';
+                statusEl.innerText = '✨ Berhasil mendaftarkan member!';
                 document.getElementById('inputNamaBaru').value = '';
-                document.getElementById('selectPaketBaru').selectedIndex = 1;
-                document.getElementById('selectDurasi').value = '1';
-                document.getElementById('inputManualExpired').value = '';
-                document.getElementById('inputSaldoBaru').value = '110000';
                 muatDataMember();
             }
         }
 
         async function muatDataMember() {
             let container = document.getElementById('listMemberBody');
-            container.innerHTML = `<div style="text-align: center; padding: 20px; color: var(--text-muted); font-size: 0.82rem;">Memuat data dari Supabase...</div>`;
-
-            let { data, error } = await supabaseClient
-                .from('kouta_member')
-                .select('*')
-                .order('created_at', { ascending: false });
-
-            if (error) {
-                container.innerHTML = `<div style="text-align: center; padding: 20px; color: #ef4444; font-size: 0.82rem;">Gagal memuat: ${error.message}</div>`;
+            let { data, error } = await supabaseClient.from('kouta_member').select('*').order('created_at', { ascending: false });
+            if (error || !data || data.length === 0) {
+                container.innerHTML = `<div style="text-align: center; padding: 20px; color: var(--text-muted); font-size: 0.82rem;">Belum ada data member.</div>`;
                 return;
             }
-
-            if (!data || data.length === 0) {
-                container.innerHTML = `<div style="text-align: center; padding: 20px; color: var(--text-muted); font-size: 0.82rem;">Belum ada data member terdaftar.</div>`;
-                return;
-            }
-
-            let todayDate = new Date();
-            todayDate.setHours(0,0,0,0);
-
             container.innerHTML = '';
             data.forEach((m) => {
                 let row = document.createElement('div');
                 row.className = 'member-row data-row';
-
-                let rawDate = m.expired_date || m.created_at;
-                let tglExpiredFormatted = '-';
-                let isExpiredByDate = false;
-
-                if (rawDate) {
-                    let expTime = new Date(rawDate);
-                    if (!isNaN(expTime.getTime())) {
-                        expTime.setHours(0,0,0,0);
-                        tglExpiredFormatted = expTime.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
-                        
-                        if (todayDate > expTime) {
-                            isExpiredByDate = true;
-                        }
-                    }
-                }
-
-                let isExpiredBySaldo = m.saldo <= 0;
-                let statusBadge = '';
-                
-                if (isExpiredBySaldo || isExpiredByDate) {
-                    statusBadge = `<div class="badge-expired-status">🔴 Expired</div>`;
-                } else {
-                    statusBadge = `<div class="badge-active">🟢 Active</div>`;
-                }
-
-                let infoPaket = m.paket ? m.paket : 'Reguler / Custom';
-
+                let isExpired = m.saldo <= 0;
                 row.innerHTML = `
                     <div><b>${m.name}</b></div>
                     <div>
-                        <div style="font-size: 0.75rem; color: var(--text-muted); font-weight: 600;">📦 ${infoPaket}</div>
-                        <div style="font-size: 0.75rem; color: var(--text-muted);">Exp: ${tglExpiredFormatted}</div>
-                        ${statusBadge}
+                        <div style="font-size: 0.75rem; color: var(--text-muted);">📦 ${m.paket || '-'}</div>
+                        ${isExpired ? '<div class="badge-expired-status">🔴 Expired</div>' : '<div class="badge-active">🟢 Active</div>'}
                     </div>
                     <div style="color: #db2777; font-weight: 800; font-size: 0.9rem;">${m.saldo.toLocaleString('id-ID')}</div>
                     <div>
                         <div class="input-inline-group">
-                            <input type="number" id="input-ubah-${m.id}" class="input-inline" placeholder="Jumlah" min="0">
-                            <button type="button" class="btn-mini btn-plus" onclick="ubahSaldo('${m.id}', ${m.saldo}, 'tambah')" title="Tambah Saldo">＋</button>
-                            <button type="button" class="btn-mini btn-minus" onclick="ubahSaldo('${m.id}', ${m.saldo}, 'kurang')" title="Kurangi Saldo">－</button>
-                            <button type="button" class="btn-mini btn-delete" onclick="hapusMember('${m.id}', '${m.name}')" title="Hapus Member">🗑️</button>
+                            <input type="number" id="input-ubah-${m.id}" class="input-inline" placeholder="Jml">
+                            <button type="button" class="btn-mini btn-plus" onclick="ubahSaldo('${m.id}', ${m.saldo}, 'tambah')">＋</button>
+                            <button type="button" class="btn-mini btn-minus" onclick="ubahSaldo('${m.id}', ${m.saldo}, 'kurang')">－</button>
+                            <button type="button" class="btn-mini btn-delete" onclick="hapusMember('${m.id}', '${m.name}')">🗑️</button>
                         </div>
                     </div>
                 `;
@@ -657,53 +317,20 @@
         }
 
         async function ubahSaldo(idMember, saldoLama, tipe) {
-            let inputEl = document.getElementById(`input-ubah-${idMember}`);
-            let nominal = parseFloat(inputEl.value);
+            let nominal = parseFloat(document.getElementById(`input-ubah-${idMember}`).value);
+            if (isNaN(nominal) || nominal <= 0) return alert("Masukkan nominal yang valid!");
+            let saldoBaru = tipe === 'tambah' ? saldoLama + nominal : Math.max(0, saldoLama - nominal);
+            let { error } = await supabaseClient.from('kouta_member').update({ saldo: saldoBaru }).eq('id', idMember);
+            if (!error) muatDataMember();
+        }
 
-            if (isNaN(nominal) || nominal <= 0) {
-                alert("Masukkan jumlah nominal yang valid terlebih dahulu!");
-                return;
-            }
-
-            let saldoBaru = saldoLama;
-            if (tipe === 'tambah') {
-                saldoBaru += nominal;
-            } else if (tipe === 'kurang') {
-                saldoBaru -= nominal;
-                if (saldoBaru < 0) saldoBaru = 0;
-            }
-
-            let { error } = await supabaseClient
-                .from('kouta_member')
-                .update({ saldo: saldoBaru })
-                .eq('id', idMember);
-
-            if (error) {
-                alert("Gagal memperbarui saldo: " + error.message);
-            } else {
-                inputEl.value = '';
-                muatDataMember();
+        async function hapusMember(idMember, nama) {
+            if (confirm(`Hapus member "${nama}"?`)) {
+                let { error } = await supabaseClient.from('kouta_member').delete().eq('id', idMember);
+                if (!error) muatDataMember();
             }
         }
 
-        async function hapusMember(idMember, namaMember) {
-            if (!confirm(`Apakah Anda yakin ingin menghapus member "${namaMember}" dari database Supabase?`)) {
-                return;
-            }
-
-            let { error } = await supabaseClient
-                .from('kouta_member')
-                .delete()
-                .eq('id', idMember);
-
-            if (error) {
-                alert("Gagal menghapus member: " + error.message);
-            } else {
-                muatDataMember();
-            }
-        }
-
-        // --- FITUR KELOLA STATUS CUCIAN ---
         async function tambahDataCucian() {
             let nama = document.getElementById('inputNamaCucian').value.trim();
             let hp = document.getElementById('inputHpCucian').value.trim();
@@ -716,29 +343,19 @@
                 return;
             }
 
-            msgEl.style.color = 'var(--text-muted)';
-            msgEl.innerText = 'Menyimpan ke database...';
-
-            let payload = {
+            let { data, error } = await supabaseClient.from('cucian').insert([{
                 nama_pelanggan: nama,
                 no_hp: hp !== '' ? hp : null,
                 status: 'Diterima',
-                estimasi: estimasi !== '' ? estimasi : null
-            };
-
-            let { data, error } = await supabaseClient
-                .from('cucian')
-                .insert([payload])
-                .select();
+                estimasi_selesai: estimasi !== '' ? estimasi : null
+            }]).select();
 
             if (error) {
                 msgEl.style.color = '#ef4444';
-                msgEl.innerText = 'Gagal menyimpan: ' + error.message;
+                msgEl.innerText = 'Gagal: ' + error.message;
             } else {
-                let idBaru = data[0].id;
                 msgEl.style.color = '#10b981';
-                msgEl.innerHTML = `✨ Berhasil! ID Order: <b style="color:#db2777; user-select:all;">${idBaru}</b>`;
-                
+                msgEl.innerHTML = `✨ Berhasil! ID Order: <b style="color:#db2777; user-select:all;">${data[0].id}</b>`;
                 document.getElementById('inputNamaCucian').value = '';
                 document.getElementById('inputHpCucian').value = '';
                 document.getElementById('inputEstimasiCucian').value = '';
@@ -748,47 +365,26 @@
 
         async function muatDataCucian() {
             let container = document.getElementById('listCucianBody');
-            container.innerHTML = `<div style="text-align: center; padding: 20px; color: var(--text-muted); font-size: 0.82rem;">Memuat data cucian...</div>`;
-
-            let { data, error } = await supabaseClient
-                .from('cucian')
-                .select('*')
-                .order('created_at', { ascending: false });
-
-            if (error) {
-                container.innerHTML = `<div style="text-align: center; padding: 20px; color: #ef4444; font-size: 0.82rem;">Gagal memuat: ${error.message}</div>`;
-                return;
-            }
-
-            if (!data || data.length === 0) {
+            let { data, error } = await supabaseClient.from('cucian').select('*').order('created_at', { ascending: false });
+            if (error || !data || data.length === 0) {
                 container.innerHTML = `<div style="text-align: center; padding: 20px; color: var(--text-muted); font-size: 0.82rem;">Belum ada data cucian.</div>`;
                 return;
             }
-
             container.innerHTML = '';
             data.forEach((c) => {
                 let row = document.createElement('div');
                 row.className = 'member-row data-row';
                 row.style.gridTemplateColumns = '1.2fr 1fr 1.2fr 1.8fr';
-
-                let shortId = c.id.substring(0, 8) + '...';
-                let noHpText = c.no_hp ? c.no_hp : '-';
-                let estimasiVal = c.estimasi ? c.estimasi : '';
-
                 row.innerHTML = `
                     <div>
                         <div style="font-weight: 800;">${c.nama_pelanggan}</div>
-                        <div style="font-size: 0.7rem; color: var(--text-muted);" title="${c.id}">ID: ${shortId}</div>
+                        <div style="font-size: 0.7rem; color: var(--text-muted);">ID: ${c.id.substring(0, 8)}...</div>
                     </div>
-                    <div style="font-size: 0.78rem;">${noHpText}</div>
-                    <div>
-                        <span style="background: #fdf2f8; color: #db2777; border: 1px solid var(--border-color); padding: 3px 8px; border-radius: 6px; font-size: 0.72rem; font-weight: 700;">
-                            ${c.status}
-                        </span>
-                    </div>
+                    <div style="font-size: 0.78rem;">${c.no_hp || '-'}</div>
+                    <div><span style="background: #fdf2f8; color: #db2777; border: 1px solid var(--border-color); padding: 3px 8px; border-radius: 6px; font-size: 0.72rem; font-weight: 700;">${c.status}</span></div>
                     <div>
                         <div style="display: flex; flex-direction: column; gap: 4px;">
-                            <input type="text" id="input-estimasi-${c.id}" class="form-input" style="padding: 5px; font-size: 0.72rem;" value="${estimasiVal}" placeholder="Estimasi selesai...">
+                            <input type="text" id="input-estimasi-${c.id}" class="form-input" style="padding: 5px; font-size: 0.72rem;" value="${c.estimasi_selesai || ''}" placeholder="Estimasi selesai...">
                             <div style="display: flex; gap: 4px; align-items: center;">
                                 <select id="select-status-${c.id}" class="form-select" style="padding: 5px; font-size: 0.72rem; border-radius: 8px;">
                                     <option value="Diterima" ${c.status === 'Diterima' ? 'selected' : ''}>Diterima</option>
@@ -796,8 +392,8 @@
                                     <option value="Setrika & Packing" ${c.status === 'Setrika & Packing' ? 'selected' : ''}>Setrika & Packing</option>
                                     <option value="Selesai / Siap Diambil" ${c.status === 'Selesai / Siap Diambil' ? 'selected' : ''}>Selesai</option>
                                 </select>
-                                <button type="button" class="btn-mini btn-plus" onclick="updateStatusCucian('${c.id}')" title="Simpan Perubahan">💾</button>
-                                <button type="button" class="btn-mini btn-delete" onclick="hapusCucian('${c.id}', '${c.nama_pelanggan}')" title="Hapus Data">🗑️</button>
+                                <button type="button" class="btn-mini btn-plus" onclick="updateStatusCucian('${c.id}')">💾</button>
+                                <button type="button" class="btn-mini btn-delete" onclick="hapusCucian('${c.id}', '${c.nama_pelanggan}')">🗑️</button>
                             </div>
                         </div>
                     </div>
@@ -807,40 +403,20 @@
         }
 
         async function updateStatusCucian(idCucian) {
-            let selectEl = document.getElementById(`select-status-${idCucian}`);
-            let statusBaru = selectEl.value;
-            let inputEstimasiEl = document.getElementById(`input-estimasi-${idCucian}`);
-            let estimasiBaru = inputEstimasiEl.value.trim();
-
-            let { error } = await supabaseClient
-                .from('cucian')
-                .update({ 
-                    status: statusBaru,
-                    estimasi: estimasiBaru !== '' ? estimasiBaru : null 
-                })
-                .eq('id', idCucian);
-
-            if (error) {
-                alert("Gagal memperbarui data: " + error.message);
-            } else {
-                muatDataCucian();
-            }
+            let statusBaru = document.getElementById(`select-status-${idCucian}`).value;
+            let estimasiBaru = document.getElementById(`input-estimasi-${idCucian}`).value.trim();
+            let { error } = await supabaseClient.from('cucian').update({ 
+                status: statusBaru,
+                estimasi_selesai: estimasiBaru !== '' ? estimasiBaru : null 
+            }).eq('id', idCucian);
+            if (!error) muatDataCucian();
+            else alert("Gagal memperbarui: " + error.message);
         }
 
-        async function hapusCucian(idCucian, namaPelanggan) {
-            if (!confirm(`Hapus data cucian atas nama "${namaPelanggan}"?`)) {
-                return;
-            }
-
-            let { error } = await supabaseClient
-                .from('cucian')
-                .delete()
-                .eq('id', idCucian);
-
-            if (error) {
-                alert("Gagal menghapus data: " + error.message);
-            } else {
-                muatDataCucian();
+        async function hapusCucian(idCucian, nama) {
+            if (confirm(`Hapus data cucian "${nama}"?`)) {
+                let { error } = await supabaseClient.from('cucian').delete().eq('id', idCucian);
+                if (!error) muatDataCucian();
             }
         }
     </script>
